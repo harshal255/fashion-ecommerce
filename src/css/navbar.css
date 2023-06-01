@@ -1,0 +1,20 @@
+.custom-link-hover {
+    transition: margin-bottom 0.3s ease-in-out;
+}
+
+.fb-icon:hover{
+    margin-bottom: 0.5rem;
+    color: rgb(36, 36, 185);
+}
+.pin-icon:hover{
+    margin-bottom: 0.5rem;
+    color: rgb(211, 15, 15);
+}
+.tele-icon:hover{
+    margin-bottom: 0.5rem;
+    color: rgb(66, 66, 215);
+}
+.mail-icon:hover{
+    margin-bottom: 0.5rem;
+    color: rgb(185, 91, 36);
+}

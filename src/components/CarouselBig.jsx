@@ -3,7 +3,8 @@ import { Carousel } from "@material-tailwind/react";
 
 const CarouselBig = () => {
   return (
-    <Carousel className="rounded-xl">
+    <div className='hidden sm:block'>
+    <Carousel className="rounded-xl ">
     <img
       src="./images/leanding1.jpg"
       alt="image 1"
@@ -29,6 +30,7 @@ const CarouselBig = () => {
     />
   
   </Carousel>
+  </div>
   )
 }
 

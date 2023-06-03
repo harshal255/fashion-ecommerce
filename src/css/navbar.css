@@ -2,19 +2,35 @@
     transition: margin-bottom 0.3s ease-in-out;
 }
 
-.fb-icon:hover{
+.fb-icon:hover {
     margin-bottom: 0.5rem;
-    color: rgb(36, 36, 185);
+    color: rgb(36, 150, 185);
 }
-.pin-icon:hover{
+
+.pin-icon:hover {
     margin-bottom: 0.5rem;
     color: rgb(211, 15, 15);
 }
-.tele-icon:hover{
+
+.tele-icon:hover {
     margin-bottom: 0.5rem;
     color: rgb(66, 66, 215);
 }
-.mail-icon:hover{
+
+.mail-icon:hover {
     margin-bottom: 0.5rem;
     color: rgb(185, 91, 36);
+}
+
+.menu-btn {
+    color: black;
+    background-color: transparent !important;
+    transition: color 0.3s;
+}
+
+.menu-ex {
+    width: 100vw;
+}
+.menu-btn:hover {
+    color: rgb(255, 154, 191);
 }

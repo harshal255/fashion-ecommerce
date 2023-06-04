@@ -82,11 +82,11 @@ export default function NavbarCom() {
                     />
                     <div className="hidden lg:block justify-end">{navList2}</div>
                 </div>
-                <MobileNav open={openNav}>
+                {/* <MobileNav open={openNav}>
                     <div className="container mx-auto">
                         {navList1}
                     </div>
-                </MobileNav>
+                </MobileNav> */}
             </Navbar>
             <Drawer placement="right" open={open} onClose={closeDrawerLogin}>
                 <div className="mb-2 flex items-center justify-between p-4">

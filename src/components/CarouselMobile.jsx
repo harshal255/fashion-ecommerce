@@ -3,7 +3,7 @@ import { Carousel } from "@material-tailwind/react";
 
 const CarouselMobile = () => {
   return (
-    <Carousel className="rounded-xl sm:invisible">
+    <Carousel className="rounded-xl sm:hidden carousel-slide ">
        
     <img
       src="./images/leandingMobile1.jpg"

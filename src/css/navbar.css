@@ -31,6 +31,30 @@
 .menu-ex {
     width: 100vw;
 }
+
 .menu-btn:hover {
     color: rgb(255, 154, 191);
 }
+
+.badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+.link {
+    text-decoration: underline;
+    font-size: 0.9em;
+}
+.link:hover {
+    color: rgb(255, 154, 191);  
+} 

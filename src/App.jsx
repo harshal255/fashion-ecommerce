@@ -8,6 +8,7 @@ import NavbarMenu from './components/navbarMenu'
 import OurProducts from './components/OurProducts'
 import LatestBlog from './components/LatestBlog'
 import ImageGallary from './components/ImageGallary'
+import MobileFooter from './components/MobileFooter'
 
 
 function App() {
@@ -16,15 +17,13 @@ function App() {
     <>
       <NavbarCom />
       <NavbarMenu />
-    
-      <div className="bg-white">
-        <Leandingpage></Leandingpage>
-        <Leanding2></Leanding2>
-        <Leanding3></Leanding3>
-        <OurProducts></OurProducts>
-        <LatestBlog></LatestBlog>
-        <ImageGallary></ImageGallary>
-      </div>
+      <Leandingpage></Leandingpage>
+      <Leanding2></Leanding2>
+      <Leanding3></Leanding3>
+      <OurProducts></OurProducts>
+      <LatestBlog></LatestBlog>
+      <ImageGallary></ImageGallary>
+      <MobileFooter></MobileFooter>
       <Footer></Footer>
     </>
   )

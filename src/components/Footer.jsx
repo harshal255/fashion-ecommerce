@@ -52,7 +52,7 @@ const currentYear = new Date().getFullYear();
 
 export default function Footer() {
   return (
-    <footer className="sticky bottom-0 left-0 right-0 -z-20">
+    <footer className="bottom-0 left-0 right-0">
       <div className="w-full p-6">
         <div className="flex flex-wrap -mt-1 ts:-mx-2">
           {SITEMAP.map(({ title, links }, index) => (

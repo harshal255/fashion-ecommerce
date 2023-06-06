@@ -16,9 +16,6 @@ function App() {
     <>
       <NavbarCom />
       <NavbarMenu />
-      <Leandingpage></Leandingpage>
-      <Leanding2></Leanding2>
-      <Leanding3></Leanding3>
       <div className="bg-white">
         <Leandingpage></Leandingpage>
         <Leanding2></Leanding2>

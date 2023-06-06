@@ -1,10 +1,13 @@
-import React from 'react';
+import React from "react";
 import { AiOutlineHeart, AiOutlineEye, AiOutlineShoppingCart } from 'react-icons/ai';
 import { TbArrowsCross } from 'react-icons/tb';
 import '../css/Leanding3.css';
 
 
+
 const Leanding3 = () => {
+
+   
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 m-2 sm:mt-5 sm:w-[97vw]">
             <div className="overflow-hidden className shadow-lg cursor-pointer ">
@@ -20,17 +23,24 @@ const Leanding3 = () => {
                             <img className="object-cover w-full md:h-[27.5rem] xl:h-[40rem] " src="./images/leanding3_img_2.webp" alt="Flower and sky" />
                             <div>
                                 <div className="iconsCol absolute top-6 left-6  p-2 opacity-100 hover:opacity-100 transition-opacity duration-300">
-                                    <AiOutlineHeart className="w-6 h-6 text-white hover:text-gray-900 m-1" />
-                                    <TbArrowsCross className="w-6 h-6 text-white hover:text-gray-900 m-1" />
+                                    <AiOutlineHeart
+                                        className="w-6 h-6 text-white m-1"
+                                       
+                                    />
+                                    <TbArrowsCross
+                                        className="w-6 h-6 text-white m-1"
+                                        
+                                    />
+
                                 </div>
                                 <div className="cardButtons absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 flex flex-col gap-3">
-                                    
-                                    <button class="rounded-full font-extralight text-sm bg-white text-gray-900 hover:bg-gray-900 hover:text-white py-2 px-5 flex items-center flex-col group1 ">
+
+                                    <button className="rounded-full font-extralight text-sm bg-white text-gray-900 hover:bg-gray-900 hover:text-white py-2 px-5 flex items-center flex-col group1 ">
                                         <span>Quick View</span>
                                         <AiOutlineEye className="w-6 h-6" />
                                     </button>
 
-                                    <button class="rounded-full font-extralight text-sm bg-white text-gray-900 py-2 px-5 flex items-center flex-col hover:bg-gray-900 hover:text-white">
+                                    <button className="rounded-full font-extralight text-sm bg-white text-gray-900 py-2 px-5 flex items-center flex-col hover:bg-gray-900 hover:text-white">
                                         <span>Quick Shop</span>
                                         <AiOutlineShoppingCart className="w-6 h-6" />
                                     </button>
@@ -49,6 +59,8 @@ const Leanding3 = () => {
                     </div>
                 </div>
             </div>
+     
+
 
             <div className="overflow-hidden className shadow-lg cursor-pointer md:inline-block hidden ">
                 <img className="object-cover w-full md:h-[25rem] xl:h-[37.5rem]" src="./images/leanding3_img_3.webp" alt="Flower and sky" />

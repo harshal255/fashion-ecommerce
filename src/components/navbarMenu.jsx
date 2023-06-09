@@ -36,7 +36,7 @@ const NavbarMenu = () => {
 
     return (
         <React.Fragment>
-            <div className="py-5" style={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
+            <div className="py-5 hidden lg:flex justify-center gap-[16px]">
                 <div
                     className="menu-item-wrapper"
                     onMouseOver={() => setIsDropdownOpen(true)}
@@ -62,28 +62,28 @@ const NavbarMenu = () => {
                                 </ListItem>
                             </Typography>
                         </MenuHandler>
-                        <MenuList className="hidden lg:block menu-ex">
-                            <ul className="grid grid-cols-4 gap-4 ">
-                                <li className='menu-btn'><a href="/collections/bridal-lehenga">Bridal Lehenga</a></li>
-                                <li className='menu-btn'><a href="/collections/bridesmaid-lehenga">Bridesmaid Lehenga</a></li>
-                                <li className='menu-btn'><a href="/collections/jequard-lehenga-choli">Jacquard Lehenga Choli</a></li>
-                                <li className='menu-btn'><a href="/collections/chaniya-choli">Chaniya Choli</a></li>
-                                <li className='menu-btn'><a href="/collections/cotton-lehenga">Cotton Lehenga</a></li>
-                                <li className='menu-btn'><a href="/collections/crop-top-lehenga-choli">Co-ords Set</a></li>
-                                <li className='menu-btn'><a href="/collections/lucknowi-collection">Lucknowi Lehenga</a></li>
-                                <li className='menu-btn'><a href="/collections/engagement-lehenga">Engagement Lehenga</a></li>
-                                <li className='menu-btn'><a href="/collections/mehndi-rasam">Mehndi Rasam</a></li>
-                                <li className='menu-btn'><a href="/collections/haldi-rasam-lehenga-choli">Haldi Rasam Lehenga Choli</a></li>
-                                <li className='menu-btn'><a href="/collections/patola-lehenga-choli">Patola Lehenga Choli</a></li>
-                                <li className='menu-btn'><a href="/collections/party-wear-lehenga">Party Wear Lehenga</a></li>
-                                <li className='menu-btn'><a href="/collections/printed-lehenga-choli">Printed Lehenga Choli</a></li>
-                                <li className='menu-btn'><a href="/collections/bandhani-print-lehenga">Bandhani Print Lehenga</a></li>
-                                <li className='menu-btn'><a href="/collections/sequence-lehenga-choli">Sequins Lehenga Choli</a></li>
-                                <li className='menu-btn'><a href="/collections/gaji-silk">Gaji Silk Lehenga </a></li>
-                                <li className='menu-btn'><a href="/collections/silk-lehenga">Silk Lehenga</a></li>
-                                <li className='menu-btn'><a href="/collections/south-indian-lehenga">South Indian Lehenga</a></li>
-                                <li className='menu-btn'><a href="/collections/paithani-lehenga">Paithani Lehenga</a></li>
-                                <li className='menu-btn'><a href="/collections/new-arrival">New Arrivals</a></li>
+                        <MenuList className="hidden lg:block menu-ex ">
+                            <ul className="grid grid-cols-4 gap-6  text-center ">
+                                <li className='menu-btn text-gray-600'><a href="/collections/bridal-lehenga">Bridal Lehenga</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/bridesmaid-lehenga">Bridesmaid Lehenga</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/jequard-lehenga-choli">Jacquard Lehenga Choli</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/chaniya-choli">Chaniya Choli</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/cotton-lehenga">Cotton Lehenga</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/crop-top-lehenga-choli">Co-ords Set</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/lucknowi-collection">Lucknowi Lehenga</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/engagement-lehenga">Engagement Lehenga</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/mehndi-rasam">Mehndi Rasam</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/haldi-rasam-lehenga-choli">Haldi Rasam Lehenga Choli</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/patola-lehenga-choli">Patola Lehenga Choli</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/party-wear-lehenga">Party Wear Lehenga</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/printed-lehenga-choli">Printed Lehenga Choli</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/bandhani-print-lehenga">Bandhani Print Lehenga</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/sequence-lehenga-choli">Sequins Lehenga Choli</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/gaji-silk">Gaji Silk Lehenga </a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/silk-lehenga">Silk Lehenga</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/south-indian-lehenga">South Indian Lehenga</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/paithani-lehenga">Paithani Lehenga</a></li>
+                                <li className='menu-btn text-gray-600'><a href="/collections/new-arrival">New Arrivals</a></li>
                             </ul>
                         </MenuList>
                     </Menu>
@@ -115,13 +115,13 @@ const NavbarMenu = () => {
                         </MenuHandler>
                         <MenuList className="hidden lg:block menu-ex">
                             <ul className='grid grid-cols-7 gap-4'>
-                                <li className='menu-btn col-start-2'><a href="/collections/anarkali-gown">Anarkali Gown</a></li>
-                                <li className='menu-btn col-start-2'><a href="/collections/printed-gown">Printed Gown</a></li>
-                                <li className='menu-btn col-start-2'><a href="/collections/jacquard-gown">Jacquard Gown</a></li>
-                                <li className='menu-btn col-start-2'><a href="/collections/pethani-gown">Paithani Gown</a></li>
-                                <li className='menu-btn col-start-3 row-start-1'><a href="/collections/plain-gown">Plain Gown</a></li>
-                                <li className='menu-btn col-start-3 row-start-2'><a href="/collections/georgette-gown">Georgette Gown</a></li>
-                                <li className='menu-btn col-start-3 row-start-3'><a href="/collections/silk-gown">Silk Gown</a></li>
+                                <li className='menu-btn col-start-2 text-gray-600'><a href="/collections/anarkali-gown">Anarkali Gown</a></li>
+                                <li className='menu-btn col-start-2 text-gray-600'><a href="/collections/printed-gown">Printed Gown</a></li>
+                                <li className='menu-btn col-start-2 text-gray-600'><a href="/collections/jacquard-gown">Jacquard Gown</a></li>
+                                <li className='menu-btn col-start-2 text-gray-600'><a href="/collections/pethani-gown">Paithani Gown</a></li>
+                                <li className='menu-btn col-start-3 row-start-1 text-gray-600'><a href="/collections/plain-gown">Plain Gown</a></li>
+                                <li className='menu-btn col-start-3 row-start-2 text-gray-600'><a href="/collections/georgette-gown">Georgette Gown</a></li>
+                                <li className='menu-btn col-start-3 row-start-3 text-gray-600'><a href="/collections/silk-gown">Silk Gown</a></li>
                             </ul>
                         </MenuList>
                     </Menu>
@@ -153,13 +153,13 @@ const NavbarMenu = () => {
                         </MenuHandler>
                         <MenuList className="hidden lg:block menu-ex">
                             <ul className='grid grid-cols-7 gap-4'>
-                                <li className='menu-btn col-start-2'><a href="/collections/anarkali-gown">Anarkali Gown</a></li>
-                                <li className='menu-btn col-start-2'><a href="/collections/printed-gown">Printed Gown</a></li>
-                                <li className='menu-btn col-start-2'><a href="/collections/jacquard-gown">Jacquard Gown</a></li>
-                                <li className='menu-btn col-start-2'><a href="/collections/pethani-gown">Paithani Gown</a></li>
-                                <li className='menu-btn col-start-3 row-start-1'><a href="/collections/plain-gown">Plain Gown</a></li>
-                                <li className='menu-btn col-start-3 row-start-2'><a href="/collections/georgette-gown">Georgette Gown</a></li>
-                                <li className='menu-btn col-start-3 row-start-3'><a href="/collections/silk-gown">Silk Gown</a></li>
+                                <li className='menu-btn col-start-2 text-gray-600'><a href="/collections/anarkali-gown">Anarkali Gown</a></li>
+                                <li className='menu-btn col-start-2 text-gray-600'><a href="/collections/printed-gown">Printed Gown</a></li>
+                                <li className='menu-btn col-start-2 text-gray-600'><a href="/collections/jacquard-gown">Jacquard Gown</a></li>
+                                <li className='menu-btn col-start-2 text-gray-600'><a href="/collections/pethani-gown">Paithani Gown</a></li>
+                                <li className='menu-btn col-start-3 row-start-1 text-gray-600'><a href="/collections/plain-gown">Plain Gown</a></li>
+                                <li className='menu-btn col-start-3 row-start-2 text-gray-600'><a href="/collections/georgette-gown">Georgette Gown</a></li>
+                                <li className='menu-btn col-start-3 row-start-3 text-gray-600'><a href="/collections/silk-gown">Silk Gown</a></li>
                             </ul>
                         </MenuList>
                     </Menu>
@@ -191,14 +191,14 @@ const NavbarMenu = () => {
                         </MenuHandler>
                         <MenuList className="hidden lg:block menu-ex">
                             <ul className='grid grid-cols-5 gap-4'>
-                                <li className='menu-btn col-start-2'><a href="/collections/kaftan">Kaftan</a></li>
-                                <li className='menu-btn col-start-2'><a href="/collections/dupatta">Dupattas</a></li>
-                                <li className='menu-btn col-start-2'><a href="/collections/dresses">Dresses</a></li>
-                                <li className='menu-btn col-start-2'><a href="/collections/purse">Purse</a></li>
-                                <li className='menu-btn col-start-3 row-start-1'><a href="/collections/blouse">Ready Made Blouse</a></li>
-                                <li className='menu-btn col-start-3 row-start-2'><a href="/collections/ready-to-wear">Ready To Wear</a></li>
-                                <li className='menu-btn col-start-3 row-start-3'><a href="/collections/plus-size-lehenga">Plus Size Lehenga</a></li>
-                                <li className='menu-btn col-start-3 row-start-4'><a href="/collections/tops">Tops</a></li>
+                                <li className='menu-btn col-start-2 text-gray-600'><a href="/collections/kaftan">Kaftan</a></li>
+                                <li className='menu-btn col-start-2 text-gray-600'><a href="/collections/dupatta">Dupattas</a></li>
+                                <li className='menu-btn col-start-2 text-gray-600'><a href="/collections/dresses">Dresses</a></li>
+                                <li className='menu-btn col-start-2 text-gray-600'><a href="/collections/purse">Purse</a></li>
+                                <li className='menu-btn col-start-3 row-start-1 text-gray-600'><a href="/collections/blouse">Ready Made Blouse</a></li>
+                                <li className='menu-btn col-start-3 row-start-2 text-gray-600'><a href="/collections/ready-to-wear">Ready To Wear</a></li>
+                                <li className='menu-btn col-start-3 row-start-3 text-gray-600'><a href="/collections/plus-size-lehenga">Plus Size Lehenga</a></li>
+                                <li className='menu-btn col-start-3 row-start-4 text-gray-600'><a href="/collections/tops">Tops</a></li>
                             </ul>
                         </MenuList>
                     </Menu>

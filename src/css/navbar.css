@@ -55,6 +55,29 @@
     text-decoration: underline;
     font-size: 0.9em;
 }
+
 .link:hover {
-    color: rgb(255, 154, 191);  
-} 
+    color: rgb(255, 154, 191);
+}
+
+.search-container {
+    position: relative;
+    display: inline-block;
+}
+
+.search-container {
+    margin-top: 4vh;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+.margin{
+    margin-top: 30rem;
+}
+.search-icon {
+    position: absolute;
+    right: 1vw;
+    bottom: 1vh;
+    /* transform: translateY(-50%); */
+    pointer-events: none;
+}

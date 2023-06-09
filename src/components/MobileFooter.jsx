@@ -1,25 +1,50 @@
-import { Typography } from "@material-tailwind/react";
 import SITEMAP from "../api/Footer";
+import { Typography } from "@material-tailwind/react";
 
+import { useState } from "react";
+import {
+    Accordion,
+    AccordionHeader,
+    AccordionBody,
+} from "@material-tailwind/react";
 
+// eslint-disable-next-line react/prop-types
+function Icon({ id, open }) {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className={`${id === open ? "rotate-180" : ""
+                } h-5 w-5 transition-transform`}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+        >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+    );
+}
 const currentYear = new Date().getFullYear();
+export default function MobileFooter() {
+    const [open, setOpen] = useState(0);
 
-export default function Footer() {
-  return (
-    <footer className="bottom-0 left-0 right-0 hidden md:block">
-      <div className="w-full p-6">
-        <div className="flex flex-wrap -mt-1 ts:-mx-2">
-          {SITEMAP.map(({ title, links }, index) => (
-            <div key={index} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 p-2">
-              <Typography
-                variant="small"
-                color="black"
-                className="mb-4 divide-gray-300 uppercase"
-              >
-                {title}
-              </Typography>
-              <ul className="space-y-1 text-gray-300">
-                {links.map(({ text, icon: Icon, href, inputPlaceholder, buttonText }, index) => (
+    const handleOpen = (value) => {
+        setOpen(open === value ? 0 : value);
+    };
+
+    return (
+        <div className="md:hidden mx-5 mb-[100px]">
+        {
+            SITEMAP.map((element)=>{
+                return(
+                    <Accordion open={open === element.id} icon={<Icon id={element.id} open={open} />} key={element.id}>
+                <AccordionHeader onClick={() => handleOpen(element.id)} className="text-black text-base">
+                   {element.title}
+                </AccordionHeader>
+
+                <AccordionBody>
+                <ul className="space-y-1 text-gray-300">
+                {element.links.map(({ text, icon: Icon, href, inputPlaceholder, buttonText }, index) => (
                   <Typography
                     key={index}
                     as="li"
@@ -41,7 +66,7 @@ export default function Footer() {
                         {text}
                       </a>
                     ) : (
-                      <div className="flex items-center">
+                      <div className="flex items-center ">
                         {Icon && <Icon />}
                         <div>
                           <div className="mb-1">{text}</div>
@@ -50,7 +75,7 @@ export default function Footer() {
                               <input
                                 type="email"
                                 placeholder={inputPlaceholder}
-                                className=""
+                                className="mx-2"
                               />
                               <button
                                 type="button"
@@ -66,11 +91,12 @@ export default function Footer() {
                   </Typography>
                 ))}
               </ul>
-            </div>
-          ))}
-        </div>
-
-        <div className="max-w-screen-3xl flex w-full flex-col items-center justify-center border-t border-blue-gray-50 py-4 md:flex-row md:justify-between">
+                </AccordionBody>
+            </Accordion>
+                )
+            })
+        }
+        <div className="max-w-screen-3xl flex w-full flex-col items-center justify-center border-t border-blue-gray-50 py-4 md:flex-row md:justify-between gap-5">
           <Typography
             variant="small"
             className="text-center font-normal text-blue-gray-900 md:mb-0"
@@ -85,7 +111,6 @@ export default function Footer() {
             />
           </a>
         </div>
-      </div>
-    </footer>
-  );
+        </div>
+    );
 }

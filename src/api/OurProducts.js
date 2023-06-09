@@ -33,6 +33,39 @@ const Products = {
 
 
         },
+        {
+            id: 4,
+            img: "./images/bestSeller_1.webp",
+            img_hover: "./images/bestSeller_1_hover.webp",
+            price: "₹ 1,800.00 - ₹ 2,600.00",
+            description: "Purple Color Plain Georgette Lehenga Choli With Dupatta",
+            QuickView: "",
+            QuickShop: "",
+
+
+        },
+        {
+            id: 5,
+            img: "./images/bestSeller_2.webp",
+            img_hover: "./images/bestSeller_2_hover.webp",
+            price: "₹ 3,600.00 - ₹ 4,400.00 ",
+            description: "Yellow Color Gota Patti & Tassels Work Bandhani Printed Vaishali Silk Lehenga Choli With Dupatta",
+            QuickView: "",
+            QuickShop: "",
+
+
+        },
+        {
+            id: 6,
+            img: "./images/bestSeller_3.webp",
+            img_hover: "./images/bestSeller_3_hover.webp",
+            price: " ₹ 3,600.00 - ₹ 4,400.00 ",
+            description: "Navy Blue Color Bandhani Printed Vaishali Silk Lehenga With Blouse And Dupatta",
+            QuickView: "",
+            QuickShop: "",
+
+
+        },
 
     ],
     FeaturedProducts: [

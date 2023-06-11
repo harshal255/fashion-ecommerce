@@ -1,5 +1,5 @@
-import React from 'react';
 import ImagesForLeading2 from '../api/Leanding2';
+import { Link } from "react-router-dom";
 
 
 const FourImages = () => {
@@ -10,13 +10,13 @@ const FourImages = () => {
       {
         ImagesForLeading2.map((element) => {
           return (
-            <div className="overflow-hidden className shadow-lg cursor-pointer relative overflow-y-hidden item flex-shrink-0 scroll-snap-align-start" key={element.id}>
+            <Link to="/collections" className="overflow-hidden className shadow-lg cursor-pointer relative overflow-y-hidden item flex-shrink-0 scroll-snap-align-start" key={element.id}>
               <img className="object-cover w-full h-[15rem] sm:h-[30rem] " src={element.img} alt="Flower and sky" />
 
               <button className="absolute bottom-2 sm:bottom-12 mx-[20%] sm:mx-[25%]  bg-white hover:bg-black text-black  hover:text-white py-2 px-4 duration-500 hover:outline-none flex justify-center">
                 {element.buttontext}
               </button>
-            </div>
+            </Link>
 
           )
         })

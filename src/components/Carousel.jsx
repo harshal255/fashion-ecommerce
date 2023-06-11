@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { GrFormPrevious, GrFormNext } from "react-icons/gr"
+import { useState } from "react";
+import { GrFormPrevious, GrFormNext } from "react-icons/gr";
+import { Link } from "react-router-dom";
 
 const Carousel = () => {
     const images = [
@@ -33,11 +34,13 @@ const Carousel = () => {
         <>
             {/* for mobile size */}
             <div className="w-full flex sm:hidden items-center justify-center ">
-                <img
-                    src={mobileImages[currentImage]}
-                    alt="Carousel Slide"
-                    className="w-full"
-                />
+                <Link to='/collections'>
+                    <img
+                        src={mobileImages[currentImage]}
+                        alt="Carousel Slide"
+                        className="w-full"
+                    />
+                </Link>
 
 
                 <div>

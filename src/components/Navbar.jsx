@@ -249,7 +249,7 @@ export default function NavbarCom() {
                 </div>
                 <div className="margin">
                     <a href="#" className="link block px-4 py-2 bg-gray-100 border-t border-gray-300 text-gray-700 text-sm font-medium hover:bg-gray-200 transition-colors duration-200">
-                        Search for "{selected}"
+                        Search for {selected}
                     </a>
                 </div>
             </Drawer>

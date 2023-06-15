@@ -211,7 +211,7 @@ export default function NavbarCom() {
             {BottomNavbar}
             <Drawer placement="right" open={openLogin} onClose={closeDrawerLogin}>
                 <div className="mb-2 flex items-center justify-between p-4">
-                    <Typography variant="h7" >
+                    <Typography variant="h6" >
                         Login
                     </Typography>
                     <IconButton variant="text" onClick={closeDrawerLogin}>
@@ -228,7 +228,7 @@ export default function NavbarCom() {
             </Drawer>
             <Drawer placement="right" open={openSearch} onClose={closeDrawerSearch}>
                 <div className="mb-2 flex items-center justify-between p-4">
-                    <Typography variant="h7" >
+                    <Typography variant="h6" >
                         SEARCH OUR SITE
                     </Typography>
                     <IconButton variant="text" onClick={closeDrawerSearch}>
@@ -255,7 +255,7 @@ export default function NavbarCom() {
             </Drawer>
             <Drawer placement="right" open={openBag} onClose={closeDrawerBag}>
                 <div className="mb-2 flex items-center justify-between p-4">
-                    <Typography variant="h7" >
+                    <Typography variant="h6" >
                         SHOOPING CART
                     </Typography>
                     <IconButton variant="text" onClick={closeDrawerBag}>
@@ -271,7 +271,7 @@ export default function NavbarCom() {
 
             <Drawer open={openNavbar} onClose={closeDrawerNavbar}>
                 <div className="mb-2 flex items-center justify-between p-4">
-                    <Typography variant="h7" color="blue-gray">
+                    <Typography variant="h6" color="blue-gray">
                         Side Menu
                     </Typography>
                     <IconButton variant="text" color="blue-gray" onClick={closeDrawerNavbar}>

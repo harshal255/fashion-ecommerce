@@ -1,4 +1,4 @@
-import React from 'react';
+
 import GalleryImage from '../api/ImageGallary';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -52,7 +52,7 @@ const ImageGallarySlider = () => {
                     return (
                         <div key={gallery.id} className="lg:w-1/6 h-[14rem] md:h-[25rem] w-1/2 mt-5 lg:mt-10  overflow-hidden" >
                             <div className='ease-in-out md:hover:scale-110 hover:scale-125 cursor-pointer duration-1000'>
-                                <a href={gallery.link} target="_blank">
+                                <a href={gallery.link} target="_blank" rel="noreferrer">
                                     <img alt="team" className="flex-shrink-0 viol object-cover object-center mb-4 transition-opacity transform-none duration-500 ease-in-out" src={gallery.img} />
                                 </a>
                             </div>

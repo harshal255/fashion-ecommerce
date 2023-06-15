@@ -1,4 +1,3 @@
-import React from "react";
 import { AiOutlineHeart, AiOutlineEye, AiOutlineShoppingCart } from 'react-icons/ai';
 import { TbArrowsCross } from 'react-icons/tb';
 import '../css/Leanding3.css';

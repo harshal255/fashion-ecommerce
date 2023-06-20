@@ -34,7 +34,7 @@ import { VscAccount } from 'react-icons/vsc';
 import { MdMail, MdAddShoppingCart } from 'react-icons/md';
 import { AiOutlineHeart, AiFillHeart, AiOutlineShoppingCart } from 'react-icons/ai';
 import { CgShoppingBag } from 'react-icons/cg';
-import { GiHamburgerMenu } from 'react-icons/gi'
+// import { GiHamburgerMenu } from 'react-icons/gi'
 import { FiHelpCircle } from 'react-icons/fi';
 
 
@@ -51,6 +51,7 @@ export default function NavbarCom() {
     const [openNavbar, setOpenNavbar] = useState(false);
     const [open, setOpen] = useState(0);
     const [selected, SetIsSelected] = useState("All Categories");
+    const [isRegister, setIsRegister] = useState(false);
 
     const handleOpen = (value) => {
         setOpen(open === value ? 0 : value);
@@ -110,7 +111,7 @@ export default function NavbarCom() {
 
     const navList1 = (
         <>
-            <GiHamburgerMenu onClick={openDrawerNavbar} className="m-2 md:hidden hover:cursor-pointer hover:text-pink-500 hover:scale-125 duration-100"></GiHamburgerMenu>
+            {/*<GiHamburgerMenu onClick={openDrawerNavbar} className="m-2 md:hidden hover:cursor-pointer hover:text-pink-500 hover:scale-125 duration-100"></GiHamburgerMenu>*/}
             <ul className="hidden mb-4 mt-2 md:flex h-10  gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center justify-around sm:gap-8">
                 <Typography as="li" variant="small" className="p-1 font-normal">
                     <Tooltip title="Share on Facebook" followCursor placement="bottom">
@@ -212,19 +213,31 @@ export default function NavbarCom() {
             <Drawer placement="right" open={openLogin} onClose={closeDrawerLogin}>
                 <div className="mb-2 flex items-center justify-between p-4">
                     <Typography variant="h7" >
-                        Login
+                        {isRegister ? "REGISTER" : "LOGIN" }
                     </Typography>
                     <IconButton variant="text" onClick={closeDrawerLogin}>
                         <XMarkIcon strokeWidth={2} className="h-5 w-5" />
                     </IconButton>
                 </div>
-                <form className="flex flex-col gap-6 p-4">
-                    <Input type="email" label="Email" />
-                    <Input type="password" label="Password" />
-                    <a href="#" className="link">Forgot your Password?</a>
-                    <Button color="pink">Sign In</Button>
-                    <a href="#" className="link">New customer? Create your account</a>
-                </form>
+                { !isRegister ? (
+                    <form className="flex flex-col gap-6 p-4">
+                        <Input type="email" label="Email" />
+                        <Input type="password" label="Password" />
+                        <a href="#" className="link">Forgot your Password?</a>
+                        <Button color="pink">Sign In</Button>
+                        <a href="#" className="link" onClick={() => { setIsRegister(true) }} >New customer? Create your account</a>
+                    </form>
+                ) : (
+                    <form className="flex flex-col gap-6 p-4">
+                        <Input label="First Name" />
+                        <Input label="Last Name" />
+                        <Input type="email" label="Email" />
+                        <Input type="password" label="Password" />
+                        <Button color="pink">Register</Button>
+                        <a href="#" className="link" onClick={() => { setIsRegister(false) }} >Already have an account? Login here</a>
+                    </form>
+                )
+                }
             </Drawer>
             <Drawer placement="right" open={openSearch} onClose={closeDrawerSearch}>
                 <div className="mb-2 flex items-center justify-between p-4">

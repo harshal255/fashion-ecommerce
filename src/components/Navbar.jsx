@@ -51,7 +51,10 @@ export default function NavbarCom() {
     const [openNavbar, setOpenNavbar] = useState(false);
     const [open, setOpen] = useState(0);
     const [selected, SetIsSelected] = useState("All Categories");
+
     const [isRegister, setIsRegister] = useState(false);
+
+
 
     const handleOpen = (value) => {
         setOpen(open === value ? 0 : value);
@@ -212,8 +215,10 @@ export default function NavbarCom() {
             {BottomNavbar}
             <Drawer placement="right" open={openLogin} onClose={closeDrawerLogin}>
                 <div className="mb-2 flex items-center justify-between p-4">
+
                     <Typography variant="h7" >
                         {isRegister ? "REGISTER" : "LOGIN" }
+
                     </Typography>
                     <IconButton variant="text" onClick={closeDrawerLogin}>
                         <XMarkIcon strokeWidth={2} className="h-5 w-5" />
@@ -241,7 +246,9 @@ export default function NavbarCom() {
             </Drawer>
             <Drawer placement="right" open={openSearch} onClose={closeDrawerSearch}>
                 <div className="mb-2 flex items-center justify-between p-4">
+
                     <Typography variant="h7" >
+
                         SEARCH OUR SITE
                     </Typography>
                     <IconButton variant="text" onClick={closeDrawerSearch}>
@@ -262,13 +269,17 @@ export default function NavbarCom() {
                 </div>
                 <div className="margin">
                     <a href="#" className="link block px-4 py-2 bg-gray-100 border-t border-gray-300 text-gray-700 text-sm font-medium hover:bg-gray-200 transition-colors duration-200">
+
                         Search for "{selected}"
+
                     </a>
                 </div>
             </Drawer>
             <Drawer placement="right" open={openBag} onClose={closeDrawerBag}>
                 <div className="mb-2 flex items-center justify-between p-4">
+
                     <Typography variant="h7" >
+
                         SHOOPING CART
                     </Typography>
                     <IconButton variant="text" onClick={closeDrawerBag}>
@@ -284,7 +295,9 @@ export default function NavbarCom() {
 
             <Drawer open={openNavbar} onClose={closeDrawerNavbar}>
                 <div className="mb-2 flex items-center justify-between p-4">
+
                     <Typography variant="h7" color="blue-gray">
+
                         Side Menu
                     </Typography>
                     <IconButton variant="text" color="blue-gray" onClick={closeDrawerNavbar}>

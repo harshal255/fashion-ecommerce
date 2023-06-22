@@ -1,14 +1,13 @@
 import './App.css'
 import Footer from './components/Footer'
-import Leandingpage from './components/Leandingpage'
-import Leanding2 from './components/Leanding2'
 import NavbarCom from './components/Navbar'
-import Leanding3 from './components/Leanding3'
 import NavbarMenu from './components/navbarMenu'
-import OurProducts from './components/OurProducts'
-import LatestBlog from './components/LatestBlog'
-import ImageGallary from './components/ImageGallary'
 import MobileFooter from './components/MobileFooter'
+import { Routes, Route } from 'react-router-dom'
+import Collections from './pages/Collections'
+import NoMatch from './components/NoMatch'
+import Home from './pages/Home'
+
 
 
 function App() {
@@ -17,12 +16,11 @@ function App() {
     <>
       <NavbarCom />
       <NavbarMenu />
-      <Leandingpage></Leandingpage>
-      <Leanding2></Leanding2>
-      <Leanding3></Leanding3>
-      <OurProducts></OurProducts>
-      <LatestBlog></LatestBlog>
-      <ImageGallary></ImageGallary>
+      <Routes>
+        <Route path='/' element={<Home></Home>}></Route>
+        <Route path='/collections' element={<Collections></Collections>}></Route>
+        <Route path='*' element={<NoMatch></NoMatch>}></Route>
+      </Routes>
       <MobileFooter></MobileFooter>
       <Footer></Footer>
     </>

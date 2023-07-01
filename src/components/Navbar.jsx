@@ -114,8 +114,8 @@ export default function NavbarCom() {
 
     const navList1 = (
         <>
-            <GiHamburgerMenu onClick={openDrawerNavbar} className="m-2 md:hidden hover:cursor-pointer hover:text-pink-500 hover:scale-125 duration-100"></GiHamburgerMenu>
-            <ul className="hidden mb-4 mt-2 md:flex h-10  gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center justify-around sm:gap-8">
+            <GiHamburgerMenu onClick={openDrawerNavbar} className="m-2 lg:hidden hover:cursor-pointer hover:text-pink-500 hover:scale-125 duration-100"></GiHamburgerMenu>
+            <ul className="hidden mb-4 mt-2 lg:flex h-10  gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center justify-around sm:gap-8">
                 <Typography as="li" variant="small" className="p-1 font-normal">
                     <Tooltip title="Share on Facebook" followCursor placement="bottom">
                         <a href="https://www.facebook.com/sharer/sharer.php?u=https://looknbookart.com" target="_blank" className="flex items-center custom-link-hover fb-icon" rel="noreferrer">

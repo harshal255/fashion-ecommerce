@@ -34,7 +34,7 @@ import { VscAccount } from 'react-icons/vsc';
 import { MdMail, MdAddShoppingCart } from 'react-icons/md';
 import { AiOutlineHeart, AiFillHeart, AiOutlineShoppingCart } from 'react-icons/ai';
 import { CgShoppingBag } from 'react-icons/cg';
-// import { GiHamburgerMenu } from 'react-icons/gi'
+import { GiHamburgerMenu } from 'react-icons/gi'
 import { FiHelpCircle } from 'react-icons/fi';
 
 
@@ -114,7 +114,7 @@ export default function NavbarCom() {
 
     const navList1 = (
         <>
-            {/*<GiHamburgerMenu onClick={openDrawerNavbar} className="m-2 md:hidden hover:cursor-pointer hover:text-pink-500 hover:scale-125 duration-100"></GiHamburgerMenu>*/}
+            <GiHamburgerMenu onClick={openDrawerNavbar} className="m-2 md:hidden hover:cursor-pointer hover:text-pink-500 hover:scale-125 duration-100"></GiHamburgerMenu>
             <ul className="hidden mb-4 mt-2 md:flex h-10  gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center justify-around sm:gap-8">
                 <Typography as="li" variant="small" className="p-1 font-normal">
                     <Tooltip title="Share on Facebook" followCursor placement="bottom">
@@ -270,7 +270,7 @@ export default function NavbarCom() {
                 <div className="margin">
                     <a href="#" className="link block px-4 py-2 bg-gray-100 border-t border-gray-300 text-gray-700 text-sm font-medium hover:bg-gray-200 transition-colors duration-200">
 
-                        Search for "{selected}"
+                        Search for `{selected}`
 
                     </a>
                 </div>

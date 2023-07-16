@@ -34,8 +34,9 @@ import { VscAccount } from 'react-icons/vsc';
 import { MdMail, MdAddShoppingCart } from 'react-icons/md';
 import { AiOutlineHeart, AiFillHeart, AiOutlineShoppingCart } from 'react-icons/ai';
 import { CgShoppingBag } from 'react-icons/cg';
-// import { GiHamburgerMenu } from 'react-icons/gi'
+import { GiHamburgerMenu } from 'react-icons/gi'
 import { FiHelpCircle } from 'react-icons/fi';
+import { Link, useNavigate } from "react-router-dom";
 
 
 
@@ -54,7 +55,7 @@ export default function NavbarCom() {
 
     const [isRegister, setIsRegister] = useState(false);
 
-
+    const navigate = useNavigate();
 
     const handleOpen = (value) => {
         setOpen(open === value ? 0 : value);
@@ -108,14 +109,19 @@ export default function NavbarCom() {
         document.body.style.height = "";
     }
 
+    const handleClick = () => {
+        const path = isRegister ? '/register' : '/login';
+        navigate(path);
+    }
+
     useEffect(() => {
         window.addEventListener("resize", () => window.innerWidth >= 960 && setOpenNav(false));
     }, []);
 
     const navList1 = (
         <>
-            {/*<GiHamburgerMenu onClick={openDrawerNavbar} className="m-2 md:hidden hover:cursor-pointer hover:text-pink-500 hover:scale-125 duration-100"></GiHamburgerMenu>*/}
-            <ul className="hidden mb-4 mt-2 md:flex h-10  gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center justify-around sm:gap-8">
+            <GiHamburgerMenu onClick={openDrawerNavbar} className="m-2 lg:hidden hover:cursor-pointer hover:text-pink-500 hover:scale-125 duration-100"></GiHamburgerMenu>
+            <ul className="hidden mb-4 mt-2 lg:flex h-10  gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center justify-around sm:gap-8">
                 <Typography as="li" variant="small" className="p-1 font-normal">
                     <Tooltip title="Share on Facebook" followCursor placement="bottom">
                         <a href="https://www.facebook.com/sharer/sharer.php?u=https://looknbookart.com" target="_blank" className="flex items-center custom-link-hover fb-icon" rel="noreferrer">
@@ -216,28 +222,56 @@ export default function NavbarCom() {
             <Drawer placement="right" open={openLogin} onClose={closeDrawerLogin}>
                 <div className="mb-2 flex items-center justify-between p-4">
 
-                    <Typography variant="h7" >
-                        {isRegister ? "REGISTER" : "LOGIN" }
+                    <Link to={isRegister ? '/register' : '/login'} onClick={handleClick}>
+                        <Typography variant="h7" onClick={handleClick} >
+                            {isRegister ? "REGISTER" : "LOGIN"}
 
-                    </Typography>
+                        </Typography>
+                    </Link>
                     <IconButton variant="text" onClick={closeDrawerLogin}>
                         <XMarkIcon strokeWidth={2} className="h-5 w-5" />
                     </IconButton>
                 </div>
-                { !isRegister ? (
+                {!isRegister ? (
                     <form className="flex flex-col gap-6 p-4">
-                        <Input type="email" label="Email" />
-                        <Input type="password" label="Password" />
-                        <a href="#" className="link">Forgot your Password?</a>
+                        <Input size="lg" color="pink" label={
+                            <>
+                                Email <span className="text-red-500">*</span>
+                            </>
+                        } />
+                        <Input
+                            size="lg"
+                            color="pink"
+                            label={
+                                <>
+                                    Password <span className="text-red-500">*</span>
+                                </>
+                            }
+                        />
+                        <Link to="/recover" onClick={() => { setForgetPass(true) }} className=" underline font-medium transition-colors hover:text-pink-700">
+                            Forgot your password?
+                        </Link>
                         <Button color="pink">Sign In</Button>
                         <a href="#" className="link" onClick={() => { setIsRegister(true) }} >New customer? Create your account</a>
                     </form>
                 ) : (
                     <form className="flex flex-col gap-6 p-4">
-                        <Input label="First Name" />
-                        <Input label="Last Name" />
-                        <Input type="email" label="Email" />
-                        <Input type="password" label="Password" />
+                        <Input size="lg" color="pink" label="First Name" />
+                        <Input size="lg" color="pink" label="Last Name" />
+                        <Input size="lg" color="pink" label={
+                            <>
+                                Email <span className="text-red-500">*</span>
+                            </>
+                        } />
+                        <Input
+                            size="lg"
+                            color="pink"
+                            label={
+                                <>
+                                    Password <span className="text-red-500">*</span>
+                                </>
+                            }
+                        />
                         <Button color="pink">Register</Button>
                         <a href="#" className="link" onClick={() => { setIsRegister(false) }} >Already have an account? Login here</a>
                     </form>
@@ -270,7 +304,7 @@ export default function NavbarCom() {
                 <div className="margin">
                     <a href="#" className="link block px-4 py-2 bg-gray-100 border-t border-gray-300 text-gray-700 text-sm font-medium hover:bg-gray-200 transition-colors duration-200">
 
-                        Search for "{selected}"
+                        Search for `{selected}`
 
                     </a>
                 </div>

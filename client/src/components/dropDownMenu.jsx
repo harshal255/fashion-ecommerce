@@ -8,7 +8,7 @@ import {
     MenuList,
 } from "@material-tailwind/react";
 
-const NavbarMenu = () => {
+const dropDownMenu = () => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
     const [isDropdownOpen1, setIsDropdownOpen1] = React.useState(false);
@@ -208,4 +208,4 @@ const NavbarMenu = () => {
     );
 };
 
-export default NavbarMenu;
+export default dropDownMenu;

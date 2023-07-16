@@ -7,6 +7,7 @@ import {
     MenuHandler,
     MenuList,
 } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const NavbarMenu = () => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -56,9 +57,13 @@ const NavbarMenu = () => {
                                     selected={isMenuOpen || isMobileMenuOpen}
                                     onClick={handleMenuToggle}
                                 >
-                                    <div className='menu-btn'>
-                                        Lehenga Choli
-                                    </div>
+                                    <Link to="/collections">
+                                        <div className='menu-btn'>
+
+                                            Lehenga Choli
+
+                                        </div>
+                                    </Link>
                                 </ListItem>
                             </Typography>
                         </MenuHandler>
@@ -107,9 +112,11 @@ const NavbarMenu = () => {
                                     selected={isMenuOpen || isMobileMenuOpen}
                                     onClick={handleMenuToggle}
                                 >
-                                    <div className='menu-btn'>
-                                        Sarees
-                                    </div>
+                                    <Link to="/collections">
+                                        <div className='menu-btn'>
+                                            Sarees
+                                        </div>
+                                    </Link>
                                 </ListItem>
                             </Typography>
                         </MenuHandler>
@@ -145,9 +152,11 @@ const NavbarMenu = () => {
                                     selected={isMenuOpen || isMobileMenuOpen}
                                     onClick={handleMenuToggle}
                                 >
-                                    <div className='menu-btn'>
-                                        Gown
-                                    </div>
+                                    <Link to="/collections">
+                                        <div className='menu-btn'>
+                                            Gown
+                                        </div>
+                                    </Link>
                                 </ListItem>
                             </Typography>
                         </MenuHandler>
@@ -183,9 +192,11 @@ const NavbarMenu = () => {
                                     selected={isMenuOpen || isMobileMenuOpen}
                                     onClick={handleMenuToggle}
                                 >
-                                    <div className='menu-btn'>
-                                        Collections
-                                    </div>
+                                    <Link to="/collections">
+                                        <div className='menu-btn'>
+                                            Collections
+                                        </div>
+                                    </Link>
                                 </ListItem>
                             </Typography>
                         </MenuHandler>

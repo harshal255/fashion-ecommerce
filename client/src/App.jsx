@@ -1,12 +1,14 @@
 import './App.css'
 import Footer from './components/Footer'
 import NavbarCom from './components/Navbar'
-import NavbarMenu from './components/navbarMenu'
+// import NavbarMenu from './components/navbarMenu'
 import MobileFooter from './components/MobileFooter'
 import { Routes, Route } from 'react-router-dom'
 import Collections from './pages/Collections'
 import NoMatch from './components/NoMatch'
 import Home from './pages/Home'
+import CollectionDetails from './pages/collectionDetails'
+
 
 
 
@@ -15,10 +17,11 @@ function App() {
   return (
     <>
       <NavbarCom />
-      <NavbarMenu />
+      {/* <NavbarMenu /> */}
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/collections' element={<Collections></Collections>}></Route>
+        <Route path='/collections/details' element={<CollectionDetails></CollectionDetails>}></Route>
         <Route path='*' element={<NoMatch></NoMatch>}></Route>
       </Routes>
       <MobileFooter></MobileFooter>

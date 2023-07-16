@@ -36,9 +36,8 @@ import { AiOutlineHeart, AiFillHeart, AiOutlineShoppingCart } from 'react-icons/
 import { CgShoppingBag } from 'react-icons/cg';
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { FiHelpCircle } from 'react-icons/fi';
+import { Link, useNavigate } from "react-router-dom";
 import AddtoCart from "./AddtoCart";
-
-
 
 export default function NavbarCom() {
 
@@ -55,7 +54,7 @@ export default function NavbarCom() {
 
     const [isRegister, setIsRegister] = useState(false);
 
-
+    const navigate = useNavigate();
 
     const handleOpen = (value) => {
         setOpen(open === value ? 0 : value);
@@ -107,6 +106,11 @@ export default function NavbarCom() {
         setOpenBag(false);
         document.body.style.overflow = "";
         document.body.style.height = "";
+    }
+
+    const handleClick = () => {
+        const path = isRegister ? '/register' : '/login';
+        navigate(path);
     }
 
     useEffect(() => {
@@ -217,28 +221,56 @@ export default function NavbarCom() {
             <Drawer placement="right" open={openLogin} onClose={closeDrawerLogin}>
                 <div className="mb-2 flex items-center justify-between p-4">
 
-                    <Typography variant="h7" >
-                        {isRegister ? "REGISTER" : "LOGIN" }
+                    <Link to={isRegister ? '/register' : '/login'} onClick={handleClick}>
+                        <Typography variant="h7" onClick={handleClick} >
+                            {isRegister ? "REGISTER" : "LOGIN"}
 
-                    </Typography>
+                        </Typography>
+                    </Link>
                     <IconButton variant="text" onClick={closeDrawerLogin}>
                         <XMarkIcon strokeWidth={2} className="h-5 w-5" />
                     </IconButton>
                 </div>
-                { !isRegister ? (
+                {!isRegister ? (
                     <form className="flex flex-col gap-6 p-4">
-                        <Input type="email" label="Email" />
-                        <Input type="password" label="Password" />
-                        <a href="#" className="link">Forgot your Password?</a>
+                        <Input size="lg" color="pink" label={
+                            <>
+                                Email <span className="text-red-500">*</span>
+                            </>
+                        } />
+                        <Input
+                            size="lg"
+                            color="pink"
+                            label={
+                                <>
+                                    Password <span className="text-red-500">*</span>
+                                </>
+                            }
+                        />
+                        <Link to="/recover" onClick={() => { setForgetPass(true) }} className=" underline font-medium transition-colors hover:text-pink-700">
+                            Forgot your password?
+                        </Link>
                         <Button color="pink">Sign In</Button>
                         <a href="#" className="link" onClick={() => { setIsRegister(true) }} >New customer? Create your account</a>
                     </form>
                 ) : (
                     <form className="flex flex-col gap-6 p-4">
-                        <Input label="First Name" />
-                        <Input label="Last Name" />
-                        <Input type="email" label="Email" />
-                        <Input type="password" label="Password" />
+                        <Input size="lg" color="pink" label="First Name" />
+                        <Input size="lg" color="pink" label="Last Name" />
+                        <Input size="lg" color="pink" label={
+                            <>
+                                Email <span className="text-red-500">*</span>
+                            </>
+                        } />
+                        <Input
+                            size="lg"
+                            color="pink"
+                            label={
+                                <>
+                                    Password <span className="text-red-500">*</span>
+                                </>
+                            }
+                        />
                         <Button color="pink">Register</Button>
                         <a href="#" className="link" onClick={() => { setIsRegister(false) }} >Already have an account? Login here</a>
                     </form>

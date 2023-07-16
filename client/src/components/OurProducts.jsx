@@ -5,6 +5,7 @@ import Products from '../api/OurProducts';
 import { AiOutlineHeart, AiOutlineEye, AiOutlineShoppingCart } from 'react-icons/ai';
 import { TbArrowsCross } from 'react-icons/tb';
 import '../css/OurProducts.css';
+import { Link } from 'react-router-dom';
 
 
 const OurProducts = () => {
@@ -39,14 +40,12 @@ const OurProducts = () => {
       <div className="buttons text-center">
         <button
           className={`bg-white  py-2 px-5 m-2 md:m-4 hover:text-black hover:border-2 hover:border-black duration-400 ${selectedButton === 'best-seller' ? 'text-black border-2 border-black' : 'text-gray-800 border-2 border-transparent'}  `}
-          onClick={() => handleButtonClick('best-seller')}
-        >
+          onClick={() => handleButtonClick('best-seller')}>
           Best Seller
         </button>
         <button
           className={`bg-white py-2 px-5 m-2 md:m-4 hover:text-black hover:border-2 hover:border-black duration-400 ${selectedButton === 'featured' ? 'text-black border-2 border-black' : 'text-gray-800 border-2 border-transparent'}  `}
-          onClick={() => handleButtonClick('featured')}
-        >
+          onClick={() => handleButtonClick('featured')}>
           Featured
         </button>
       </div>
@@ -81,15 +80,17 @@ const OurProducts = () => {
                       </div>
                       <div className="cardButtons absolute -bottom-3 -right-1 sm:top-1/2 sm:left-1/2 sm:bottom-auto sm:right-auto transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 flex flex-col sm:gap-3  bg-white sm:bg-transparent rounded-full">
 
-                        <button className="rounded-full font-extralight text-sm bg-white text-gray-900 hover:bg-gray-900 hover:text-white  py-2  px-2 sm:px-5 flex items-center flex-col group1 ">
+                        <Link to='/collections/details'>
+                          <button className="rounded-full font-extralight text-sm bg-white text-gray-900 hover:bg-gray-900 hover:text-white  py-2  px-2 sm:px-5 flex items-center flex-col group1 ">
+                            <AiOutlineEye className="h-[16px] w-[16px] sm:w-6 sm:h-6" />
+                          </button>
+                        </Link>
+                        <Link to='/collections/details'>
 
-                          <AiOutlineEye className="h-[16px] w-[16px] sm:w-6 sm:h-6" />
-                        </button>
-
-                        <button className="rounded-full font-extralight text-sm bg-white text-gray-900 py-2 px-2 sm:px-5 flex items-center flex-col hover:bg-gray-900 hover:text-white">
-
-                          <AiOutlineShoppingCart className="h-[16px] w-[16px] sm:w-6 sm:h-6" />
-                        </button>
+                          <button className="rounded-full font-extralight text-sm bg-white text-gray-900 py-2 px-2 sm:px-5 flex items-center flex-col hover:bg-gray-900 hover:text-white">
+                            <AiOutlineShoppingCart className="h-[16px] w-[16px] sm:w-6 sm:h-6" />
+                          </button>
+                        </Link>
 
 
 

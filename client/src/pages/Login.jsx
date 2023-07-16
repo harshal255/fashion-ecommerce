@@ -1,4 +1,4 @@
-import React from "react";
+
 import {
     Card,
     Input,
@@ -6,13 +6,10 @@ import {
     Typography,
 } from "@material-tailwind/react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Login() {
-    const handleLinkClick = ()=>{
-        const navigate = useNavigate();
-        navigate('/recover')
-    }
+   
     return (
         <Card color="transparent" shadow={false}>
             <div className="bg-gray-200 py-4">
@@ -39,7 +36,7 @@ export default function Login() {
                             />
                         </div>
                         <Typography color="gray" className="mt-2 mx-auto font-normal">
-                            <Link to="/recover" className=" underline font-medium transition-colors hover:text-pink-700" onClick={handleLinkClick}>
+                            <Link to="/recover" className=" underline font-medium transition-colors hover:text-pink-700">
                                 Forgot your password?
                             </Link>
                         </Typography>

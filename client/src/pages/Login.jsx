@@ -28,6 +28,7 @@ export default function Login() {
                             <Input
                                 size="lg"
                                 color="pink"
+                                type="password"
                                 label={
                                     <>
                                         Password <span className="text-red-500">*</span>

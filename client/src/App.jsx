@@ -11,7 +11,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import ForgetPassword from './pages/ForgetPassword'
 import CollectionDetails from './pages/collectionDetails'
-import Checkout from './pages/Checkout'
+import CheckoutForm from './pages/CheckoutForm'
 import AdminPanel from './pages/Admin/AdminPanel'
 import CreateProduct from './pages/Admin/createProduct';
 import UpdateProduct from './pages/Admin/updateProduct'
@@ -19,28 +19,88 @@ import UpdateProduct from './pages/Admin/updateProduct'
 
 
 function App() {
-
   return (
     <>
-      <NavbarCom />
-      <NavbarMenu />
       <Routes>
-        <Route path='/' element={<Home></Home>}></Route>
-        <Route path='/collections' element={<Collections></Collections>}></Route>
-        <Route path='/login' element={<Login />}></Route>
-        <Route path='/register' element={<Register />}></Route>
-        <Route path='/recover' element={<ForgetPassword />}></Route>
-        <Route path='/collections/details' element={<CollectionDetails></CollectionDetails>}></Route>
-        <Route path='/checkout' element={<Checkout></Checkout>}></Route>
-        <Route path='/admin' element={<AdminPanel></AdminPanel>}></Route>
-        <Route path='/admin/createProduct' element={<CreateProduct></CreateProduct>}></Route>
-        <Route path='/admin/updateProduct' element={<UpdateProduct></UpdateProduct>}></Route>
-        <Route path='*' element={<NoMatch></NoMatch>}></Route>
+        <Route
+          path="/"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <Home />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/collections"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <Collections />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/login"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <Login />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/register"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <Register />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/recover"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <ForgetPassword />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/checkout"
+          element={<CheckoutForm />}
+        ></Route>
+        <Route
+          path="*"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <NoMatch />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
       </Routes>
-      <MobileFooter></MobileFooter>
-      <Footer></Footer>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,9 +1,15 @@
+import React from 'react';
 import "../css/navbar.css";
 import {
     Typography,
     ListItem,
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import "../css/navbar.css";
+import {
+    Typography,
+    ListItem,
+} from "@material-tailwind/react";
 
 const NavbarMenu = () => {
     return (

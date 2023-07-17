@@ -47,6 +47,54 @@ function App() {
           }
         ></Route>
         <Route
+          path="/collections/details"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <CollectionDetails />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/admin"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <AdminPanel/>
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/admin/createproduct"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <CreateProduct/>
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/admin/updateproduct"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <UpdateProduct/>
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
           path="/login"
           element={
             <>

@@ -247,7 +247,7 @@ export default function NavbarCom() {
                                 </>
                             }
                         />
-                        <Link to="/recover" onClick={() => { setForgetPass(true) }} className=" underline font-medium transition-colors hover:text-pink-700">
+                        <Link to="/recover" className=" underline font-medium transition-colors hover:text-pink-700">
                             Forgot your password?
                         </Link>
                         <Button color="pink">Sign In</Button>

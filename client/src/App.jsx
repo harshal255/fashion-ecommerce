@@ -10,6 +10,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import ForgetPassword from './pages/ForgetPassword'
+import CheckoutForm from './pages/CheckoutForm'
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />}></Route>
         <Route path='/recover' element={<ForgetPassword />}></Route>
+        <Route path='/checkout' element={<CheckoutForm />}></Route>
         <Route path='*' element={<NoMatch></NoMatch>}></Route>
       </Routes>
       <MobileFooter></MobileFooter>

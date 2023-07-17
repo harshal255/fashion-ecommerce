@@ -23,13 +23,14 @@ export default function Login() {
                 <>
                     <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96 mx-auto">
                         <div className="mb-4 flex flex-col gap-6  items-center justify-center">
-                            <Input size="lg" color="pink" label={
+                            <Input size="lg" color="pink" type="email" label={
                                 <>
                                     Email <span className="text-red-500">*</span>
                                 </>
                             } />
                             <Input
                                 size="lg"
+                                type="password"
                                 color="pink"
                                 label={
                                     <>

@@ -1,4 +1,4 @@
-import React from "react";
+
 import {
     Card,
     Input,
@@ -6,13 +6,10 @@ import {
     Typography,
 } from "@material-tailwind/react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Login() {
-    const handleLinkClick = ()=>{
-        const navigate = useNavigate();
-        navigate('/recover')
-    }
+   
     return (
         <Card color="transparent" shadow={false}>
             <div className="bg-gray-200 py-4">
@@ -23,15 +20,15 @@ export default function Login() {
                 <>
                     <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96 mx-auto">
                         <div className="mb-4 flex flex-col gap-6  items-center justify-center">
-                            <Input size="lg" color="pink" type="email" label={
+                            <Input size="lg" color="pink" label={
                                 <>
                                     Email <span className="text-red-500">*</span>
                                 </>
                             } />
                             <Input
                                 size="lg"
-                                type="password"
                                 color="pink"
+                                type="password"
                                 label={
                                     <>
                                         Password <span className="text-red-500">*</span>
@@ -40,7 +37,7 @@ export default function Login() {
                             />
                         </div>
                         <Typography color="gray" className="mt-2 mx-auto font-normal">
-                            <Link to="/recover" className=" underline font-medium transition-colors hover:text-pink-700" onClick={handleLinkClick}>
+                            <Link to="/recover" className=" underline font-medium transition-colors hover:text-pink-700">
                                 Forgot your password?
                             </Link>
                         </Typography>

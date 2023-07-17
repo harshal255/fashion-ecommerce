@@ -37,8 +37,7 @@ import { CgShoppingBag } from 'react-icons/cg';
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { FiHelpCircle } from 'react-icons/fi';
 import { Link, useNavigate } from "react-router-dom";
-
-
+import AddtoCart from "./AddtoCart";
 
 export default function NavbarCom() {
 
@@ -206,7 +205,7 @@ export default function NavbarCom() {
                     <div className="">{navList1}</div>
                     <a href="/" className="w-[12rem]">
                         <img
-                            src="./images/logo.png"
+                            src="../images/logo.png"
                             alt="logo"
                         />
                     </a>
@@ -309,23 +308,9 @@ export default function NavbarCom() {
                     </a>
                 </div>
             </Drawer>
-            <Drawer placement="right" open={openBag} onClose={closeDrawerBag}>
-                <div className="mb-2 flex items-center justify-between p-4">
-
-                    <Typography variant="h7" >
-
-                        SHOOPING CART
-                    </Typography>
-                    <IconButton variant="text" onClick={closeDrawerBag}>
-                        <XMarkIcon strokeWidth={2} className="h-5 w-5" />
-                    </IconButton>
-                </div>
-                <div className="flex flex-col m-14">
-                    <MdAddShoppingCart className="mx-12 h-20 w-20" />
-                    <p className="mx-4">Your cart is empty.</p>
-                    <Button color="pink" className="rounded-xl">RETURN TO SHOP</Button>
-                </div>
-            </Drawer >
+            {/* openBag,closeDrawerBag */}
+            <AddtoCart open={openBag} onClose={closeDrawerBag}></AddtoCart>
+           
 
             <Drawer open={openNavbar} onClose={closeDrawerNavbar}>
                 <div className="mb-2 flex items-center justify-between p-4">

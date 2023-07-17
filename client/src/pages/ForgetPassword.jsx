@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     Card,
     Input,
@@ -6,15 +5,11 @@ import {
     Typography,
 } from "@material-tailwind/react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 function ForgetPassword() {
 
-    const handleClick = () => {
-        const navigate = useNavigate();
-        navigate('/login');
-    }
     return (
         <Card color="transparent" shadow={false}>
             <div className="bg-gray-200 py-4">
@@ -41,7 +36,7 @@ function ForgetPassword() {
                         RESET PASSWORD
                     </Button>
                     <Typography color="gray" className="mt-2 mx-auto font-normal">
-                        <Link to="/login" className=" underline font-medium transition-colors hover:text-pink-700" onClick={handleClick}>
+                        <Link to="/login" className=" underline font-medium transition-colors hover:text-pink-700">
                             Cancle
                         </Link>
                     </Typography>

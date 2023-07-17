@@ -12,6 +12,11 @@ import Register from './pages/Register'
 import ForgetPassword from './pages/ForgetPassword'
 import CollectionDetails from './pages/collectionDetails'
 import Checkout from './pages/Checkout'
+import AdminPanel from './pages/Admin/AdminPanel'
+import CreateProduct from './pages/Admin/CreateProduct';
+import UpdateProduct from './pages/Admin/UpdateProduct'
+
+
 
 function App() {
 
@@ -27,6 +32,9 @@ function App() {
         <Route path='/recover' element={<ForgetPassword />}></Route>
         <Route path='/collections/details' element={<CollectionDetails></CollectionDetails>}></Route>
         <Route path='/checkout' element={<Checkout></Checkout>}></Route>
+        <Route path='/admin' element={<AdminPanel></AdminPanel>}></Route>
+        <Route path='/admin/createProduct' element={<CreateProduct></CreateProduct>}></Route>
+        <Route path='/admin/updateProduct' element={<UpdateProduct></UpdateProduct>}></Route>
         <Route path='*' element={<NoMatch></NoMatch>}></Route>
       </Routes>
       <MobileFooter></MobileFooter>

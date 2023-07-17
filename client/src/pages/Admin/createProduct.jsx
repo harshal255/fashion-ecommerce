@@ -1,9 +1,9 @@
-import React from 'react'
 
-const createProduct = () => {
+
+const CreateProduct = () => {
   return (
-    <div>createProduct</div>
+    <div className="h-[50vh] w-[100vw] flex items-center justify-center text-5xl">createProduct</div>
   )
 }
 
-export default createProduct
+export default CreateProduct

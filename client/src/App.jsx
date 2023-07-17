@@ -13,8 +13,8 @@ import ForgetPassword from './pages/ForgetPassword'
 import CollectionDetails from './pages/collectionDetails'
 import Checkout from './pages/Checkout'
 import AdminPanel from './pages/Admin/AdminPanel'
-import CreateProduct from './pages/Admin/CreateProduct';
-import UpdateProduct from './pages/Admin/UpdateProduct'
+import CreateProduct from './pages/Admin/createProduct';
+import UpdateProduct from './pages/Admin/updateProduct'
 
 
 

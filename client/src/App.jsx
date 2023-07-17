@@ -12,6 +12,10 @@ import Register from './pages/Register'
 import ForgetPassword from './pages/ForgetPassword'
 import CollectionDetails from './pages/collectionDetails'
 import CheckoutForm from './pages/CheckoutForm'
+import AdminPanel from './pages/Admin/AdminPanel'
+import CreateProduct from './pages/Admin/createProduct';
+import UpdateProduct from './pages/Admin/updateProduct'
+
 
 
 function App() {

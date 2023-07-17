@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Blogs from '../api/LatestBlog';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";

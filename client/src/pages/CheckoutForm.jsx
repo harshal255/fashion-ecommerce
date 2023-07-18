@@ -46,7 +46,6 @@ function CheckoutForm() {
                                 />
                             </a>
                         </div>
-
                         <ul className="flex mt-1 ml-[5rem]">
                             <li
                                 className={`cursor-pointer ${activeTab === 'cart' ? 'font-bold' : 'font-normal'}`}
@@ -129,6 +128,7 @@ function CheckoutForm() {
                                     <div className="mb-4 flex flex-col">
                                         <Input size="lg" label="City" color='pink' type='text' />
                                     </div>
+
                                     <div id="coutnryState" className="mb-4 flex flex-col gap-4">
                                         <select
                                             value={selectedCountry}
@@ -180,6 +180,7 @@ function CheckoutForm() {
                                     />
                                 </div>
                                 <div className="flex items-center" >
+
                                     <a href="/cart" className="font-medium transition-colors hover:text-pink-700 w-[50%]">
                                         &lt; Return to cart
                                     </a>
@@ -307,8 +308,8 @@ function CheckoutForm() {
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div className="flex items-center border" >
-                                    <p className="font-medium transition-colors hover:text-pink-700 cursor-pointer border" onClick={() => { setActiveTab('shipping') }}>
+                                <div className="flex items-center" >
+                                    <p className="font-medium transition-colors hover:text-pink-700 cursor-pointer" onClick={() => { setActiveTab('shipping') }}>
                                         &lt; Return to shipping
                                     </p>
                                     <Button className="ml-20 mt-6 bg-pink-500" onClick={() => {/* payment interface */ }} >

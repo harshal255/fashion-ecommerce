@@ -15,7 +15,8 @@ import {
     ListItemSuffix,
     Chip,
     Select,
-    Option
+    Option,
+    Rating
 
 } from "@material-tailwind/react";
 import Tooltip from '@mui/material/Tooltip';
@@ -30,6 +31,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { AiOutlineHeart, AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import AddtoCart from "../components/AddtoCart";
+import CustomerReview from "../components/CustomerReview";
 
 
 const collectionDetails = () => {
@@ -128,45 +130,48 @@ const collectionDetails = () => {
 
 
     return (
-        <div className="flex flex-col md:flex-row lg:my-5 md:gap-1 lg:gap-5 mt-5">
-            <div className="md:w-1/2">
-                <img src="../images/collectiondetails.webp" alt="Detailspage" className="m-auto my-2 sm:w-1/2" />
-            </div>
-
-            <div className="md:w-1/2 w-full lg:pl-10 lg:py-[5rem] mt-6 lg:mt-0 sm:mx-5 px-5">
-                <h2 className="text-sm title-font text-gray-500 tracking-widest">SAREES</h2>
-                <h1 className="text-gray-900 text-3xl title-font font-semibold mb-1">Grey Color Haydrabadi Patola Printed Lehenga</h1>
-
-                <p className="leading-relaxed ">Make your fashion sense more impressive by wearing grey color lehenga made of dola silk beautify with patola print and foil work.
-                    This lehenga paired with fully unstitch similar blouse material and comes with dupatta.
-                    This silk lehenga is semi-stitch with canvas and can can.
-                    This white lehenga choli length is 41 inches</p>
-
-                <span className="title-font font-medium text-2xl text-gray-900">₹{price}</span>
-                <div className="flex mt-4 gap-2">
-                    <button className="flex text-pink py-2 px-6 items-center justify-between gap-3 focus:outline-none rounded-full border border-black ">
-                        <AiOutlineMinus
-                            className={`hover:text-pink-500 ${counter === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
-                            onClick={handleDecrement}
-                        />
-
-                        {counter}
-                        <AiOutlinePlus className="hover:text-pink-500" onClick={handleIncrement} />
-
-                    </button>
-                    <button className="flex text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none rounded-full hover:bg-pink-800 duration-300 hover:translate-y-2" onClick={openDrawerBag}>Add to Card</button>
-                    <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500">
-                        <AiOutlineHeart className='text-pink-500' />
-
-                    </button>
+        <>
+            <div className="flex flex-col md:flex-row lg:my-5 md:gap-1 lg:gap-5 mt-5">
+                <div className="md:w-1/2">
+                    <img src="../images/collectiondetails.webp" alt="Detailspage" className="m-auto my-2 sm:w-1/2" />
                 </div>
-                <h2 className="text-sm title-font text-gray-500 tracking-widest my-2">First Select or Update product Quality & then AddtoCart</h2>
+
+                <div className="md:w-1/2 w-full lg:pl-10 lg:py-[5rem] mt-6 lg:mt-0 sm:mx-5 px-5">
+                    <h2 className="text-sm title-font text-gray-500 tracking-widest">SAREES</h2>
+                    <h1 className="text-gray-900 text-3xl title-font font-semibold mb-1">Grey Color Haydrabadi Patola Printed Lehenga</h1>
+
+
+                    <p className="leading-relaxed ">Make your fashion sense more impressive by wearing grey color lehenga made of dola silk beautify with patola print and foil work.
+                        This lehenga paired with fully unstitch similar blouse material and comes with dupatta.
+                        This silk lehenga is semi-stitch with canvas and can can.
+                        This white lehenga choli length is 41 inches</p>
+
+                    <span className="title-font font-medium text-2xl text-gray-900">₹{price}</span>
+                    <div className="flex mt-4 gap-2">
+                        <button className="flex text-pink py-2 px-6 items-center justify-between gap-3 focus:outline-none rounded-full border border-black ">
+                            <AiOutlineMinus
+                                className={`hover:text-pink-500 ${counter === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                onClick={handleDecrement}
+                            />
+
+                            {counter}
+                            <AiOutlinePlus className="hover:text-pink-500" onClick={handleIncrement} />
+
+                        </button>
+                        <button className="flex text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none rounded-full hover:bg-pink-800 duration-300 hover:translate-y-2" onClick={openDrawerBag}>Add to Card</button>
+                        <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500">
+                            <AiOutlineHeart className='text-pink-500' />
+
+                        </button>
+                    </div>
+                    <h2 className="text-sm title-font text-gray-500 tracking-widest my-2">First Select or Update product Quality & then AddtoCart</h2>
+                </div>
+                <AddtoCart open={openBag} onClose={closeDrawerBag} productCount={counter} singleproductPrice={singleprice}></AddtoCart>
             </div>
-            <AddtoCart open={openBag} onClose={closeDrawerBag} productCount={counter} singleproductPrice={singleprice}></AddtoCart>
+            <CustomerReview></CustomerReview>
 
 
-
-        </div>
+        </>
     )
 }
 

@@ -57,7 +57,14 @@ const UpdateProduct = ({ productId }) => {
               type="text"
               id="name"
               name="name"
-              className="w-full border-gray-300 rounded-md shadow-sm focus:border-pink-500 focus:ring focus:ring-green-200"
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                border: '1px solid black',
+                borderRadius: '0.375rem',
+                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+                outline: 'none',
+              }}
             />
           </div>
           <div className="mb-4">
@@ -68,7 +75,14 @@ const UpdateProduct = ({ productId }) => {
               type="number"
               id="price"
               name="price"
-              className="w-full border-gray-300 rounded-md shadow-sm focus:border-pink-500 focus:ring focus:ring-green-200"
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                border: '1px solid black',
+                borderRadius: '0.375rem',
+                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+                outline: 'none',
+              }}
             />
           </div>
           <div className="mb-4">
@@ -79,7 +93,14 @@ const UpdateProduct = ({ productId }) => {
               type="text"
               id="description"
               name="description"
-              className="w-full border-gray-300 rounded-md shadow-sm focus:border-pink-500 focus:ring focus:ring-green-200"
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                border: '1px solid black',
+                borderRadius: '0.375rem',
+                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+                outline: 'none',
+              }}
             />
           </div>
           <div className="mb-4">
@@ -90,7 +111,14 @@ const UpdateProduct = ({ productId }) => {
               type="text"
               id="category"
               name="category"
-              className="w-full border-gray-300 rounded-md shadow-sm focus:border-pink-500 focus:ring focus:ring-green-200"
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                border: '1px solid black',
+                borderRadius: '0.375rem',
+                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+                outline: 'none',
+              }}
             />
           </div>
           <div className="mb-4">
@@ -101,7 +129,14 @@ const UpdateProduct = ({ productId }) => {
               type="text"
               id="images.public_id"
               name="images.public_id"
-              className="w-full border-gray-300 rounded-md shadow-sm focus:border-pink-500 focus:ring focus:ring-green-200"
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                border: '1px solid black',
+                borderRadius: '0.375rem',
+                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+                outline: 'none',
+              }}
             />
           </div>
           <div className="mb-4">
@@ -112,7 +147,14 @@ const UpdateProduct = ({ productId }) => {
               type="text"
               id="images.url"
               name="images.url"
-              className="w-full border-gray-300 rounded-md shadow-sm focus:border-pink-500 focus:ring focus:ring-green-200"
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                border: '1px solid black',
+                borderRadius: '0.375rem',
+                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+                outline: 'none',
+              }}
             />
           </div>
           <button

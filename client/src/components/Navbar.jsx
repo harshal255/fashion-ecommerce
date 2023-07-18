@@ -28,6 +28,7 @@ import {
 
 } from "@heroicons/react/24/solid";
 import '../css/navbar.css';
+import axios from "axios";
 import { FaFacebookF, FaPinterestP, FaTelegram } from 'react-icons/fa';
 import { IoIosSearch } from 'react-icons/io';
 import { VscAccount } from 'react-icons/vsc';
@@ -53,6 +54,43 @@ export default function NavbarCom() {
     const [selected, SetIsSelected] = useState("All Categories");
 
     const [isRegister, setIsRegister] = useState(false);
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleRegisterSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            console.log(name, email, password);
+            const response = await axios.post('http://localhost:4000/api/v1/register', {
+                name,
+                email,
+                password,
+            });
+
+            // console.log('Registration successful');
+            console.log(response);
+
+        } catch (error) {
+            console.error('Registration failed:', error);
+        }
+    };
+    const handleLoginSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post('http://localhost:4000/api/v1/login', {
+                email,
+                password,
+            });
+            console.log(response);
+            // console.log('Login successful');
+        } catch (error) {
+            console.error('Login failed:', error);
+        }
+    };
 
     const navigate = useNavigate();
 
@@ -232,14 +270,20 @@ export default function NavbarCom() {
                     </IconButton>
                 </div>
                 {!isRegister ? (
-                    <form className="flex flex-col gap-6 p-4">
-                        <Input size="lg" color="pink" label={
-                            <>
-                                Email <span className="text-red-500">*</span>
-                            </>
-                        } />
+                    <form className="flex flex-col gap-6 p-4" onSubmit={handleLoginSubmit}>
+                        <Input type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            size="lg" color="pink" label={
+                                <>
+                                    Email <span className="text-red-500">*</span>
+                                </>
+                            } />
                         <Input
                             size="lg"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             color="pink"
                             label={
                                 <>
@@ -250,20 +294,27 @@ export default function NavbarCom() {
                         <Link to="/recover" onClick={() => { setForgetPass(true) }} className=" underline font-medium transition-colors hover:text-pink-700">
                             Forgot your password?
                         </Link>
-                        <Button color="pink">Sign In</Button>
+                        <Button color="pink" type="submit">Sign In</Button>
                         <a href="#" className="link" onClick={() => { setIsRegister(true) }} >New customer? Create your account</a>
                     </form>
                 ) : (
-                    <form className="flex flex-col gap-6 p-4">
-                        <Input size="lg" color="pink" label="First Name" />
-                        <Input size="lg" color="pink" label="Last Name" />
-                        <Input size="lg" color="pink" label={
-                            <>
-                                Email <span className="text-red-500">*</span>
-                            </>
-                        } />
+                    <form className="flex flex-col gap-6 p-4" onSubmit={handleRegisterSubmit}>
+                        <Input type="text" size="lg" value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            color="pink" label="Name" />
+                        <Input type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            size="lg" color="pink" label={
+                                <>
+                                    Email <span className="text-red-500">*</span>
+                                </>
+                            } />
                         <Input
                             size="lg"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             color="pink"
                             label={
                                 <>
@@ -271,7 +322,7 @@ export default function NavbarCom() {
                                 </>
                             }
                         />
-                        <Button color="pink">Register</Button>
+                        <Button color="pink" type="submit" >Register</Button>
                         <a href="#" className="link" onClick={() => { setIsRegister(false) }} >Already have an account? Login here</a>
                     </form>
                 )
@@ -310,7 +361,7 @@ export default function NavbarCom() {
             </Drawer>
             {/* openBag,closeDrawerBag */}
             <AddtoCart open={openBag} onClose={closeDrawerBag}></AddtoCart>
-           
+
 
             <Drawer open={openNavbar} onClose={closeDrawerNavbar}>
                 <div className="mb-2 flex items-center justify-between p-4">

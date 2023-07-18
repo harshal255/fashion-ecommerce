@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
     Input,
     Checkbox,
@@ -33,11 +34,11 @@ function CheckoutForm() {
         setSelectedState(event.target.value);
     };
     return (
-        <div className="flex">
-            <div className="w-2/3 border items-centerflex">
-                <div >
+        <div className="flex flex-col-reverse lg:flex-row">
+            <div className="w-full lg:w-7/12 border flex items-center justify-center py-10">
+                <div>
                     <div id="form">
-                        <div className="flex gap-5  text-blue-gray-900">
+                        <div className="flex gap-5  text-blue-gray-900 ml-[5rem]">
                             <a href="/" className="w-[12rem]">
                                 <img
                                     src="./images/logo.png"
@@ -45,8 +46,7 @@ function CheckoutForm() {
                                 />
                             </a>
                         </div>
-
-                        <ul className="flex mt-1">
+                        <ul className="flex mt-1 ml-[5rem]">
                             <li
                                 className={`cursor-pointer ${activeTab === 'cart' ? 'font-bold' : 'font-normal'}`}
                                 onClick={() => handleTabClick('cart')}
@@ -83,9 +83,9 @@ function CheckoutForm() {
                                     </Typography>
                                     <Typography color="gray" className="ml-20 text-center font-normal">
                                         Already have an account?{" "}
-                                        <a href="/login" className="font-medium transition-colors hover:text-pink-700">
+                                        <Link to="/login" className="font-medium transition-colors hover:text-pink-700">
                                             Log In
-                                        </a>
+                                        </Link>
                                     </Typography>
                                 </div>
                                 <header>
@@ -128,7 +128,8 @@ function CheckoutForm() {
                                     <div className="mb-4 flex flex-col">
                                         <Input size="lg" label="City" color='pink' type='text' />
                                     </div>
-                                    <div id="coutnryState" className="mb-4 flex flex-col">
+
+                                    <div id="coutnryState" className="mb-4 flex flex-col gap-4">
                                         <select
                                             value={selectedCountry}
                                             onChange={handleCountryChange}
@@ -179,7 +180,8 @@ function CheckoutForm() {
                                     />
                                 </div>
                                 <div className="flex items-center" >
-                                    <a href="/cart" className="font-medium transition-colors hover:text-pink-700">
+
+                                    <a href="/cart" className="font-medium transition-colors hover:text-pink-700 w-[50%]">
                                         &lt; Return to cart
                                     </a>
                                     <Button className="ml-20 mt-6 bg-pink-500" onClick={() => { setActiveTab('shipping') }} >
@@ -340,8 +342,26 @@ function CheckoutForm() {
                     </div>
                 </div>
             </div>
-            <div className="w-1/2 border h-[100vh] items-center justify-center flex">
-                I am a AddToCard Details
+            <div className="w-full lg:w-5/12 border bg-gray-100 p-5 sm:p-7 md:p-10 lg:p-14">
+                <div className="flex justify-between gap-5 items-center">
+                    <div className='border bg-white px-2 relative '>
+                        <div className="badge absolute -top-2 -right-2 bg-gray-600 h-6 w-6">1</div>
+                        <img src="../images/collectiondetails.webp" alt="img" className='h-20 w-52 lg:w-16'/>
+                    </div>
+                    <div className="flex flex-col">
+                        <span className='text-sm'>Teal Color Plain With Lace Border Rangoli Silk Lehenga Choli Set</span>
+                        <span className='text-[12px] text-gray-600'>Unstitched/Semi-Stitched</span>
+                    </div>
+                    <div>
+                        ₹1,280.00
+                    </div>
+                </div>
+                <div className="my-3 border-t-2">
+                    <div className="flex justify-between m-4 font-semibold text-lg">
+                        <span>Subtotal:</span>
+                        <span> ₹1,280.00 </span>
+                    </div>
+                </div>
             </div>
         </div>
     )

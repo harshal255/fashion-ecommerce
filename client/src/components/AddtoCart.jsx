@@ -20,7 +20,7 @@ const AddtoCart = ({ open, onClose, productCount, singleproductPrice }) => {
     const [currentProductPrice, setCurrentProductPrice] = useState(singleproductPrice);
 
 
-    console.log(productCount, singleproductPrice);
+    // console.log(productCount, singleproductPrice);
 
     const ClearAll = () => {
         setCurrentProductCount(0);
@@ -97,8 +97,11 @@ const AddtoCart = ({ open, onClose, productCount, singleproductPrice }) => {
                 </div>
                 <span className="text-[12px] flex items-center"><Checkbox color="pink" defaultChecked />Tax included and shipping calculated at checkout
                     I agree with the terms and conditions. </span>
-                <Link to="/checkout">
-                <button className="flex text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none rounded-full hover:bg-pink-800 duration-300 hover:translate-y-2 my-4 justify-center items-center w-full">Check Out</button>
+                <Link to="/checkout" onClick={() => {
+                    document.body.style.overflow = "";
+                    document.body.style.height = "";
+                }}>
+                    <button className="flex text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none rounded-full hover:bg-pink-800 duration-300 hover:translate-y-2 my-4 justify-center items-center w-full">Check Out</button>
                 </Link>
 
 

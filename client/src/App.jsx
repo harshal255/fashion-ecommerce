@@ -17,8 +17,8 @@ import CreateProduct from './pages/Admin/createProduct'
 import UpdateProduct from './pages/Admin/updateProduct'
 import Dashboard from './pages/Admin/DashBoard'
 import { AuthProvider } from './AuthContext';
-import UserDetails from './components/userdetail'
 import Orders from './pages/Orders/orders'
+import UserDetails from './components/userdetail'
 
 function App() {
   return (
@@ -150,18 +150,6 @@ function App() {
                 <NavbarCom />
                 <NavbarMenu />
                 <ForgetPassword />
-                <MobileFooter />
-                <Footer />
-              </>
-            }
-          ></Route>
-          <Route
-            path="/userdetails"
-            element={
-              <>
-                <NavbarCom />
-                <NavbarMenu />
-                <Userdetail />
                 <MobileFooter />
                 <Footer />
               </>

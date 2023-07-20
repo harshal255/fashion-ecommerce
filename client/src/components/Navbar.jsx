@@ -85,6 +85,7 @@ export default function NavbarCom() {
 
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();
+        closeDrawerLogin();
 
         try {
             // console.log(name, email, password);
@@ -105,6 +106,7 @@ export default function NavbarCom() {
     };
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
+        closeDrawerLogin();
 
         try {
             const response = await axios.post('http://localhost:4000/api/v1/login', {
@@ -119,7 +121,7 @@ export default function NavbarCom() {
             Cookies.set('token', Token);
 
             if (response.data.user.role === 'admin') {
-                navigate('/admin/dash');
+                navigate('/admin');
             } else {
                 navigate('/');
             }
@@ -150,6 +152,7 @@ export default function NavbarCom() {
 
 
     const handleLogout = async () => {
+        
         try {
             const response = await axios.get('http://localhost:4000/api/v1/logout', {
                 headers: {

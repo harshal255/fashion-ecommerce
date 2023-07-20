@@ -6,12 +6,14 @@ import {
 } from "@material-tailwind/react";
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,11 +25,12 @@ export default function Register() {
                 email,
                 password,
             });
-
-            console.log('Registration successful');
+            alert('Registration successful');
             console.log(response);
+            navigate('/login');
 
         } catch (error) {
+            alert(error.response.data.message);
             console.error('Registration failed:', error);
         }
     };

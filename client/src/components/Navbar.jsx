@@ -1,5 +1,17 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import Box from '@mui/material/Box';
+import Tooltip from '@mui/material/Tooltip';
+import Avatar from '@mui/material/Avatar';
+import { ShoppingBasket } from '@mui/icons-material';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Divider from '@mui/material/Divider';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Logout from '@mui/icons-material/Logout';
+import { green } from '@mui/material/colors';
+import Cookies from 'js-cookie';
+
 import {
     Input,
     Drawer,
@@ -17,7 +29,6 @@ import {
     Option
 
 } from "@material-tailwind/react";
-import Tooltip from '@mui/material/Tooltip';
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import {
     PresentationChartBarIcon,
@@ -39,10 +50,12 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { FiHelpCircle } from 'react-icons/fi';
 import { Link, useNavigate } from "react-router-dom";
 import AddtoCart from "./AddtoCart";
+import AuthContext from "../AuthContext";
 
 export default function NavbarCom() {
 
-
+    const { isLoggedIN, setIsLoggedIn } = useContext(AuthContext);
+    const [userDetails, setUserDetails] = useState(null);
     const [openNav, setOpenNav] = useState(false);
     const [openSearch, setOpenSearch] = useState(false);
     const [openLogin, setOpenLogin] = useState(false);
@@ -59,21 +72,34 @@ export default function NavbarCom() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const [anchorEl, setAnchorEl] = useState(null);
+    const openProfile = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const navigate = useNavigate();
+
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            console.log(name, email, password);
+            // console.log(name, email, password);
             const response = await axios.post('http://localhost:4000/api/v1/register', {
                 name,
                 email,
                 password,
             });
-
-            // console.log('Registration successful');
-            console.log(response);
+            alert('Registration successful');
+            // console.log(response);
+            setIsRegister(false);
+            navigate('/login');
 
         } catch (error) {
+            alert(error.response.data.message);
             console.error('Registration failed:', error);
         }
     };
@@ -85,15 +111,63 @@ export default function NavbarCom() {
                 email,
                 password,
             });
-            console.log(response);
-            // console.log('Login successful');
+            // console.log(response);
+
+            // Set the refresh token in the cookie
+            alert("Log In Successfull");
+            const Token = response.data.token;
+            Cookies.set('token', Token);
+
+            if (response.data.user.role === 'admin') {
+                navigate('/admin/dash');
+            } else {
+                navigate('/');
+            }
+
+            setIsLoggedIn(true); // Update isLoggedIn state in the Navbar component
         } catch (error) {
+            alert(error.response.data.message);
             console.error('Login failed:', error);
         }
     };
 
-    const navigate = useNavigate();
+    const fetchUserDetails = async () => {
+        try {
+            const response = await axios.get('http://localhost:4000/api/v1/me', {
+                headers: {
+                    Authorization : `Bearer ${Cookies.get('token')}`,
+                },
+            });
+            console.log(Cookies.get('token'));
+            const userDetails = response.data.user;
+            setUserDetails(userDetails); // Set the user details in the state variable
+            alert(`Name: ${userDetails.name}\nEmail: ${userDetails.email}`);
+        } catch (error) {
+            alert('Failed to fetch user details: ' + error.response.data.message);
+            console.error('Failed to fetch user details:', error);
+        }
+    };
 
+
+    const handleLogout = async () => {
+        try {
+            const response = await axios.get('http://localhost:4000/api/v1/logout', {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get('token')}`
+                }
+            });
+            console.log(response);
+            // If the response status is 200, it means the logout was successful
+            if (response.status === 200) {
+                setIsLoggedIn(false); // Remove the logged-in state
+                alert(response.data.message);
+                Cookies.remove('token'); // Remove the token from the cookie
+            }
+        } catch (error) {
+            alert(error.response.data.message);
+            console.error(error);
+        }
+    };
     const handleOpen = (value) => {
         setOpen(open === value ? 0 : value);
     };
@@ -146,7 +220,7 @@ export default function NavbarCom() {
         document.body.style.height = "";
     }
 
-    const handleClick = () => {
+    const handleRglClick = () => {
         const path = isRegister ? '/register' : '/login';
         navigate(path);
     }
@@ -198,11 +272,86 @@ export default function NavbarCom() {
                     <IoIosSearch size={20} />
                 </a>
             </Typography>
-            <Typography as="li" variant="small" className="md:p-1 font-normal">
-                <a href="#" className="md:flex items-center hidden hover:cursor-pointer hover:text-pink-500 hover:scale-125 duration-100" onClick={openDrawerLogin}>
-                    <VscAccount size={20} />
-                </a>
-            </Typography>
+            {isLoggedIN ? (
+                <section>
+                    <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+                        <Tooltip title="Account settings">
+                            <IconButton
+                                onClick={handleClick}
+                                size="small"
+                                sx={{ ml: 1 }}
+                                aria-controls={openProfile ? 'account-menu' : undefined}
+                                aria-haspopup="true"
+                                aria-expanded={openProfile ? 'true' : undefined}
+                            >
+                                <Avatar sx={{ width: 32, height: 32, bgcolor: green[500] }}
+                                    variant="rounded" >
+                                    U
+                                </Avatar>
+                            </IconButton>
+                        </Tooltip>
+                    </Box>
+                    <Menu
+                        anchorEl={anchorEl}
+                        id="account-menu"
+                        open={openProfile}
+                        onClose={handleClose}
+                        onClick={handleClose}
+                        PaperProps={{
+                            elevation: 0,
+                            sx: {
+                                overflow: 'visible',
+                                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                mt: 1.5,
+                                '& .MuiAvatar-root': {
+                                    width: 32,
+                                    height: 32,
+                                    ml: -0.5,
+                                    mr: 1,
+                                },
+                                '&:before': {
+                                    content: '""',
+                                    display: 'block',
+                                    position: 'absolute',
+                                    top: 0,
+                                    right: 14,
+                                    width: 10,
+                                    height: 10,
+                                    bgcolor: 'background.paper',
+                                    transform: 'translateY(-50%) rotate(45deg)',
+                                    zIndex: 0,
+                                },
+                            },
+                        }}
+                        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                    >
+                        <MenuItem onClick={() => {
+                            handleClose();
+                            fetchUserDetails();
+                        }
+                        }>
+                            <Avatar /> Profile
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>
+                            <ShoppingBasket /> Orders
+                        </MenuItem>
+                        <Divider />
+                        <MenuItem onClick={handleLogout}>
+                            <ListItemIcon>
+                                <Logout fontSize="small" />
+                            </ListItemIcon>
+                            Logout
+                        </MenuItem>
+                    </Menu>
+                </section>
+            )
+                : (<Typography as="li" variant="small" className="md:p-1 font-normal">
+                    <a href="#" className="md:flex items-center hidden hover:cursor-pointer hover:text-pink-500 hover:scale-125 duration-100" onClick={openDrawerLogin}>
+                        <VscAccount size={20} />
+                    </a>
+                </Typography>
+                )}
             <Typography as="li" variant="small" className="md:p-1  font-normal relative">
                 <a href="#" className="md:flex items-center hidden hover:cursor-pointer hover:text-pink-500 hover:scale-125 duration-100">
                     <AiOutlineHeart size={20} />
@@ -259,8 +408,8 @@ export default function NavbarCom() {
             <Drawer placement="right" open={openLogin} onClose={closeDrawerLogin}>
                 <div className="mb-2 flex items-center justify-between p-4">
 
-                    <Link to={isRegister ? '/register' : '/login'} onClick={handleClick}>
-                        <Typography variant="h7" onClick={handleClick} >
+                    <Link to={isRegister ? '/register' : '/login'} onClick={handleRglClick}>
+                        <Typography variant="h7" onClick={handleRglClick} >
                             {isRegister ? "REGISTER" : "LOGIN"}
 
                         </Typography>

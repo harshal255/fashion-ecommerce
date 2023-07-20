@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { Formik, Form, Field } from "formik";
 
 const CreateProduct = () => {
@@ -18,10 +19,16 @@ const CreateProduct = () => {
       console.log(values);
       const response = await axios.post(
         "http://localhost:4000/api/v1/product/new",
-        values
+        values,
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get('Token')}`
+          }
+        }
       );
       console.log(response.data);
     } catch (error) {
+      alert(error.response.data.message);
       console.error(error);
     }
   }

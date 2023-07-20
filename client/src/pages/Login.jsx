@@ -1,4 +1,5 @@
-
+import React, { useState, useContext } from "react";
+import Cookies from 'js-cookie';
 import {
     Card,
     Input,
@@ -6,13 +7,16 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import axios from "axios";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "../AuthContext";
 
 export default function Login() {
-    
+
+    const { setIsLoggedIn } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -21,9 +25,22 @@ export default function Login() {
                 email,
                 password,
             });
-            console.log(response);
-            // console.log('Login successful');
+            // console.log(response);
+
+            // Set the refresh token in the cookie
+            alert("Log In Successfull");
+            const Token = response.data.token;
+            Cookies.set('token', Token);
+
+            if (response.data.user.role === 'admin') {
+                navigate('/admin/dash');
+            } else {
+                navigate('/');
+            }
+
+            setIsLoggedIn(true); // Update isLoggedIn state in the Navbar component
         } catch (error) {
+            alert(error.response.data.message);
             console.error('Login failed:', error);
         }
     };

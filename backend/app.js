@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const cookieParser = require("cookie-parser");
 const errorMiddleware = require("./middleware/error");
+const fileupload = require("express-fileupload")
 
 const corsOptions = {
     origin: 'http://localhost:5173',
@@ -14,6 +15,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+app.use(fileupload({
+    useTempFiles:true
+}))
 
 // Route import
 const product = require("./routes/productRoute");

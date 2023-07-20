@@ -2,15 +2,43 @@ const Product = require("../models/productModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apiFeatures");
+const cloudinary = require("cloudinary").v2
+
+cloudinary.config({ 
+  cloud_name: 'daxydmhh2',
+  api_key: '739182818485924',
+  api_secret: 'irgskFoAYMsERkNSW1id-DiHzNw'
+});
 
 // Create product
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   req.body.user = req.user.id;
-  const product = await Product.create(req.body);
-  res.status(201).json({
-    success: true,
-    product,
-  });
+  const file = req.files.photos;
+  
+  try {
+    result = await cloudinary.uploader.upload(file.tempFilePath,{
+      folder: "products",
+    });
+  } catch (err) {
+    return next(new ErrorHandler("Error uploading file to Cloudinary", 500));
+  }
+
+  req.body.images = {
+    public_id: result.public_id,
+    url: result.url,
+  };
+
+  try {
+    const product = await Product.create(req.body);
+
+    res.status(201).json({
+      success: true,
+      product,
+    });
+  } 
+  catch (error) {
+    return next(new ErrorHandler("Error creating product", 500));
+  }
 });
 
 // get all products
@@ -37,6 +65,23 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
   }
+  const file = req.files.photos;
+  for (let i = 0; i < product.images.length; i++) {
+    await cloudinary.uploader.destroy(product.images[i].public_id);
+  }
+
+  try {
+    result = await cloudinary.uploader.upload(file.tempFilePath,{
+      folder: "products",
+    });
+  } catch (err) {
+    return next(new ErrorHandler("Error uploading file to Cloudinary", 500));
+  }
+
+  req.body.images = {
+    public_id: result.public_id,
+    url: result.url,
+  };
 
   product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -57,9 +102,13 @@ exports.deleteProducts = catchAsyncErrors(async (req, res, next) => {
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
   }
+  
+  for (let i = 0; i < product.images.length; i++) {
+    await cloudinary.uploader.destroy(product.images[i].public_id);
+  }
 
-  await Product.deleteOne();
-
+  await product.remove();
+  
   res.status(200).json({
     success: true,
     message: "Product deleted successfully",

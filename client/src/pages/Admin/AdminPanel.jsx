@@ -25,6 +25,7 @@ import {
   Tab
 } from "@material-tailwind/react";
 import { useState } from 'react'
+import AdminDashboard from "./AdminDashboard";
 
 
 
@@ -45,6 +46,7 @@ const AdminPanel = () => {
 
     <div>
       <Heading mainTitle={"Admin Panel"} smallTitle={"View, Delete & Edit user as well as Product"}></Heading>
+      <AdminDashboard></AdminDashboard>
       <div className="buttons text-center">
         <button
           className={`bg-white  py-2 px-5 m-2 md:m-4 hover:text-black hover:border-2 hover:border-black duration-400
@@ -89,7 +91,7 @@ const AdminPanel = () => {
                 <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
                   <Tabs value="all" className="w-full md:w-max">
                     <TabsHeader>
-                      { AdminPanels.Tabs.map(({ label, value }) => (
+                      {AdminPanels.Tabs.map(({ label, value }) => (
                         <Tab key={value} value={value}>
                           &nbsp;&nbsp;{label}&nbsp;&nbsp;
                         </Tab>
@@ -105,7 +107,7 @@ const AdminPanel = () => {
                 <table className="mt-4 w-full min-w-max table-auto text-left">
                   <thead>
                     <tr>
-                      { AdminPanels.Table_head.map((head, index) => (
+                      {AdminPanels.Table_head.map((head, index) => (
                         <th
                           key={head}
                           className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50"
@@ -116,7 +118,7 @@ const AdminPanel = () => {
                             className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
                           >
                             {head}{" "}
-                            {index !==  AdminPanels.Table_head.length - 1 && (
+                            {index !== AdminPanels.Table_head.length - 1 && (
                               <ChevronUpDownIcon strokeWidth={2} className="h-4 w-4" />
                             )}
                           </Typography>
@@ -125,8 +127,8 @@ const AdminPanel = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    { AdminPanels.Users.map(({ img, name, email, job, org, online, date }, index) => {
-                      const isLast = index ===  AdminPanels.Users.length - 1;
+                    {AdminPanels.Users.map(({ img, name, email, job, org, online, date }, index) => {
+                      const isLast = index === AdminPanels.Users.length - 1;
                       const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
                       return (

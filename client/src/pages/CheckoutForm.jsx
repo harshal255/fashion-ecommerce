@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import {
     Input,
@@ -7,14 +7,27 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import countryStateData from '../api/countryStateData.json';
+import axios from 'axios';
 
 function CheckoutForm() {
     const [activeTab, setActiveTab] = useState('information');
     const [mail, setMail] = useState('');
+    const formRef = useRef(null);
+    const [city, setCity] = useState('');
+    const [pincode, setPincode] = useState('');
+    const [phoneNo, setPhoneNo] = useState('');
     const [address, setAddress] = useState('');
     const [selectedCountry, setSelectedCountry] = useState("select country");
     const [selectedState, setSelectedState] = useState("select state");
     const [selectedOption, setSelectedOption] = useState("standard");
+
+    const [itemPrice, setItemPrice] = useState(1000);
+    const [taxPrice, setTaxPrice] = useState(200);
+    const [shippingPrice, setShippingPrice] = useState(0);
+    const [total, setTotal] = useState(0)
+
+    const [itemName, setItemName] = useState("Teal Color Plain With Lace Border Rangoli Silk Lehenga Choli Set");
+    const [qty, setQty] = useState(1);
 
     const handleMailChange = (event) => {
         setMail(event.target.value);
@@ -33,6 +46,87 @@ function CheckoutForm() {
     const handleStateChange = (event) => {
         setSelectedState(event.target.value);
     };
+
+    const handleOptionChange = (option, price) => {
+        setSelectedOption(option);
+        setShippingPrice(price);
+    };
+    const calculateTotal = () => {
+        const totalPrice = qty * (itemPrice + shippingPrice + taxPrice);
+        setTotal(totalPrice);
+    };
+
+    const handleShippingInfo = (event) => {
+        event.preventDefault();
+
+        console.log("hello");
+        const formData = new FormData(formRef.current);
+
+        // Extract the values from the form data
+        const city = formData.get('city');
+        const pincode = formData.get('pincode');
+        const phoneNo = formData.get('phoneNo');
+
+        setCity(city);
+        setPincode(pincode);
+        setPhoneNo(phoneNo);
+
+        console.log(city, pincode, phoneNo);
+        setActiveTab('shipping');
+
+    }
+    const handleFormSubmit = async () => {
+
+        const requestBody = {
+            itemsPrice: itemPrice,
+            taxPrice: taxPrice,
+            shippingPrice: shippingPrice,
+            totalPrice: total,
+            orderItems: [
+                {
+                    product: "6454afd9ebe3a4002f19ca01",
+                    name: "product234",
+                    price: 243,
+                    image: "sample image",
+                    quantity: qty
+                }
+            ],
+            shippingInfo: {
+                address: address,
+                city: city,
+                state: selectedState,
+                country: selectedCountry,
+                pinCode: pincode,
+                phoneNo: phoneNo
+            },
+            paymentInfo: {
+                id: "sample payment info",
+                status: "succeeded"
+            }
+        };
+
+        console.log(requestBody);
+
+        try {
+            const res = await axios.post(
+                "http://localhost:4000/api/v1/order/new",
+                requestBody,
+                {
+                    withCredentials: true, // Include cookies in the request (important for authentication)
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+            console.log(res.data); // Assuming the response contains the data you want to log
+            alert("Order Placed!");
+        } catch (error) {
+            alert('Failed to place order' + error.response.data.message);
+            console.error(error);
+        }
+
+
+    }
     return (
         <div className="flex flex-col-reverse lg:flex-row">
             <div className="w-full lg:w-7/12 border flex items-center justify-center py-10">
@@ -76,7 +170,7 @@ function CheckoutForm() {
                             </li>
                         </ul>
                         {activeTab === 'information' && (
-                            <form className="m-20 mb-2 w-80 max-w-screen-lg sm:w-96">
+                            <form className="m-20 mb-2 w-80 max-w-screen-lg sm:w-96" onSubmit={handleShippingInfo} ref={formRef} >
                                 <div className="flex items-center">
                                     <Typography color="gray" className="mt-1 text-black font-bold">
                                         Contact
@@ -123,10 +217,7 @@ function CheckoutForm() {
                                         <Input size="lg" label="Address" color='pink' type='text' onChange={handleAddChange} />
                                     </div>
                                     <div className="mb-4 flex flex-col">
-                                        <Input size="lg" label="Apartment, suite, etc. (optional)" color='pink' type='text' />
-                                    </div>
-                                    <div className="mb-4 flex flex-col">
-                                        <Input size="lg" label="City" color='pink' type='text' />
+                                        <Input size="lg" label="City" color='pink' type='text' name='city' />
                                     </div>
 
                                     <div id="coutnryState" className="mb-4 flex flex-col gap-4">
@@ -159,10 +250,10 @@ function CheckoutForm() {
                                         </select>
                                     </div>
                                     <div className="mb-4 flex flex-col">
-                                        <Input size="lg" label="PIN code" color='pink' type='number' />
+                                        <Input size="lg" label="PIN code" color='pink' type='number' name='pincode' />
                                     </div>
                                     <div className="mb-4 flex flex-col">
-                                        <Input size="lg" label="Phone" color='pink' type='number' />
+                                        <Input size="lg" label="Phone" color='pink' type='number' name='phoneNo' />
                                     </div>
                                     <Checkbox
                                         label={
@@ -184,7 +275,7 @@ function CheckoutForm() {
                                     <a href="/cart" className="font-medium transition-colors hover:text-pink-700 w-[50%]">
                                         &lt; Return to cart
                                     </a>
-                                    <Button className="ml-20 mt-6 bg-pink-500" onClick={() => { setActiveTab('shipping') }} >
+                                    <Button className="ml-20 mt-6 bg-pink-500" type="submit" >
                                         Continue to shipping
                                     </Button>
                                 </div>
@@ -235,7 +326,7 @@ function CheckoutForm() {
                                                     type="radio"
                                                     name="shippingOption"
                                                     checked={selectedOption === 'standard'}
-                                                    onChange={() => setSelectedOption('standard')}
+                                                    onChange={() => handleOptionChange('standard', 0)}
                                                     className="mr-2"
                                                 />
                                                 Standard
@@ -248,12 +339,12 @@ function CheckoutForm() {
                                                     type="radio"
                                                     name="shippingOption"
                                                     checked={selectedOption === 'cashOnDelivery'}
-                                                    onChange={() => setSelectedOption('cashOnDelivery')}
+                                                    onChange={() => handleOptionChange('cashOnDelivery', 100)}
                                                     className="mr-2"
                                                 />
                                                 Standard Shipping (Cash on Delivery)
                                             </td>
-                                            <td className="text-right border-b py-2">100$</td>
+                                            <td className="text-right border-b py-2">100₹</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -261,7 +352,7 @@ function CheckoutForm() {
                                     <p className="font-medium transition-colors hover:text-pink-700 cursor-pointer" onClick={() => { setActiveTab('information') }}>
                                         &lt; Return to information
                                     </p>
-                                    <Button className=" ml-20 mt-6 bg-pink-500" onClick={() => { setActiveTab('Payment') }} >
+                                    <Button className=" ml-20 mt-6 bg-pink-500" onClick={() => { setActiveTab('Payment'); calculateTotal(); }} >
                                         Continue to Payment
                                     </Button>
                                 </div>
@@ -312,8 +403,8 @@ function CheckoutForm() {
                                     <p className="font-medium transition-colors hover:text-pink-700 cursor-pointer" onClick={() => { setActiveTab('shipping') }}>
                                         &lt; Return to shipping
                                     </p>
-                                    <Button className="ml-20 mt-6 bg-pink-500" onClick={() => {/* payment interface */ }} >
-                                        Complete Order
+                                    <Button className="ml-20 mt-6 bg-pink-500" onClick={() => { handleFormSubmit() }} >
+                                        Pay
                                     </Button>
                                 </div>
                             </div>
@@ -338,30 +429,40 @@ function CheckoutForm() {
                             </div>
                         </div>
                     </div>
-                    <div id="item">
-                    </div>
                 </div>
             </div>
             <div className="w-full lg:w-5/12 border bg-gray-100 p-5 sm:p-7 md:p-10 lg:p-14">
                 <div className="flex justify-between gap-5 items-center">
                     <div className='border bg-white px-2 relative '>
                         <div className="badge absolute -top-2 -right-2 bg-gray-600 h-6 w-6">1</div>
-                        <img src="../images/collectiondetails.webp" alt="img" className='h-20 w-52 lg:w-16'/>
+                        <img src="../images/collectiondetails.webp" alt="img" className='h-20 w-52 lg:w-16' />
                     </div>
                     <div className="flex flex-col">
-                        <span className='text-sm'>Teal Color Plain With Lace Border Rangoli Silk Lehenga Choli Set</span>
+                        <span className='text-sm'>{itemName}</span>
                         <span className='text-[12px] text-gray-600'>Unstitched/Semi-Stitched</span>
                     </div>
                     <div>
-                        ₹1,280.00
+                        ${itemPrice}₹
                     </div>
                 </div>
                 <div className="my-3 border-t-2">
-                    <div className="flex justify-between m-4 font-semibold text-lg">
-                        <span>Subtotal:</span>
-                        <span> ₹1,280.00 </span>
+                    <div className="flex flex-col m-4 font-semibold text-lg">
+                        <div className="flex justify-between items-center">
+                            <span>Tax Price:</span>
+                            <span>${taxPrice}₹</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                            <span>Shipping Price:</span>
+                            <span>${shippingPrice}₹</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                            <span>Subtotal:</span>
+                            <span>${total}₹</span>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
     )

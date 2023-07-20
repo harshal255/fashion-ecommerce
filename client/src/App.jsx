@@ -17,6 +17,7 @@ import CreateProduct from './pages/Admin/createProduct'
 import UpdateProduct from './pages/Admin/updateProduct'
 import Dashboard from './pages/Admin/DashBoard'
 import { AuthProvider } from './AuthContext';
+import UserDetails from './components/userdetail'
 
 function App() {
   return (
@@ -42,6 +43,18 @@ function App() {
                 <NavbarCom />
                 <NavbarMenu />
                 <Collections />
+                <MobileFooter />
+                <Footer />
+              </>
+            }
+          ></Route>
+          <Route
+            path="/user"
+            element={
+              <>
+                <NavbarCom />
+                <NavbarMenu />
+                <UserDetails />
                 <MobileFooter />
                 <Footer />
               </>

@@ -191,7 +191,49 @@ const AdminPanel = {
         },
     ],
 
-    Table_head: ["Member", "Function", "Status", "Employed"," "],
+    Table_head: ["Member", "Function", "Status", "Employed", " "],
+    Orders: [
+        {
+            id: 1,
+            username: "Linda Johnson",
+            Address: "4713 North Street",
+            Price: "$67.66",
+            Date: "2023-07-25",
+            Product: "synergy",
+            img: "../images/bestSeller_1.webp",
+            paymentstatus: "Success"
+        },
+        {
+            id: 2,
+            username: "Linda Smith",
+            Address: "1234 Main St",
+            Price: "$19.99",
+            Date: "2023-07-20",
+            Product: "Widget",
+            img: "../images/bestSeller_2.webp",
+            paymentstatus: "Success",
+        },
+        {
+            id: 3,
+            username: 'Kathryn Kertzmann',
+            Address: '1234 Main St',
+            Price: '€75.59',
+            Date: '2023-07-23',
+            Product: 'Tasty Cotton Shoes',
+            img: '../images/bestSeller_3.webp',
+            paymentstatus: 'Success'
+        },
+        {
+            id: 4,
+            username: "John Doe",
+            Address: "123 Main St",
+            Price: "$19.99",
+            Date: "2023-07-20",
+            Product: "Widget",
+            img: "../images/bestSeller_2.webp",
+            paymentstatus: "Success",
+        }
+    ]
 
 }
 

@@ -18,6 +18,7 @@ import UpdateProduct from './pages/Admin/updateProduct'
 import Dashboard from './pages/Admin/DashBoard'
 import { AuthProvider } from './AuthContext';
 import UserDetails from './components/userdetail'
+import Orders from './pages/Orders/orders'
 
 function App() {
   return (
@@ -154,6 +155,31 @@ function App() {
               </>
             }
           ></Route>
+          <Route
+            path="/userdetails"
+            element={
+              <>
+                <NavbarCom />
+                <NavbarMenu />
+                <Userdetail />
+                <MobileFooter />
+                <Footer />
+              </>
+            }
+          ></Route>
+          <Route
+            path="/orders"
+            element={
+              <>
+                <NavbarCom />
+                <NavbarMenu />
+                <Orders/>
+                <MobileFooter />
+                <Footer />
+              </>
+            }
+          ></Route>
+        
           <Route
             path="/checkout"
             element={<CheckoutForm />}

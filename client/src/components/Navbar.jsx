@@ -325,7 +325,7 @@ export default function NavbarCom() {
                         </MenuItem>
                         <MenuItem onClick={() =>{
                             handleClose();
-
+                            navigate('/orders');
                           }
                         }>
                             <ShoppingBasket /> Orders

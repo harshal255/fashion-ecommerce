@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }) => {
       setUserDetails(userDetails); // Set the user profile details in the state variable
     } catch (error) {
       console.error("Failed to fetch user profile details:", error);
+      alert(error.response.data.message);
     }
   };
 

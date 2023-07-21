@@ -141,15 +141,18 @@ export default function NavbarCom() {
     const handleLogout = async () => {
         try {
             const response = await axios.get('http://localhost:4000/api/v1/logout', {
+                withCredentials: true,
                 headers: {
-                    Authorization: `Bearer ${Cookies.get('token')}`
-                }
+                    "Content-Type": "application/json",
+                },
             });
+
             console.log(response);
             // If the response status is 200, it means the logout was successful
             if (response.status === 200) {
                 setIsLoggedIn(false); // Remove the logged-in state
                 alert(response.data.message);
+                navigate("/");
                 Cookies.remove('token'); // Remove the token from the cookie
             }
         } catch (error) {
@@ -323,10 +326,10 @@ export default function NavbarCom() {
                         }>
                             <Avatar /> Profile
                         </MenuItem>
-                        <MenuItem onClick={() =>{
+                        <MenuItem onClick={() => {
                             handleClose();
                             navigate('/orders');
-                          }
+                        }
                         }>
                             <ShoppingBasket /> Orders
                         </MenuItem>

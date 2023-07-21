@@ -4,7 +4,6 @@ import {
     Dialog,
     DialogHeader,
     DialogBody,
-    DialogFooter,
     Input,
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
@@ -124,7 +123,7 @@ const orders = () => {
                 <div className="lg:w-2/3 flex flex-col justify-center items-center m-2 lg:m-10 gap-2 lg:gap-4">
                     {orders.map((order) => (
                         <div key={order._id} className="border flex w-full gap-5 cursor-pointer"
-                            onClick={() => handleOrderClick(order._id)} >
+                            onClick={() => {handleOrderClick(order._id); handleOpen()}} >
                             <img src={order.orderItems[0].image} alt="" className="w-28 h-30" />
                             <div className="flex flex-col w-4/5 justify-evenly">
                                 <h1 className="text-lg">{order.orderItems[0].name}</h1>
@@ -153,7 +152,7 @@ const orders = () => {
             </div>
 
             {selectedOrder && (
-                <Dialog size={"xl"} open={open} handler={handleOpen} className="bg-white shadow-none mx-0">
+                <Dialog size={"xl"} open={open} handler={handleOpen} className="bg-white shadow-none mx-0 h-full">
                     <div className="">
                         <div className="flex items-center justify-between">
                             <DialogHeader variant="h5" color="pink-gray">
@@ -161,14 +160,6 @@ const orders = () => {
                             </DialogHeader>
                             <XMarkIcon className="mr-3 h-5 w-5" onClick={handleOpen} />
                         </div>
-                        <div>
-                            <img
-                                alt="team"
-                                className="flex-shrink-0 my-4 w-[100px] h-[100px] object-cover object-center mb-4 rounded-full m-auto hover:cursor-pointer"
-                                src={selectedOrder.orderItems[0].image} // Use the image from the orderItems
-                            />
-                        </div>
-
                         <DialogBody divider>
                             <div className="flex flex-col gap-3">
                                 <Input color="pink" label="User Name" value={selectedOrder.user.name} readOnly />

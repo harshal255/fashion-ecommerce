@@ -272,9 +272,9 @@ function CheckoutForm() {
                                 </div>
                                 <div className="flex items-center" >
 
-                                    <a href="/cart" className="font-medium transition-colors hover:text-pink-700 w-[50%]">
+                                    <Link to="/orders" className="font-medium transition-colors hover:text-pink-700 w-[50%]">
                                         &lt; Return to cart
-                                    </a>
+                                    </Link>
                                     <Button className="ml-20 mt-6 bg-pink-500" type="submit" >
                                         Continue to shipping
                                     </Button>

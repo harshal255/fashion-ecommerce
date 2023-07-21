@@ -24,12 +24,18 @@ export const AuthProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
       });
-
+      console.log(response);
       const userDetails = response.data.user;
       setUserDetails(userDetails); // Set the user profile details in the state variable
     } catch (error) {
+      console.error("Error object:", error);
+      // Check if the error contains a response object and the data/message properties
+      if (error.response && error.response.data && error.response.data.message) {
+        alert(error.response.data.message);
+      } else {
+        alert(error.message);
+      }
       console.error("Failed to fetch user profile details:", error);
-      alert(error.response.data.message);
     }
   };
 

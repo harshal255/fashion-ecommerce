@@ -326,6 +326,7 @@ export default function NavbarCom() {
                         }>
                             <Avatar /> Profile
                         </MenuItem>
+
                         <MenuItem onClick={() => {
                             handleClose();
                             navigate('/orders');

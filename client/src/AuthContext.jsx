@@ -39,7 +39,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-
   return (
     <AuthContext.Provider value={{ isLoggedIN, setIsLoggedIn, userDetails, fetchUserProfile }}>
       {children}

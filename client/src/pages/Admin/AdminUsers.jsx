@@ -1,7 +1,8 @@
+import { useState } from "react";
 import AdminPanels from "../../api/AdminPanels";
-
-import { MagnifyingGlassIcon, ChevronUpDownIcon } from "@heroicons/react/24/outline";
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
+import axios from "axios";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { PencilIcon } from "@heroicons/react/24/solid";
 import {
     Card,
     CardHeader,
@@ -9,9 +10,7 @@ import {
     Typography,
     Button,
     CardBody,
-    Chip,
     CardFooter,
-    Avatar,
     IconButton,
     Tooltip,
     Tabs,
@@ -20,6 +19,31 @@ import {
 } from "@material-tailwind/react";
 
 const AdminUsers = () => {
+
+    const [users, setUsers] = useState([]);
+    const showUsers = async () => {
+        try {
+            const response = await axios.get("http://localhost:4000/api/v1/admin/users", {
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (response.data.success) {
+                const usersdata = response.data.users;
+                setUsers(usersdata);
+                console.log(users);
+            } else {
+                alert("Failed to fetch user details");
+                console.log(response.data.message);
+            }
+        } catch (error) {
+            alert(error.response.data.message);
+            console.error("Failed to fetch user details:", error);
+        }
+    }
+
     return (
         <div className="users">
             <Card className="h-full w-full">
@@ -34,11 +58,8 @@ const AdminUsers = () => {
                             </Typography>
                         </div>
                         <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-                            <Button variant="outlined" color="blue-gray" size="sm">
+                            <Button variant="outlined" color="blue-gray" size="sm" onClick={showUsers}>
                                 view all
-                            </Button>
-                            <Button className="flex items-center gap-3" color="blue" size="sm">
-                                <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add member
                             </Button>
                         </div>
                     </div>
@@ -58,93 +79,77 @@ const AdminUsers = () => {
                     </div>
                 </CardHeader>
                 <CardBody className="overflow-scroll px-0">
-                    <table className="mt-4 w-full min-w-max table-auto text-left">
-                        <thead>
-                            <tr>
-                                {AdminPanels.Table_head.map((head, index) => (
-                                    <th
-                                        key={head}
-                                        className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50"
-                                    >
+                    <div className="overflow-x-auto">
+                        <table className="mt-4 w-full min-w-max table-auto text-left">
+                            <thead>
+                                <tr>
+                                    <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
                                         <Typography
                                             variant="small"
                                             color="blue-gray"
                                             className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
                                         >
-                                            {head}{" "}
-                                            {index !== AdminPanels.Table_head.length - 1 && (
-                                                <ChevronUpDownIcon strokeWidth={2} className="h-4 w-4" />
-                                            )}
+                                            Members
                                         </Typography>
                                     </th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {AdminPanels.Users.map(({ img, name, email, job, org, online, date }, index) => {
-                                const isLast = index === AdminPanels.Users.length - 1;
-                                const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
-
-                                return (
-                                    <tr key={name}>
-                                        <td className={classes}>
-                                            <div className="flex items-center gap-3">
-                                                <Avatar src={img} alt={name} size="sm" />
-                                                <div className="flex flex-col">
-                                                    <Typography variant="small" color="blue-gray" className="font-normal">
-                                                        {name}
-                                                    </Typography>
-                                                    <Typography
-                                                        variant="small"
-                                                        color="blue-gray"
-                                                        className="font-normal opacity-70"
-                                                    >
-                                                        {email}
-                                                    </Typography>
+                                    <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50 hidden md:table-cell">
+                                        <Typography
+                                            variant="small"
+                                            color="blue-gray"
+                                            className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
+                                        >
+                                            Role
+                                        </Typography>
+                                    </th>
+                                    <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
+                                        <Typography
+                                            variant="small"
+                                            color="blue-gray"
+                                            className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
+                                        >
+                                            Update
+                                        </Typography>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {users.map(({ name, email, role }, index) => {
+                                    return (
+                                        <tr key={name}>
+                                            <td className="p-4 border-b border-blue-gray-50">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="flex flex-col">
+                                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                                            {name}
+                                                        </Typography>
+                                                        <Typography
+                                                            variant="small"
+                                                            color="blue-gray"
+                                                            className="font-normal opacity-70 hidden md:block"
+                                                        >
+                                                            {email}
+                                                        </Typography>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td className={classes}>
-                                            <div className="flex flex-col">
+                                            </td>
+                                            <td className="p-4 border-b border-blue-gray-50 hidden md:table-cell">
                                                 <Typography variant="small" color="blue-gray" className="font-normal">
-                                                    {job}
+                                                    {role}
                                                 </Typography>
-                                                <Typography
-                                                    variant="small"
-                                                    color="blue-gray"
-                                                    className="font-normal opacity-70"
-                                                >
-                                                    {org}
-                                                </Typography>
-                                            </div>
-                                        </td>
-                                        <td className={classes}>
-                                            <div className="w-max">
-                                                <Chip
-                                                    variant="ghost"
-                                                    size="sm"
-                                                    value={online ? "online" : "offline"}
-                                                    color={online ? "green" : "blue-gray"}
-                                                />
-                                            </div>
-                                        </td>
-                                        <td className={classes}>
-                                            <Typography variant="small" color="blue-gray" className="font-normal">
-                                                {date}
-                                            </Typography>
-                                        </td>
-                                        <td className={classes}>
-                                            <Tooltip content="Edit User">
-                                                <IconButton variant="text" color="blue-gray">
-                                                    <PencilIcon className="h-4 w-4" />
-                                                </IconButton>
-                                            </Tooltip>
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
+                                            </td>
+                                            <td className="p-4 border-b border-blue-gray-50">
+                                                <Tooltip content="Edit User">
+                                                    <IconButton variant="text" color="blue-gray">
+                                                        <PencilIcon className="h-4 w-4" />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
                 </CardBody>
                 <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
                     <Typography variant="small" color="blue-gray" className="font-normal">

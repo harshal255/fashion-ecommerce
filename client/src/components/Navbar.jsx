@@ -55,7 +55,6 @@ import AuthContext from "../AuthContext";
 export default function NavbarCom() {
 
     const { isLoggedIN, setIsLoggedIn } = useContext(AuthContext);
-    const [userDetails, setUserDetails] = useState(null);
     const [openNav, setOpenNav] = useState(false);
     const [openSearch, setOpenSearch] = useState(false);
     const [openLogin, setOpenLogin] = useState(false);
@@ -80,7 +79,7 @@ export default function NavbarCom() {
     const handleClose = () => {
         setAnchorEl(null);
     };
-
+    const { fetchUserProfile } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleRegisterSubmit = async (e) => {
@@ -111,8 +110,14 @@ export default function NavbarCom() {
         try {
             const response = await axios.post('http://localhost:4000/api/v1/login', {
                 email,
-                password,
-            });
+                password
+            },
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+
+                });
             // console.log(response);
 
             // Set the refresh token in the cookie
@@ -133,26 +138,7 @@ export default function NavbarCom() {
         }
     };
 
-    const fetchUserDetails = async () => {
-        try {
-            const response = await axios.get('http://localhost:4000/api/v1/me', {
-                headers: {
-                    Authorization : `Bearer ${Cookies.get('token')}`,
-                },
-            });
-            console.log(Cookies.get('token'));
-            const userDetails = response.data.user;
-            setUserDetails(userDetails); // Set the user details in the state variable
-            alert(`Name: ${userDetails.name}\nEmail: ${userDetails.email}`);
-        } catch (error) {
-            alert('Failed to fetch user details: ' + error.response.data.message);
-            console.error('Failed to fetch user details:', error);
-        }
-    };
-
-
     const handleLogout = async () => {
-        
         try {
             const response = await axios.get('http://localhost:4000/api/v1/logout', {
                 headers: {
@@ -331,12 +317,17 @@ export default function NavbarCom() {
                     >
                         <MenuItem onClick={() => {
                             handleClose();
-                            fetchUserDetails();
+                            fetchUserProfile();
+                            navigate('/user');
                         }
                         }>
                             <Avatar /> Profile
                         </MenuItem>
-                        <MenuItem onClick={handleClose}>
+                        <MenuItem onClick={() =>{
+                            handleClose();
+                            navigate('/orders');
+                          }
+                        }>
                             <ShoppingBasket /> Orders
                         </MenuItem>
                         <Divider />

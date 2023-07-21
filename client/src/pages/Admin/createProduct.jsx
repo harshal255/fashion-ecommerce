@@ -1,8 +1,5 @@
-/* eslint-disable no-unused-vars */
-
-import React from "react";
-import { Formik, Form, Field } from "formik";
 import axios from "axios";
+import { Formik, Form, Field } from "formik";
 
 const CreateProduct = () => {
   const initialValues = {
@@ -21,10 +18,16 @@ const CreateProduct = () => {
       console.log(values);
       const response = await axios.post(
         "http://localhost:4000/api/v1/product/new",
-        values
+        values,
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get('Token')}`
+          }
+        }
       );
       console.log(response.data);
     } catch (error) {
+      alert(error.response.data.message);
       console.error(error);
     }
   }
@@ -123,8 +126,24 @@ const CreateProduct = () => {
               }}
             />
           </div>
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="multiple_files">Upload multiple files</label>
-          <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple />
+          <div className="mb-4">
+            <label htmlFor="images.url" className="block mb-1 font-medium">
+              URL:
+            </label>
+            <Field
+              type="text"
+              id="images.url"
+              name="images.url"
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                border: '1px solid black',
+                borderRadius: '0.375rem',
+                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+                outline: 'none',
+              }}
+            />
+          </div>
           <button
             type="submit"
             className="w-full py-2 px-4 bg-pink-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:ring-pink-200"

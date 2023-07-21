@@ -121,41 +121,9 @@ const UpdateProduct = ({ productId }) => {
               }}
             />
           </div>
-          <div className="mb-4">
-            <label htmlFor="images.public_id" className="block mb-1 font-medium">
-              Public ID:
-            </label>
-            <Field
-              type="text"
-              id="images.public_id"
-              name="images.public_id"
-              style={{
-                width: '100%',
-                padding: '0.75rem',
-                border: '1px solid black',
-                borderRadius: '0.375rem',
-                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
-                outline: 'none',
-              }}
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="images.url" className="block mb-1 font-medium">
-              URL:
-            </label>
-            <Field
-              type="text"
-              id="images.url"
-              name="images.url"
-              style={{
-                width: '100%',
-                padding: '0.75rem',
-                border: '1px solid black',
-                borderRadius: '0.375rem',
-                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
-                outline: 'none',
-              }}
-            />
+          <div className="my-5">
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="multiple_files">Update multiple files</label>
+            <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple />
           </div>
           <button
             type="submit"

@@ -7,16 +7,15 @@ const fileupload = require("express-fileupload")
 
 const corsOptions = {
     origin: 'http://localhost:5173',
-    methods: ['GET', 'POST'], // Specify the allowed HTTP methods
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'], // Specify the allowed headers
     credentials: true, // Enable credentials (cookies, authorization headers, etc)
 };
-
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 app.use(fileupload({
-    useTempFiles:true
+    useTempFiles: true
 }))
 
 // Route import

@@ -16,6 +16,7 @@ function CheckoutForm() {
     console.log(userDetails);
 
     const product = location.state && location.state.product;
+    const currentProductPrice = location.state && location.state.currentProductPrice;
 
     if (!product) {
         // Handle the case when there is no product object in the state
@@ -62,7 +63,7 @@ function CheckoutForm() {
         setShippingPrice(price);
     };
     const calculateTotal = () => {
-        const totalPrice = qty * (product.price + shippingPrice + taxPrice);
+        const totalPrice = qty * (currentProductPrice + shippingPrice + taxPrice);
         setTotal(totalPrice);
     };
 
@@ -92,7 +93,7 @@ function CheckoutForm() {
     const handleFormSubmit = async () => {
 
         const requestBody = {
-            itemsPrice: product.price,
+            itemsPrice: currentProductPrice,
             taxPrice: taxPrice,
             shippingPrice: shippingPrice,
             totalPrice: total,
@@ -441,25 +442,27 @@ function CheckoutForm() {
                         <span className='text-[12px] text-gray-600'>{product.stock}</span>
                     </div>
                     <div>
-                        ${product.price}₹
+                        {currentProductPrice}₹
                     </div>
                 </div>
                 <div className="my-3 border-t-2">
                     <div className="flex flex-col m-4 font-semibold text-lg">
                         <div className="flex justify-between items-center">
                             <span>Tax Price:</span>
-                            <span>${taxPrice}₹</span>
+                            <span>{taxPrice}₹</span>
                         </div>
                         <div className="flex justify-between items-center">
                             <span>Shipping Price:</span>
-                            <span>${shippingPrice}₹</span>
+                            <span>{shippingPrice}₹</span>
                         </div>
                         <div className="flex justify-between items-center">
                             <span>Subtotal:</span>
-                            <span>${total}₹</span>
+                            <span>{total}₹</span>
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
     )

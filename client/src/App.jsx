@@ -185,13 +185,13 @@ function App() {
               <>
                 <NavbarCom />
                 <NavbarMenu />
-                <Orders/>
+                <Orders />
                 <MobileFooter />
                 <Footer />
               </>
             }
           ></Route>
-        
+
           <Route
             path="/checkout"
             element={<CheckoutForm />}

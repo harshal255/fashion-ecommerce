@@ -1,24 +1,102 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import AuthContext from "../AuthContext";
+import axios from "axios";
 import {
     Button,
     Dialog,
     DialogHeader,
     DialogBody,
     DialogFooter,
-    Input,
     Textarea,
     Typography,
     Rating
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import { AiOutlineDelete } from "react-icons/ai";
 
-const CustomerReview = () => {
-
+const CustomerReview = ({ pid }) => {
     const [rated, setRated] = useState(5);
+    const [comment, setComment] = useState('');
     const [open, setOpen] = useState(false);
+    const [reviews, setReviews] = useState([]);
+    const { userDetails, fetchUserProfile } = useContext(AuthContext);
+
     const handleOpen = () => setOpen((cur) => !cur);
+
+    useEffect(() => {
+        fetchUserProfile();
+    }, []);
+
+    useEffect(() => {
+        const fetchReviews = async () => {
+            try {
+                const response = await axios.get(
+                    `http://localhost:4000/api/v1/reviews?id=${pid}`
+                );
+                setReviews(response.data.reviews);
+                // Calculate the average rating from the fetched reviews
+                const totalRating = response.data.reviews.reduce((acc, review) => acc + review.rating, 0);
+                const averageRating = totalRating / response.data.reviews.length;
+                setRated(averageRating);
+
+
+            } catch (error) {
+                console.error("Failed to fetch reviews:", error);
+            }
+        };
+
+        fetchReviews();
+    }, []); //productId
+
+    const handleReview = async () => {
+        try {
+            const reviewData = {
+                rating: rated,
+                comment: comment,
+                productId: pid,
+            };
+
+            const response = await axios.put('http://localhost:4000/api/v1/review', reviewData, {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            console.log(response.data);
+            alert("Rating submitted");
+        } catch (error) {
+            console.error('Failed to submit review:', error);
+            alert('Failed to submit review: ' + error.response.data.message);
+        }
+    };
+
+    const handleDeleteReview = async (reviewId) => {
+        try {
+            const response = await axios.delete(
+                `http://localhost:4000/api/v1/reviews?productId=${pid}&id=${reviewId}`,
+                {
+                    withCredentials: true,
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            // Remove the deleted review from the reviews state
+            setReviews((prevReviews) =>
+                prevReviews.filter((review) => review._id !== reviewId)
+            );
+
+            console.log(response.data);
+            alert("Review deleted successfully.");
+        } catch (error) {
+            console.error("Failed to delete review:", error);
+            alert("Failed to delete review: " + error.response?.data?.message);
+        }
+    };
+
     return (
         <>
             <div className="flex flex-col items-center gap-2 m-auto">
@@ -28,16 +106,12 @@ const CustomerReview = () => {
                 <div className="flex flex-col md:flex-row gap-10">
                     <div className=" w-full flex flex-col justify-center items-center">
                         <div className="flex items-center gap-2">
-                            <Rating value={5} onChange={(value) => setRated(value)} readonly />
+                            <Rating value={reviews.rating} readonly />
                             <Typography color="pink-gray" className="font-medium">
                                 {rated} Rated
                             </Typography>
 
                         </div>
-                        {/*          <!-- Helper text --> */}
-                        <span className="text-xs leading-6 text-slate-400">
-                            based on 147 user ratings
-                        </span>
                         <button className="flex text-white bg-yellow-700 border-0 py-2 px-6 focus:outline-none rounded-full hover:bg-yellow-800 duration-300 hover:translate-y-2 my-2" onClick={handleOpen}>Write Review</button>
                     </div>
 
@@ -58,10 +132,10 @@ const CustomerReview = () => {
                             <div className="flex justify-evenly gap-2 items-center">
                                 <div className='border bg-white px-2 relative '>
                                     <div className="badge absolute -top-2 -right-2 bg-gray-600 h-6 w-6">1</div>
-                                    <img src="../images/collectiondetails.webp" alt="img" className='h-14 w-16' />
+                                    {/* <img src={product.images[0].url} alt="img" className='h-14 w-16' /> */}
                                 </div>
                                 <div className="flex flex-col">
-                                    <span className='text-sm'>Teal Color Plain With Lace Border Rangoli Silk Lehenga Choli Set</span>
+                                    <span className='text-sm'>this is sample name</span>
                                     <Rating value={5} onChange={(value) => setRated(value)} readonly />
                                 </div>
 
@@ -74,22 +148,16 @@ const CustomerReview = () => {
                                     <Rating value={5} onChange={(value) => setRated(value)} />
                                 </div>
                                 <div className="grid gap-6">
-                                    <Input label="Your Name" />
-                                    <Input label="Your Email" />
-                                    <Input label="Review Title" />
-                                    <Textarea label="Review Content" />
+                                    <Textarea label="Review Content" onChange={(e) => { setComment(e.target.value) }} />
                                 </div>
                             </DialogBody>
                             <DialogFooter className="space-x-2">
 
                                 <button className="flex text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none rounded-full hover:bg-pink-700 duration-300 hover:translate-y-2 my-2" onClick={handleOpen}>Close</button>
-                                <button className="flex text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none rounded-full hover:bg-pink-700 duration-300 hover:translate-y-2 my-2" onClick={handleOpen}>Submit</button>
+                                <button className="flex text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none rounded-full hover:bg-pink-700 duration-300 hover:translate-y-2 my-2" onClick={handleReview}>Submit</button>
 
                             </DialogFooter>
                         </div>
-
-
-
                     </Dialog>
 
 
@@ -195,21 +263,39 @@ const CustomerReview = () => {
 
 
             </div>
-            {/* reviews as a comments */}
-            <article className="lg:w-1/2 m-auto">
-                <div className="flex items-center mb-4 space-x-4 ">
-                    <img className="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1036&q=80" alt="" />
-                    <div className="space-y-1 font-medium dark:text-white">
-                        <p>Jese Leos <time dateTime="2014-08-16 19:00" className="block text-sm text-gray-500 dark:text-gray-400">Joined on August 2014</time></p>
-                    </div>
-                </div>
-                <Rating value={5} onChange={(value) => setRated(value)} readonly />
-                <footer className="mb-5 text-sm text-gray-500 dark:text-gray-400"><p>Reviewed in the United Kingdom on <time dateTime="2017-03-03 19:00">March 3, 2017</time></p></footer>
-                <p className="mb-2 text-gray-500 dark:text-gray-400">This is my third Invicta Pro Diver. They are just fantastic value for money. This one arrived yesterday and the first thing I did was set the time, popped on an identical strap from another Invicta and went in the shower with it to test the waterproofing.... No problems.</p>
-                <p className="mb-3 text-gray-500 dark:text-gray-400">It is obviously not the same build quality as those very expensive watches. But that is like comparing a Citroën to a Ferrari. This watch was well under £100! An absolute bargain.</p>
+            <div>
+                {reviews.map((review) => (
+                    <article className="lg:w-1/2 m-auto" key={review._id}>
+                        <div className="flex items-center mb-4 space-x-4 ">
+                            <div className="space-y-1 font-medium dark:text-white">
+                                <p>
+                                    {review.name}{" "}
+                                    <time
+                                        dateTime="2014-08-16 19:00"
+                                        className="block text-sm text-gray-500 dark:text-gray-400"
+                                    >
+                                        Joined on August 2014
+                                    </time>
+                                </p>
+                            </div>
+                        </div>
+                        <Rating value={review.rating} readonly />
+                        <p className="mb-2 text-gray-500 dark:text-gray-400">
+                            {review.comment}
+                        </p>
 
-            </article>
-
+                        {/* Conditionally render delete icon for admin user */}
+                        {userDetails.role === "admin" && (
+                            <button
+                                className="text-pink-500 hover:text-pink-700"
+                                onClick={() => handleDeleteReview(review._id)}
+                            >
+                                <AiOutlineDelete />
+                            </button>
+                        )}
+                    </article>
+                ))}
+            </div>
         </>
     )
 }

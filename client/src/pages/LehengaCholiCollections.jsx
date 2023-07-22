@@ -1,7 +1,6 @@
 import Collections from "../api/Collection";
-import { Link } from "react-router-dom";
 import { BsFilterCircle } from 'react-icons/bs';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Drawer,
   Typography,
@@ -9,26 +8,49 @@ import {
   Rating
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const Collection = () => {
+const LehengaCholiCollection = () => {
   const [open, setOpen] = useState(false);
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
   const [value, setValue] = useState(12000);
-  const [filteredProducts, setFilteredProducts] = useState(Collections);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fetch data from the API
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:4000/api/v1/products?category=LehengaCholi"
+        );
+        setFilteredProducts(response.data.products);
+        // setLoading(false);
+        console.log(response.data);
+      } catch (error) {
+        alert(error.response?.data?.message || "Failed to fetch products.");
+        console.error("Failed to fetch products:", error);
+        // setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleChange = (e) => {
     setValue(e.target.value);
   };
-
   const filterProduct = () => {
     setOpen(false);
-    const filteredProducts = Collections.filter(
+    const filteredProducts = filteredProducts.filter(
       (product) => product.price <= value
     );
     setFilteredProducts(filteredProducts);
   };
-
+  console.log(filterProduct);
   return (
     <div>
       <div className="h-20 sm:h-28 w-full bg-gray-600 box-content"></div>
@@ -62,12 +84,18 @@ const Collection = () => {
           {filteredProducts.map((element) => {
             return (
               <div className='ease-in-out cursor-pointer h-full min-h-[18rem] w-full md:w-[18rem] lg:w-full md:h-[30.5rem] xl:h-[43rem] overflow-hidden relative' key={element.id}>
-                <img alt="team" className="flex-shrink-0 viol object-center mb-4  ease-in-out object-cover h-full min-h-[18rem] w-full md:w-[18rem] lg:w-full  md:h-[30.5rem] xl:h-[43rem] hover:scale-110 duration-700 " src={element.image} />
-                <Link to='/collections/details' className="absolute bottom-5 sm:bottom-12 mx-5 ml-[17.5%] sm:ml-[22.5%] md:ml-[27.55%] xl:ml-[37.5%] justify-center  bg-white hover:bg-black text-black  hover:text-white py-2 px-3 sm:px-4  duration-500 hover:outline-none ">
+                <img alt="team" className="flex-shrink-0 viol object-center mb-4  ease-in-out object-cover h-full min-h-[18rem] w-full md:w-[18rem] lg:w-full  md:h-[30.5rem] xl:h-[43rem] hover:scale-110 duration-700 " src={element.images[0].url} />
+                <button
+                  onClick={() => navigate("/collections/details", { state: { productId: element._id } })}
+                  className="absolute bottom-5 sm:bottom-20 left-5 sm:left-20 bg-pink-500 border-0 my-4 py-2 px-6 focus:outline-none rounded-full hover:bg-pink-800 duration-300 hover:translate-y-2"
+                >
+                  View Details
+                </button>
+                <div className="absolute bottom-5 sm:bottom-36 left-5 sm:left-20 bg-white p-2 rounded-lg shadow-md">
                   <div>{element.buttonText}</div>
+                  <div>{element.name} </div>
                   <div>Price : {element.price} ₹</div>
-                  <Rating value={element.rating} readonly />
-                </Link>
+                </div>
               </div>
             )
           })}
@@ -79,4 +107,4 @@ const Collection = () => {
   )
 }
 
-export default Collection
+export default LehengaCholiCollection

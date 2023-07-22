@@ -78,12 +78,6 @@ export default function Footer() {
             Copyright &copy; {currentYear} <a href="https://looknbookart.com/">Loooknbook</a> all
             rights reserved.
           </Typography>
-          <a href="/">
-            <img
-              src="./images/payment.png"
-              alt="payment"
-            />
-          </a>
         </div>
       </div>
     </footer>

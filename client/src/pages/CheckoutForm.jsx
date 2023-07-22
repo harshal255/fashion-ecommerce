@@ -1,5 +1,6 @@
-import { useState, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useRef, useContext, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import AuthContext from "../AuthContext";
 import {
     Input,
     Checkbox,
@@ -10,8 +11,19 @@ import countryStateData from '../api/countryStateData.json';
 import axios from 'axios';
 
 function CheckoutForm() {
+    const location = useLocation();
+    const { userDetails, fetchUserProfile } = useContext(AuthContext);
+    console.log(userDetails);
+
+    const product = location.state && location.state.product;
+
+    if (!product) {
+        // Handle the case when there is no product object in the state
+        return <div>Loading...</div>;
+    }
+
     const [activeTab, setActiveTab] = useState('information');
-    const [mail, setMail] = useState('');
+    const [mail, setMail] = useState(userDetails?.email || "");
     const formRef = useRef(null);
     const [city, setCity] = useState('');
     const [pincode, setPincode] = useState('');
@@ -21,12 +33,10 @@ function CheckoutForm() {
     const [selectedState, setSelectedState] = useState("select state");
     const [selectedOption, setSelectedOption] = useState("standard");
 
-    const [itemPrice, setItemPrice] = useState(1000);
     const [taxPrice, setTaxPrice] = useState(200);
     const [shippingPrice, setShippingPrice] = useState(0);
     const [total, setTotal] = useState(0)
 
-    const [itemName, setItemName] = useState("Teal Color Plain With Lace Border Rangoli Silk Lehenga Choli Set");
     const [qty, setQty] = useState(1);
 
     const handleMailChange = (event) => {
@@ -42,7 +52,7 @@ function CheckoutForm() {
         setSelectedCountry(event.target.value);
         setSelectedState('');
     };
-
+    console.log(mail);
     const handleStateChange = (event) => {
         setSelectedState(event.target.value);
     };
@@ -52,9 +62,13 @@ function CheckoutForm() {
         setShippingPrice(price);
     };
     const calculateTotal = () => {
-        const totalPrice = qty * (itemPrice + shippingPrice + taxPrice);
+        const totalPrice = qty * (product.price + shippingPrice + taxPrice);
         setTotal(totalPrice);
     };
+
+    useEffect(() => {
+        fetchUserProfile();
+    }, []);
 
     const handleShippingInfo = (event) => {
         event.preventDefault();
@@ -78,17 +92,17 @@ function CheckoutForm() {
     const handleFormSubmit = async () => {
 
         const requestBody = {
-            itemsPrice: itemPrice,
+            itemsPrice: product.price,
             taxPrice: taxPrice,
             shippingPrice: shippingPrice,
             totalPrice: total,
             orderItems: [
                 {
-                    product: "6454afd9ebe3a4002f19ca01",
-                    name: "product234",
-                    price: 243,
-                    image: "sample image",
-                    quantity: qty
+                    product: product._id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.images[0].url,
+                    quantity: product.stock
                 }
             ],
             shippingInfo: {
@@ -124,8 +138,6 @@ function CheckoutForm() {
             alert('Failed to place order' + error.response.data.message);
             console.error(error);
         }
-
-
     }
     return (
         <div className="flex flex-col-reverse lg:flex-row">
@@ -184,7 +196,7 @@ function CheckoutForm() {
                                 </div>
                                 <header>
                                     <div className="my-6 mb-4 flex flex-col gap-6">
-                                        <Input size="lg" label="Email" type='email' onChange={handleMailChange} />
+                                        <Input size="lg" label="Email" type='email' value={mail} onChange={handleMailChange} />
                                     </div>
                                     <Checkbox
                                         label={
@@ -208,7 +220,7 @@ function CheckoutForm() {
                                         </Typography>
                                     </div>
                                     <div className="mb-4 flex flex-col">
-                                        <Input size="lg" label="First name" color='pink' type='text' />
+                                        <Input size="lg" label="First name" color='pink' value={userDetails.name} type='text' />
                                     </div>
                                     <div className="mb-4 flex flex-col">
                                         <Input size="lg" label="Last name" color='pink' type='text' />
@@ -255,20 +267,6 @@ function CheckoutForm() {
                                     <div className="mb-4 flex flex-col">
                                         <Input size="lg" label="Phone" color='pink' type='number' name='phoneNo' />
                                     </div>
-                                    <Checkbox
-                                        label={
-                                            (
-                                                <Typography
-                                                    variant="small"
-                                                    color="gray"
-                                                    className="flex items-center font-normal"
-                                                >
-                                                    Save this information for next time
-                                                </Typography>
-                                            )
-                                        }
-                                        containerProps={{ className: "-ml-2.5" }}
-                                    />
                                 </div>
                                 <div className="flex items-center" >
 
@@ -435,14 +433,15 @@ function CheckoutForm() {
                 <div className="flex justify-between gap-5 items-center">
                     <div className='border bg-white px-2 relative '>
                         <div className="badge absolute -top-2 -right-2 bg-gray-600 h-6 w-6">1</div>
-                        <img src="../images/collectiondetails.webp" alt="img" className='h-20 w-52 lg:w-16' />
+                        <img src={product.images[0].url} alt="img" className='h-20 w-52 lg:w-16' />
                     </div>
                     <div className="flex flex-col">
-                        <span className='text-sm'>{itemName}</span>
-                        <span className='text-[12px] text-gray-600'>Unstitched/Semi-Stitched</span>
+                        <span className='text-sm'>{product.name}</span>
+                        <span className='text-[12px] text-gray-600'>{product.description}</span>
+                        <span className='text-[12px] text-gray-600'>{product.stock}</span>
                     </div>
                     <div>
-                        ${itemPrice}₹
+                        ${product.price}₹
                     </div>
                 </div>
                 <div className="my-3 border-t-2">
@@ -461,8 +460,6 @@ function CheckoutForm() {
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     )

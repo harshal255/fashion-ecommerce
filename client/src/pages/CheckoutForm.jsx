@@ -75,58 +75,122 @@ function CheckoutForm() {
         setActiveTab('shipping');
 
     }
-    const handleFormSubmit = async () => {
+    // const handleFormSubmit = async () => {
 
-        const requestBody = {
-            itemsPrice: itemPrice,
-            taxPrice: taxPrice,
-            shippingPrice: shippingPrice,
-            totalPrice: total,
-            orderItems: [
-                {
-                    product: "6454afd9ebe3a4002f19ca01",
-                    name: "product234",
-                    price: 243,
-                    image: "sample image",
-                    quantity: qty
-                }
-            ],
-            shippingInfo: {
-                address: address,
-                city: city,
-                state: selectedState,
-                country: selectedCountry,
-                pinCode: pincode,
-                phoneNo: phoneNo
+    //     const requestBody = {
+    //         itemsPrice: itemPrice,
+    //         taxPrice: taxPrice,
+    //         shippingPrice: shippingPrice,
+    //         totalPrice: total,
+    //         orderItems: [
+    //             {
+    //                 product: "6454afd9ebe3a4002f19ca01",
+    //                 name: "product234",
+    //                 price: 243,
+    //                 image: "sample image",
+    //                 quantity: qty
+    //             }
+    //         ],
+    //         shippingInfo: {
+    //             address: address,
+    //             city: city,
+    //             state: selectedState,
+    //             country: selectedCountry,
+    //             pinCode: pincode,
+    //             phoneNo: phoneNo
+    //         },
+    //         paymentInfo: {
+    //             id: "sample payment info",
+    //             status: "succeeded"
+    //         }
+    //     };
+
+    //     console.log(requestBody);
+
+    //     try {
+    //         const res = await axios.post(
+    //             "http://localhost:4000/api/v1/order/new",
+    //             requestBody,
+    //             {
+    //                 withCredentials: true, // Include cookies in the request (important for authentication)
+    //                 headers: {
+    //                     'Content-Type': 'application/json',
+    //                 },
+    //             }
+    //         );
+    //         console.log(res.data); // Assuming the response contains the data you want to log
+    //         alert("Order Placed!");
+    //     } catch (error) {
+    //         alert('Failed to place order' + error.response.data.message);
+    //         console.error(error);
+    //     }
+
+
+    // }
+
+    
+
+    const handleFormSubmit = async (amount) => {
+        try{
+            const _data = {amount:amount}
+            const res = await axios.post("http://localhost:4000/api/v1/payment",_data,{
+                withCredentials:true,
+            })
+            // console.log(res.data);
+            return res.data;
+
+        }
+        catch(err){
+            console.error(err);
+            return null;
+        }    
+        
+    };
+
+    const handleOpenRazorpay = async(amt)=>{
+        const data = await handleFormSubmit(amt);
+        console.log(data.order.amount);
+        var options = {
+            "key": "rzp_test_mUYPZJhg6FYh4U", // Enter the Key ID generated from the Dashboard
+            "amount": Number(data.order.amount), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": data.currency,
+            "name": "Ribadiya Brothers",
+            "description": "Test Transaction",
+            "order_id": data.order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response){
+                // alert(response.razorpay_payment_id);
+                // alert(response.razorpay_order_id);
+                // alert(response.razorpay_signature)
+                axios.post("http://localhost:4000/api/v1/verify",{response:response},{
+                    withCredentials:true,
+                })
+                    .then(vfy=>{
+                        console.log(vfy);
+                    })
+                    .catch(err=>{
+                        console.error(err);
+                    })
             },
-            paymentInfo: {
-                id: "sample payment info",
-                status: "succeeded"
+            "theme": {
+                "color": "#3399cc"
             }
         };
-
-        console.log(requestBody);
-
-        try {
-            const res = await axios.post(
-                "http://localhost:4000/api/v1/order/new",
-                requestBody,
-                {
-                    withCredentials: true, // Include cookies in the request (important for authentication)
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
-            console.log(res.data); // Assuming the response contains the data you want to log
-            alert("Order Placed!");
-        } catch (error) {
-            alert('Failed to place order' + error.response.data.message);
-            console.error(error);
+        var rzp1 = new Razorpay(options);
+        rzp1.on('payment.failed', function (response){
+                alert(response.error.code);
+                alert(response.error.description);
+                alert(response.error.source);
+                alert(response.error.step);
+                alert(response.error.reason);
+                alert(response.error.metadata.order_id);
+                alert(response.error.metadata.payment_id);
+        });
+        document.getElementById('rzp-button1').onclick = function(e){
+            rzp1.open();
+            e.preventDefault();
         }
+    };
 
-
-    }
     return (
         <div className="flex flex-col-reverse lg:flex-row">
             <div className="w-full lg:w-7/12 border flex items-center justify-center py-10">
@@ -403,7 +467,7 @@ function CheckoutForm() {
                                     <p className="font-medium transition-colors hover:text-pink-700 cursor-pointer" onClick={() => { setActiveTab('shipping') }}>
                                         &lt; Return to shipping
                                     </p>
-                                    <Button className="ml-20 mt-6 bg-pink-500" onClick={() => { handleFormSubmit() }} >
+                                    <Button className="ml-20 mt-6 bg-pink-500" id="rzp-button1" onClick={() => { handleOpenRazorpay(itemPrice) }} >
                                         Pay
                                     </Button>
                                 </div>

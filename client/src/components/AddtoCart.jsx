@@ -54,7 +54,7 @@ const AddtoCart = ({ open, onClose, productCount, singleproductPrice }) => {
 
     const handleCheckout = () => {
         // Navigate to the checkout page with the product object as state
-        navigate("/checkout", { state: { product: product,  currentProductPrice: currentProductPrice } });
+        navigate("/checkout", { state: { product: product,  currentProductPrice: currentProductPrice ,currentProductCount :currentProductCount } });
     };
 
     return (

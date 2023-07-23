@@ -1,11 +1,12 @@
-import Collections from "../api/Collection";
 import { BsFilterCircle } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
 import {
   Drawer,
   Typography,
   IconButton,
-  Rating
+  Card,
+  CardFooter,
+  Button,
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
@@ -17,6 +18,7 @@ const LehengaCholiCollection = () => {
   const closeDrawer = () => setOpen(false);
   const [value, setValue] = useState(12000);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [count, setCount] = useState(1);
 
   const navigate = useNavigate();
 
@@ -25,7 +27,7 @@ const LehengaCholiCollection = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/v1/products?category=LehengaCholi"
+          `http://localhost:4000/api/v1/products?page=${count}&category=LehengaCholi`
         );
         setFilteredProducts(response.data.products);
         // setLoading(false);
@@ -38,7 +40,7 @@ const LehengaCholiCollection = () => {
     };
 
     fetchData();
-  }, []);
+  }, [count]);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -50,9 +52,8 @@ const LehengaCholiCollection = () => {
     );
     setFilteredProducts(filteredProducts);
   };
-  console.log(filterProduct);
   return (
-    <div>
+    <Card className="h-full w-full">
       <div className="h-20 sm:h-28 w-full bg-gray-600 box-content"></div>
       <div className="flex m-5 gap-2 text-gray-600"> <BsFilterCircle className="text-2xl cursor-pointer" onClick={openDrawer} /><span>Filter</span> </div>
       <Drawer open={open} onClose={closeDrawer} className="p-4">
@@ -103,7 +104,20 @@ const LehengaCholiCollection = () => {
       ) : (
         <div className="h-[50vh] w-[100vw] flex items-center justify-center text-5xl">Nothing..</div>
       )}
-    </div>
+      <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
+        <Typography variant="small" color="blue-gray" className="font-normal">
+          Page {count}
+        </Typography>
+        <div className="flex gap-2">
+          <Button variant="outlined" color="blue-gray" size="sm" onClick={() => { setCount(count - 1) }}>
+            Previous
+          </Button>
+          <Button variant="outlined" color="blue-gray" size="sm" onClick={() => { setCount(count + 1) }}>
+            Next
+          </Button>
+        </div>
+      </CardFooter>
+    </Card>
   )
 }
 

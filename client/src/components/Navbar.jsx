@@ -159,17 +159,20 @@ export default function NavbarCom() {
                     "Content-Type": "application/json",
                 },
             });
-
-            console.log(response);
-            // If the response status is 200, it means the logout was successful
-            if (response.status === 200) {
+            if (response && response.status === 200) {
                 setIsLoggedIn(false); // Remove the logged-in state
                 alert(response.data.message);
                 navigate("/");
                 Cookies.remove('token'); // Remove the token from the cookie
+            } else {
+                alert("Logout failed. Please try again.");
             }
         } catch (error) {
-            alert(error.response.data.message);
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(error.response.data.message);
+            } else {
+                alert("An error occurred. Please try again later.");
+            }
             console.error(error);
         }
     };
@@ -520,7 +523,7 @@ export default function NavbarCom() {
                     {searchResults.length > 0 ? (
                         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
                             {searchResults.map((product) => (
-                                <div key={product._id} className="bg-white p-4 shadow rounded-lg" onClick={() => { navigate("/collections/details", { state: { productId: product._id } });closeDrawerSearch(); }}>
+                                <div key={product._id} className="bg-white p-4 shadow rounded-lg" onClick={() => { navigate("/collections/details", { state: { productId: product._id } }); closeDrawerSearch(); }}>
                                     <img src={product.images[0].url} alt={product.name} className="h-40 w-full object-cover rounded-md" />
                                     <h2 className="mt-2 text-xl font-semibold">{product.name}</h2>
                                     <p className="text-gray-500">{product.description}</p>

@@ -113,6 +113,7 @@ const AdminUsers = () => {
             console.error('Failed to delete user:', error);
         }
     };
+  
     return (
         <>
             <div className="users">

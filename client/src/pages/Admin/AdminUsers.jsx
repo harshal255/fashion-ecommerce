@@ -35,6 +35,7 @@ const AdminUsers = () => {
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => setOpen((cur) => !cur);
+
     const showUsers = async () => {
         try {
             const response = await axios.get("http://localhost:4000/api/v1/admin/users", {
@@ -57,7 +58,6 @@ const AdminUsers = () => {
             console.error("Failed to fetch user details:", error);
         }
     }
-
     const handleSelectUser = (user) => {
         setSelectedUser(user);
     };

@@ -40,17 +40,6 @@ const SITEMAP = [
             { text: "Contact", href: "https://looknbookart.com/pages/contact", },
         ],
     },
-    {
-        id: "5",
-        title: "Newsletter Signup",
-        links: [
-            {
-                text: "Subscribe to our newsletter and get 10% off your first purchase",
-                inputPlaceholder: "Enter your email",
-                buttonText: "Subscribe",
-            },
-        ],
-    },
 ];
 
 

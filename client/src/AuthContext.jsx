@@ -15,7 +15,8 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('isLoggedIN', isLoggedIN.toString());
   }, [isLoggedIN]);
 
-  const [userDetails, setUserDetails] = useState("");
+  const [userDetails, setUserDetails] = useState({});
+
   const fetchUserProfile = async () => {
     try {
       const response = await axios.get("http://localhost:4000/api/v1/me", {
@@ -29,11 +30,13 @@ export const AuthProvider = ({ children }) => {
       setUserDetails(userDetails); // Set the user profile details in the state variable
     } catch (error) {
       console.error("Error object:", error);
-      // Check if the error contains a response object and the data/message properties
-      if (error.response && error.response.data && error.response.data.message) {
+      // Check for network errors
+      if (error.message === "Network Error") {
+        alert("Network error occurred. Please check your internet connection.");
+      } else if (error.response && error.response.data && error.response.data.message) {
         alert(error.response.data.message);
       } else {
-        alert(error.message);
+        alert("An error occurred. Please try again later.");
       }
       console.error("Failed to fetch user profile details:", error);
     }

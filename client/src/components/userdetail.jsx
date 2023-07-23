@@ -84,8 +84,10 @@ function UserDetails() {
             // If the update is successful, update the userDetails state
             console.log(response);
             alert('Password updated successfully!');
+
             const newToken = response.data.token;
             Cookies.set('token', newToken);
+
             handleOpen();
         } catch (error) {
             alert('Failed to update password: ' + error.response.data.message);

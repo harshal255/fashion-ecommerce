@@ -86,6 +86,7 @@ const AdminOrders = () => {
                     <div className='border flex w-full gap-5' key={order._id}>
                         {/* Display order details from the order object */}
                         <div className='flex flex-col w-4/5 justify-evenly'>
+                            <img src={order.orderItems[0].image} alt="" className="w-28 h-30" />
                             <h1 className='text-lg'>{order.orderItems[0].name}</h1>
                             <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-2">
                                 <small>Address : <span>{order.shippingInfo.address}</span></small>

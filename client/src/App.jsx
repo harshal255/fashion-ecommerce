@@ -4,7 +4,6 @@ import NavbarCom from './components/Navbar'
 import NavbarMenu from './components/navbarMenu'
 import MobileFooter from './components/MobileFooter'
 import { Routes, Route } from 'react-router-dom'
-import Collections from './pages/Collections'
 import NoMatch from './components/NoMatch'
 import Home from './pages/Home'
 import Login from './pages/Login'
@@ -14,11 +13,14 @@ import CollectionDetails from './pages/collectionDetails'
 import CheckoutForm from './pages/CheckoutForm'
 import AdminPanel from './pages/Admin/AdminPanel'
 import CreateProduct from './pages/Admin/createProduct'
-import UpdateProduct from './pages/Admin/updateProduct'
 import Dashboard from './pages/Admin/DashBoard'
 import { AuthProvider } from './AuthContext';
 import Orders from './pages/Orders/orders'
 import UserDetails from './components/userdetail'
+import TopCollections from './pages/TopCollections'
+import GownCollections from './pages/GownCollections'
+import SareesCollections from './pages/SareesCollections'
+import LehengaCholiCollections from './pages/LehengaCholiCollections'
 
 function App() {
   return (
@@ -38,12 +40,48 @@ function App() {
             }
           ></Route>
           <Route
-            path="/collections"
+            path="/LehengaCholiCollections"
             element={
               <>
                 <NavbarCom />
                 <NavbarMenu />
-                <Collections />
+                <LehengaCholiCollections />
+                <MobileFooter />
+                <Footer />
+              </>
+            }
+          ></Route>
+          <Route
+            path="/SareesCollections"
+            element={
+              <>
+                <NavbarCom />
+                <NavbarMenu />
+                <SareesCollections />
+                <MobileFooter />
+                <Footer />
+              </>
+            }
+          ></Route>
+          <Route
+            path="/GownCollections"
+            element={
+              <>
+                <NavbarCom />
+                <NavbarMenu />
+                <GownCollections />
+                <MobileFooter />
+                <Footer />
+              </>
+            }
+          ></Route>
+          <Route
+            path="/TopCollections"
+            element={
+              <>
+                <NavbarCom />
+                <NavbarMenu />
+                <TopCollections />
                 <MobileFooter />
                 <Footer />
               </>
@@ -105,20 +143,6 @@ function App() {
               </>
             }
           ></Route>
-
-          <Route
-            path="/admin/updateproduct"
-            element={
-              <>
-                <NavbarCom />
-                <NavbarMenu />
-                <UpdateProduct />
-                <MobileFooter />
-                <Footer />
-              </>
-            }
-          ></Route>
-
           <Route
             path="/login"
             element={
@@ -161,13 +185,13 @@ function App() {
               <>
                 <NavbarCom />
                 <NavbarMenu />
-                <Orders/>
+                <Orders />
                 <MobileFooter />
                 <Footer />
               </>
             }
           ></Route>
-        
+
           <Route
             path="/checkout"
             element={<CheckoutForm />}

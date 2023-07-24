@@ -7,9 +7,6 @@ const Leandingpage = () => {
     return (
         <>
             <Carousel></Carousel>
-            {/* <CarouselBig></CarouselBig> */}
-            {/* <CarouselMobile></CarouselMobile> */}
-
         </>
     )
 }

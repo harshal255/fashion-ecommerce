@@ -7,7 +7,8 @@ const fileupload = require("express-fileupload")
 
 const corsOptions = {
     // origin: 'http://127.0.0.1:5173',
-    methods: ['GET', 'POST','PUT','DELETE','OPTIONS'], // Specify the allowed HTTP methods
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST','PUT','DELETE'], // Specify the allowed HTTP methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Specify the allowed headers
     credentials: true, // Enable credentials (cookies, authorization headers, etc)
 };
@@ -15,7 +16,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 // app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5173','http://127.0.0.1:4000');
+//     res.setHeader('Access-Controsl-Allow-Origin', 'http://127.0.0.1:5173','http://127.0.0.1:4000');
 //     next();
 // });
 app.use(express.json());

@@ -1,31 +1,44 @@
 import axios from "axios";
 import { Formik, Form, Field } from "formik";
+import { useState } from "react";
 
 const CreateProduct = () => {
+  const [selectedFile, setSelectedFile] = useState(null);
+
   const initialValues = {
     name: "",
     price: 0,
     description: "",
     category: "",
-    images: {
-      public_id: "",
-      url: "",
-    },
+    photos: null,
   };
 
   const handleSubmit = async (values) => {
     try {
-      console.log(values);
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("price", values.price);
+      formData.append("description", values.description);
+      formData.append("category", values.category);
+
+      // Append the selected file to the form data
+      if (selectedFile) {
+        formData.append("photos", selectedFile);
+      }
+
       const response = await axios.post(
         "http://localhost:4000/api/v1/product/new",
-        values,
+        formData,
         {
+          withCredentials: true,
           headers: {
-            Authorization: `Bearer ${Cookies.get('Token')}`
-          }
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
+      alert("Product Added successfully");
       console.log(response.data);
+
     } catch (error) {
       alert(error.response.data.message);
       console.error(error);
@@ -109,9 +122,20 @@ const CreateProduct = () => {
             />
           </div>
           <div className="my-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="multiple_files">Update multiple files</label>
-            <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple />
-
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="multiple_files">Upload file</label>
+            <input
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                border: '1px solid black',
+                borderRadius: '0.375rem',
+                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+                outline: 'none',
+              }}
+              id="files"
+              type="file"
+              onChange={(event) => setSelectedFile(event.target.files[0])}
+            />
           </div>
           <button
             type="submit"

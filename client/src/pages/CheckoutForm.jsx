@@ -44,7 +44,6 @@ function CheckoutForm() {
     const navigate = useNavigate();
 
 
-
     const handleMailChange = (event) => {
         setMail(event.target.value);
     }
@@ -580,6 +579,7 @@ function CheckoutForm() {
                             <span>Shipping Price:</span>
                             <span>{shippingPrice}₹</span>
                         </div> */}
+
                         <div className="flex justify-between items-center">
                             <span>Subtotal:</span>
                             <span>{total}₹</span>

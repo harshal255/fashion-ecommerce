@@ -140,6 +140,7 @@ export default function NavbarCom() {
 
             if (response.data.user.role === 'admin') {
                 navigate('/admin');
+                window.location.href = '/admin';
             } else {
                 navigate('/');
             }
@@ -431,7 +432,7 @@ export default function NavbarCom() {
                 <div className="mb-2 flex items-center justify-between p-4">
 
                     <Link to={isRegister ? '/register' : '/login'} onClick={handleRglClick}>
-                        <Typography variant="h7" onClick={handleRglClick} >
+                        <Typography variant="h6" onClick={handleRglClick} >
                             {isRegister ? "REGISTER" : "LOGIN"}
 
                         </Typography>
@@ -501,7 +502,7 @@ export default function NavbarCom() {
             </Drawer>
             <Drawer placement="right" open={openSearch} onClose={closeDrawerSearch}>
                 <div className="mb-2 flex items-center justify-between p-4">
-                    <Typography variant="h7">SEARCH OUR SITE</Typography>
+                    <Typography variant="h6">SEARCH OUR SITE</Typography>
                     <IconButton variant="text" onClick={closeDrawerSearch}>
                         <XMarkIcon strokeWidth={2} className="h-5 w-5" />
                     </IconButton>
@@ -544,7 +545,7 @@ export default function NavbarCom() {
             <Drawer open={openNavbar} onClose={closeDrawerNavbar}>
                 <div className="mb-2 flex items-center justify-between p-4">
 
-                    <Typography variant="h7" color="blue-gray">
+                    <Typography variant="h6" color="blue-gray">
 
                         Side Menu
                     </Typography>

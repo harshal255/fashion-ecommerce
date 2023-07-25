@@ -33,7 +33,8 @@ export default function Login() {
             Cookies.set('token', Token);
 
             if (response.data.user.role === 'admin') {
-                navigate('/admin/dash');
+                navigate('/admin');
+                window.location.href = '/admin';
             } else {
                 navigate('/');
             }

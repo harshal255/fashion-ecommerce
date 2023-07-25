@@ -1,5 +1,5 @@
 import { useState, useRef, useContext, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useNavigate, useLocation} from 'react-router-dom'
 import AuthContext from "../AuthContext";
 import {
     Input,
@@ -34,12 +34,14 @@ function CheckoutForm() {
     const [address, setAddress] = useState('');
     const [selectedCountry, setSelectedCountry] = useState("select country");
     const [selectedState, setSelectedState] = useState("select state");
-    const [selectedOption, setSelectedOption] = useState("standard");
+    // const [selectedOption, setSelectedOption] = useState("standard");
 
     const [taxPrice, setTaxPrice] = useState(200);
     const [shippingPrice, setShippingPrice] = useState(0);
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(true);
+
+    const navigate = useNavigate();
 
 
     const handleMailChange = (event) => {
@@ -48,9 +50,9 @@ function CheckoutForm() {
     const handleAddChange = (event) => {
         setAddress(event.target.value);
     }
-    const handleTabClick = (tab) => {
-        setActiveTab(tab);
-    };
+    // const handleTabClick = (tab) => {
+    //     setActiveTab(tab);
+    // };
     const handleCountryChange = (event) => {
         setSelectedCountry(event.target.value);
         setSelectedState('');
@@ -60,12 +62,12 @@ function CheckoutForm() {
         setSelectedState(event.target.value);
     };
 
-    const handleOptionChange = (option, price) => {
-        setSelectedOption(option);
-        setShippingPrice(price);
-    };
+    // const handleOptionChange = (option, price) => {
+    //     setSelectedOption(option);
+    //     setShippingPrice(price);
+    // };
     const calculateTotal = () => {
-        const totalPrice = currentProductCount * (currentProductPrice + shippingPrice + taxPrice);
+        const totalPrice = currentProductPrice + shippingPrice + taxPrice;
         setTotal(totalPrice);
     };
 
@@ -151,7 +153,7 @@ function CheckoutForm() {
             console.log(res.data); // Assuming the response contains the data you want to log
             // Proceed to Razorpay payment after order placement
             rzp.open({
-                amount: currentProductPrice * 100, // Amount in paisa
+                amount: total,
                 name: 'Ribadiya Brothers',
                 description: 'Test Transaction',
                 handler: function (response) {
@@ -180,8 +182,9 @@ function CheckoutForm() {
                     color: '#3399cc',
                 },
             });
-            alert("Order Placed!");
             console.log(isPaymentSuccess);
+            alert("Order Placed!");
+            navigate('/orders');
         }
         catch (error) {
             alert('Failed to place order' + error.response.data.message);
@@ -266,7 +269,7 @@ function CheckoutForm() {
                                     />
                                 </a>
                             </div>
-                            <ul className="flex mt-1 ml-[5rem]">
+                            {/* <ul className="flex mt-1 ml-[5rem]">
                                 <li
                                     className={`cursor-pointer ${activeTab === 'cart' ? 'font-bold' : 'font-normal'}`}
                                     onClick={() => handleTabClick('cart')}
@@ -294,7 +297,7 @@ function CheckoutForm() {
                                 >
                                     Payment
                                 </li>
-                            </ul>
+                            </ul> */}
                             {activeTab === 'information' && (
                                 <form className="m-20 mb-2 w-80 max-w-screen-lg sm:w-96" onSubmit={handleShippingInfo} ref={formRef} >
                                     <div className="flex items-center">
@@ -343,7 +346,7 @@ function CheckoutForm() {
                                             <Input size="lg" label="Address" color='pink' type='text' onChange={handleAddChange} />
                                         </div>
                                         <div className="mb-4 flex flex-col">
-                                            <Input size="lg" label="City" color='pink' type='text' name='city' />
+                                            <Input size="lg" label="City" color='pink' type='text' name='city' onChange={(e)=>{setCity(e.target.value)}}/>
                                         </div>
 
                                         <div id="coutnryState" className="mb-4 flex flex-col gap-4">
@@ -376,10 +379,10 @@ function CheckoutForm() {
                                             </select>
                                         </div>
                                         <div className="mb-4 flex flex-col">
-                                            <Input size="lg" label="PIN code" color='pink' type='number' name='pincode' />
+                                            <Input size="lg" label="PIN code" color='pink' type='number' name='pincode' onChange={(e)=>{setPincode(e.target.value)}} />
                                         </div>
                                         <div className="mb-4 flex flex-col">
-                                            <Input size="lg" label="Phone" color='pink' type='number' name='phoneNo' />
+                                            <Input size="lg" label="Phone" color='pink' type='number' name='phoneNo' onChange={(e)=>{setPhoneNo(e.target.value)}} />
                                         </div>
                                     </div>
                                     <div className="flex items-center" >
@@ -387,13 +390,13 @@ function CheckoutForm() {
                                         <Link to="/orders" className="font-medium transition-colors hover:text-pink-700 w-[50%]">
                                             &lt; Return to cart
                                         </Link>
-                                        <Button className="ml-20 mt-6 bg-pink-500" type="submit" >
-                                            Continue to shipping
+                                        <Button className="ml-20 mt-6 bg-pink-500" id="rzp-button1"  type="submit" onClick={()=>{handleFormSubmit(total);calculateTotal();}}>
+                                           Continue for Payment
                                         </Button>
                                     </div>
                                 </form>
                             )}
-                            {activeTab === 'shipping' && (
+                            {/* {activeTab === 'shipping' && (
                                 <div className="m-20 mb-2 w-80 max-w-screen-lg sm:w-96">
                                     <div className="flex items-center">
                                         <Typography color="gray" className="mt-1 text-black font-bold">
@@ -520,7 +523,7 @@ function CheckoutForm() {
                                         </Button>
                                     </div>
                                 </div>
-                            )}
+                            )} */}
                             <div className='footer'>
                                 <hr className="border-gray-300 my-4" />
                                 <div className="footer">
@@ -548,7 +551,7 @@ function CheckoutForm() {
                                 Log In
                             </Link>
                         </div>
-                    )};
+                    )}
                 </div>
             </div>
             <div className="w-full lg:w-5/12 border bg-gray-100 p-5 sm:p-7 md:p-10 lg:p-14">
@@ -568,14 +571,15 @@ function CheckoutForm() {
                 </div>
                 <div className="my-3 border-t-2">
                     <div className="flex flex-col m-4 font-semibold text-lg">
-                        <div className="flex justify-between items-center">
+                        {/* <div className="flex justify-between items-center">
                             <span>Tax Price:</span>
                             <span>{taxPrice}₹</span>
                         </div>
                         <div className="flex justify-between items-center">
                             <span>Shipping Price:</span>
                             <span>{shippingPrice}₹</span>
-                        </div>
+                        </div> */}
+
                         <div className="flex justify-between items-center">
                             <span>Subtotal:</span>
                             <span>{total}₹</span>
@@ -587,4 +591,4 @@ function CheckoutForm() {
     )
 }
 
-export default CheckoutForm;
+export default CheckoutForm

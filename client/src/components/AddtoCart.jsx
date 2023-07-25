@@ -55,12 +55,13 @@ const AddtoCart = ({ open, onClose, productCount, singleproductPrice }) => {
     const handleCheckout = () => {
         // Navigate to the checkout page with the product object as state
         navigate("/checkout", { state: { product: product,  currentProductPrice: currentProductPrice ,currentProductCount :currentProductCount } });
+        window.location.href = '/checkout';
     };
 
     return (
         <Drawer placement="right" open={open} onClose={onClose} className="overflow-scroll">
             <div className="mb-2 flex items-center justify-between p-4 ">
-                <Typography variant="h7">
+                <Typography variant="h6">
                     SHOPPING CART
                 </Typography>
                 <IconButton variant="text" onClick={onClose}>

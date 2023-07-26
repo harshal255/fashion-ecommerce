@@ -95,7 +95,7 @@ function AppRoutes() {
           element={
             <>
               <NavbarCom />
-              <NavbarMenu />
+             <NavbarMenu />
               <GownCollections />
               <MobileFooter />
               <Footer />

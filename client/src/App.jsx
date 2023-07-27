@@ -143,7 +143,7 @@ function AppRoutes() {
         ></Route>
         {isAdmin && (
           <Route
-            path="/admin"
+            path="/TopCollections"
             element={
               <>
                 <NavbarCom />
@@ -156,7 +156,7 @@ function AppRoutes() {
         )}
         {isAdmin && (
           <Route
-            path="/admin/createproduct"
+            path="/collections/details"
             element={
               <>
                 <NavbarCom />

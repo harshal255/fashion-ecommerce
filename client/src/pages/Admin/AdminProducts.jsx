@@ -71,7 +71,6 @@ const AdminProducts = () => {
                 <div className="overflow-hidden shadow-lg cursor-pointer relative overflow-y-hidden group">
                   <div className="hover:scale-110 duration-1000 ease-in-out">
                     <img className="object-cover w-full  xl:h-[32rem] transition-opacity transform-none duration-1000 ease-in-out" src={product.images[0].url} alt="Product" />
-
                     <div className="absolute top-0 left-0 opacity-0 transition-opacity group-hover:opacity-100 duration-1000 ease-in-out secondContainer">
                       <img className="object-cover w-full   xl:h-[32rem] " src={product.images[0].url} alt="Product" />
                       <div>

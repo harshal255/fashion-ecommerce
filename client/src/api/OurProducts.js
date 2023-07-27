@@ -8,8 +8,8 @@ const Products = {
             description: "Purple Color Plain Georgette Lehenga Choli With Dupatta",
             QuickView: "",
             QuickShop: "",
-
-
+            link:"/collections/details",
+            productId:"64bbe202e62e95accd81692a",
         },
         {
             id: 2,
@@ -19,8 +19,8 @@ const Products = {
             description: "Yellow Color Gota Patti & Tassels Work Bandhani Printed Vaishali Silk Lehenga Choli With Dupatta",
             QuickView: "",
             QuickShop: "",
-
-
+            link:"/collections/details",
+            productId:"64bbe202e62e95accd81692a",
         },
         {
             id: 3,
@@ -30,8 +30,8 @@ const Products = {
             description: "Navy Blue Color Bandhani Printed Vaishali Silk Lehenga With Blouse And Dupatta",
             QuickView: "",
             QuickShop: "",
-
-
+            link:"/collections/details",
+            productId:"64bbe202e62e95accd81692a",
         },
         {
             id: 4,
@@ -41,32 +41,9 @@ const Products = {
             description: "Purple Color Plain Georgette Lehenga Choli With Dupatta",
             QuickView: "",
             QuickShop: "",
-
-
+            link:"/collections/details",
+            productId:"64bbe202e62e95accd81692a",
         },
-        {
-            id: 5,
-            img: "./images/bestSeller_2.webp",
-            img_hover: "./images/bestSeller_2_hover.webp",
-            price: "₹ 3,600.00 - ₹ 4,400.00 ",
-            description: "Yellow Color Gota Patti & Tassels Work Bandhani Printed Vaishali Silk Lehenga Choli With Dupatta",
-            QuickView: "",
-            QuickShop: "",
-
-
-        },
-        {
-            id: 6,
-            img: "./images/bestSeller_3.webp",
-            img_hover: "./images/bestSeller_3_hover.webp",
-            price: " ₹ 3,600.00 - ₹ 4,400.00 ",
-            description: "Navy Blue Color Bandhani Printed Vaishali Silk Lehenga With Blouse And Dupatta",
-            QuickView: "",
-            QuickShop: "",
-
-
-        },
-
     ],
     FeaturedProducts: [
         {

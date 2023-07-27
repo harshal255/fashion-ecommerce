@@ -131,7 +131,8 @@ export default function NavbarCom() {
                     },
 
                 });
-            // console.log(response);
+            
+            localStorage.setItem("role",response.data.user.role);
 
             // Set the refresh token in the cookie
             alert("Log In Successfull");
@@ -163,6 +164,7 @@ export default function NavbarCom() {
             if (response && response.status === 200) {
                 setIsLoggedIn(false); // Remove the logged-in state
                 alert(response.data.message);
+                localStorage.clear();
                 navigate("/");
                 Cookies.remove('token'); // Remove the token from the cookie
             } else {
@@ -555,75 +557,40 @@ export default function NavbarCom() {
                 </div>
                 <List>
                     <ListItem>
-                        <ListItemPrefix>
-                            <PresentationChartBarIcon className="h-5 w-5" />
-                        </ListItemPrefix>
-                        Demo
-                    </ListItem>
-                    <ListItem>
-                        <ListItemPrefix>
+                    <Link to="/LehengaCholiCollections" className='menu-btn' onClick={closeDrawerNavbar}>
+                        <ListItemPrefix className="flex gap-3">
                             <ShoppingBagIcon className="h-5 w-5" />
+                           
+                            Lehenga Choli
+                      
                         </ListItemPrefix>
-                        Shop
+                        </Link>
                     </ListItem>
                     <ListItem>
-                        <ListItemPrefix>
-                            <InboxIcon className="h-5 w-5" />
+                    <Link to="/SareesCollections" onClick={closeDrawerNavbar}>
+                        <ListItemPrefix className="flex gap-3">
+                            <ShoppingBagIcon className="h-5 w-5" />
+                                Sarees
                         </ListItemPrefix>
-                        Product
-                        <ListItemSuffix>
-                            <Chip
-                                value="14"
-                                size="sm"
-                                variant="ghost"
-                                color="blue-gray"
-                                className="rounded-full"
-                            />
-                        </ListItemSuffix>
+                        </Link>
                     </ListItem>
                     <ListItem>
-                        <ListItemPrefix>
-                            <UserCircleIcon className="h-5 w-5" />
+                    <Link to="/GownCollections" onClick={closeDrawerNavbar}>
+                        <ListItemPrefix className="flex gap-3">
+                            <ShoppingBagIcon className="h-5 w-5" />
+                                Gown
                         </ListItemPrefix>
-                        Portfolio
+                        </Link>
+                        
                     </ListItem>
                     <ListItem>
-                        <ListItemPrefix>
-                            <Cog6ToothIcon className="h-5 w-5" />
+                    <Link to="/TopCollections" onClick={closeDrawerNavbar}>
+                        <ListItemPrefix className="flex gap-3">
+                            <ShoppingBagIcon className="h-5 w-5" />
+                                Top
                         </ListItemPrefix>
-                        Lookbook
-                    </ListItem>
-                    <ListItem>
-                        <ListItemPrefix>
-                            <AiFillHeart className="h-5 w-5" />
-                        </ListItemPrefix>
-                        WishList
-                    </ListItem>
-                    <ListItem>
-                        <ListItemPrefix>
-                            <IoIosSearch className="h-5 w-5" />
-                        </ListItemPrefix>
-                        Search
-                    </ListItem>
-                    <ListItem>
-                        <ListItemPrefix>
-                            <VscAccount className="h-5 w-5" />
-                        </ListItemPrefix>
-                        Login/Register
-                    </ListItem>
-                    <ListItem >
-                        <ListItemPrefix>
-                            <FiHelpCircle className="h-5 w-5" />
-                        </ListItemPrefix>
-                        Need Help?
-
-                    </ListItem>
-                    <ListItem >
-                        +01 23456789
-
-                    </ListItem>
-                    <ListItem >
-                        kalles@domain.com
+                        </Link>
+                        
                     </ListItem>
                 </List>
             </Drawer>

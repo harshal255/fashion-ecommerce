@@ -1,10 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect, useContext } from "react";
-import AuthContext from "../AuthContext";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
 import {
-    Button,
     Dialog,
     DialogHeader,
     DialogBody,
@@ -21,13 +19,9 @@ const CustomerReview = ({ pid }) => {
     const [comment, setComment] = useState('');
     const [open, setOpen] = useState(false);
     const [reviews, setReviews] = useState([]);
-    const { userDetails, fetchUserProfile } = useContext(AuthContext);
 
     const handleOpen = () => setOpen((cur) => !cur);
-
-    useEffect(() => {
-        fetchUserProfile();
-    }, []);
+    const [userRole,setUserRole] = useState("");
 
     useEffect(() => {
         const fetchReviews = async () => {
@@ -46,8 +40,9 @@ const CustomerReview = ({ pid }) => {
                 console.error("Failed to fetch reviews:", error);
             }
         };
-
+        setUserRole(localStorage.getItem('role'));
         fetchReviews();
+
     }, []); //productId
 
     const handleReview = async () => {
@@ -106,7 +101,7 @@ const CustomerReview = ({ pid }) => {
                 <div className="flex flex-col md:flex-row gap-10">
                     <div className=" w-full flex flex-col justify-center items-center">
                         <div className="flex items-center gap-2">
-                            <Rating value={reviews.rating} readonly />
+                            <Rating value={reviews.rating || 0} readonly />
                             <Typography color="pink-gray" className="font-medium">
                                 {rated} Rated
                             </Typography>
@@ -270,22 +265,16 @@ const CustomerReview = ({ pid }) => {
                             <div className="space-y-1 font-medium dark:text-white">
                                 <p>
                                     {review.name}{" "}
-                                    <time
-                                        dateTime="2014-08-16 19:00"
-                                        className="block text-sm text-gray-500 dark:text-gray-400"
-                                    >
-                                        Joined on August 2014
-                                    </time>
                                 </p>
                             </div>
                         </div>
-                        <Rating value={review.rating} readonly />
+                        <Rating value={reviews.rating || 0 } readonly />
                         <p className="mb-2 text-gray-500 dark:text-gray-400">
                             {review.comment}
                         </p>
 
                         {/* Conditionally render delete icon for admin user */}
-                        {userDetails.role === "admin" && (
+                        {userRole === "admin" && (
                             <button
                                 className="text-pink-500 hover:text-pink-700"
                                 onClick={() => handleDeleteReview(review._id)}

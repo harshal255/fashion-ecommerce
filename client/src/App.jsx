@@ -22,11 +22,14 @@ import GownCollections from './pages/GownCollections'
 import SareesCollections from './pages/SareesCollections'
 import LehengaCholiCollections from './pages/LehengaCholiCollections'
 import UpdateProduct from './pages/Admin/UpdateProduct'
+import { CartProvider } from './CartContext'
 
 function App() {
   return (
     <AuthProvider>
-      <AppRoutes />
+      <CartProvider>
+        <AppRoutes />
+      </CartProvider>
     </AuthProvider>
   );
 }

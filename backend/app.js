@@ -6,9 +6,8 @@ const errorMiddleware = require("./middleware/error");
 const fileupload = require("express-fileupload")
 
 const corsOptions = {
-    // origin: 'http://127.0.0.1:5173',
-    origin: 'http://localhost:5173',
-    methods: ['GET', 'POST','PUT','DELETE'], // Specify the allowed HTTP methods
+    origin: ['http://127.0.0.1:5173', 'http://localhost:5173'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify the allowed HTTP methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Specify the allowed headers
     credentials: true, // Enable credentials (cookies, authorization headers, etc)
 };

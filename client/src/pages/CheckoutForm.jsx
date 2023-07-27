@@ -376,6 +376,7 @@ function CheckoutForm() {
                                     </div>
                                     <div className="mb-4 flex flex-col">
                                         <Input size="lg" label="Address" color='pink' type='text' onChange={handleAddChange} />
+
                                     </div>
                                     <div className="mb-4 flex flex-col">
                                         <Input size="lg" label="City" color='pink' type='text' name='city' onChange={(e) => { setCity(e.target.value) }} />

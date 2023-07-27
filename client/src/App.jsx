@@ -248,6 +248,229 @@ function AppRoutes() {
       </Routes >
     </>
   );
+=======
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppRoutes />
+    </AuthProvider>
+  );
 }
+
+function AppRoutes() {
+  const { isLoggedIN, fetchUserProfile } = useContext(AuthContext);
+  const [userDetails, setUserDetails] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (isLoggedIN) {
+        try {
+          const userProfile = await fetchUserProfile();
+          setUserDetails(userProfile);
+        } catch (error) {
+          console.error('Error fetching user details:', error);
+        }
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const isAdmin = userDetails?.role === 'admin';
+  return (
+    <>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <Home />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/LehengaCholiCollections"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <LehengaCholiCollections />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/SareesCollections"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <SareesCollections />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/GownCollections"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <GownCollections />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/TopCollections"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <TopCollections />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/user"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <UserDetails />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/collections/details"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <CollectionDetails />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        {isAdmin && (
+          <Route
+            path="/admin"
+            element={
+              <>
+                <NavbarCom />
+                <AdminPanel />
+                <MobileFooter />
+                <Footer />
+              </>
+            }
+          ></Route>
+        )}
+        {isAdmin && (
+          <Route
+            path="/admin/createproduct"
+            element={
+              <>
+                <NavbarCom />
+                <CreateProduct />
+                <MobileFooter />
+                <Footer />
+              </>
+            }
+          ></Route>
+        )}
+        {isAdmin && (
+          <Route
+            path="/admin/Updateproduct"
+            element={
+              <>
+                <NavbarCom />
+                <UpdateProduct />
+                <MobileFooter />
+                <Footer />
+              </>
+            }
+          ></Route>
+        )}
+        <Route
+          path="/login"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <Login />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/register"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <Register />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/recover"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <ForgetPassword />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/orders"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <Orders />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+
+        <Route
+          path="/checkout"
+          element={<CheckoutForm />}
+        ></Route>
+        <Route
+          path="*"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <NoMatch />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+      </Routes >
+    </>
+  );
 
 export default App;

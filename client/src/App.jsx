@@ -53,182 +53,181 @@ function AppRoutes() {
     fetchData();
   }, []);
 
-  const isAdmin = userDetails?.role === 'admin';
-  return (
-    <>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <NavbarCom />
-              <NavbarMenu />
-              <Home />
-              <MobileFooter />
-              <Footer />
-            </>
-          }
-        ></Route>
-        <Route
-          path="/LehengaCholiCollections"
-          element={
-            <>
-              <NavbarCom />
-              <NavbarMenu />
-              <LehengaCholiCollections />
-              <MobileFooter />
-              <Footer />
-            </>
-          }
-        ></Route>
-        <Route
-          path="/SareesCollections"
-          element={
-            <>
-              <NavbarCom />
-              <NavbarMenu />
-              <SareesCollections />
-              <MobileFooter />
-              <Footer />
-            </>
-          }
-        ></Route>
-        <Route
-          path="/GownCollections"
-          element={
-            <>
-              <NavbarCom />
-              <NavbarMenu />
-              <GownCollections />
-              <MobileFooter />
-              <Footer />
-            </>
-          }
-        ></Route>
-        <Route
-          path="/TopCollections"
-          element={
-            <>
-              <NavbarCom />
-              <NavbarMenu />
-              <TopCollections />
-              <MobileFooter />
-              <Footer />
-            </>
-          }
-        ></Route>
-        <Route
-          path="/user"
-          element={
-            <>
-              <NavbarCom />
-              <NavbarMenu />
-              <UserDetails />
-              <MobileFooter />
-              <Footer />
-            </>
-          }
-        ></Route>
-        <Route
-          path="/collections/details"
-          element={
-            <>
-              <NavbarCom />
-              <NavbarMenu />
-              <CollectionDetails />
-              <MobileFooter />
-              <Footer />
-            </>
-          }
-        ></Route>
-        {isAdmin && (
-          <Route
-            path="/TopCollections"
-            element={
-              <>
-                <NavbarCom />
-                <AdminPanel />
-                <MobileFooter />
-                <Footer />
-              </>
-            }
-          ></Route>
-        )}
-        {isAdmin && (
-          <Route
-            path="/collections/details"
-            element={
-              <>
-                <NavbarCom />
-                <CreateProduct />
-                <MobileFooter />
-                <Footer />
-              </>
-            }
-          ></Route>
-        )}
-        {isAdmin && (
-          <Route
-            path="/admin/Updateproduct"
-            element={
-              <>
-                <NavbarCom />
-                <UpdateProduct />
-                <MobileFooter />
-                <Footer />
-              </>
-            }
-          ></Route>
-        )}
-        <Route
-          path="/login"
-          element={
-            <>
-              <NavbarCom />
-              <NavbarMenu />
-              <Login />
-              <MobileFooter />
-              <Footer />
-            </>
-          }
-        ></Route>
-        <Route
-          path="/register"
-          element={
-            <>
-              <NavbarCom />
-              <NavbarMenu />
-              <Register />
-              <MobileFooter />
-              <Footer />
-            </>
-          }
-        ></Route>
-        <Route
-          path="/recover"
-          element={
-            <>
-              <NavbarCom />
-              <NavbarMenu />
-              <ForgetPassword />
-              <MobileFooter />
-              <Footer />
-            </>
-          }
-        ></Route>
-        <Route
-          path="/orders"
-          element={
-            <>
-              <NavbarCom />
-              <NavbarMenu />
-              <Orders />
-              <MobileFooter />
-              <Footer />
-            </>
-          }
-        ></Route>
-
+  const isAdmin = userDetails?.role === 'admin';
+  return (
+    <>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <Home />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/LehengaCholiCollections"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <LehengaCholiCollections />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/SareesCollections"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <SareesCollections />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/GownCollections"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <GownCollections />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/TopCollections"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <TopCollections />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/user"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <UserDetails />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/collections/details"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <CollectionDetails />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        {isAdmin && (
+          <Route
+            path="/admin"
+            element={
+              <>
+                <NavbarCom />
+                <AdminPanel />
+                <MobileFooter />
+                <Footer />
+              </>
+            }
+          ></Route>
+        )}
+        {isAdmin && (
+          <Route
+            path="/admin/createProduct"
+            element={
+              <>
+                <NavbarCom />
+                <CreateProduct />
+                <MobileFooter />
+                <Footer />
+              </>
+            }
+          ></Route>
+        )}
+        {isAdmin && (
+          <Route
+            path="/admin/Updateproduct"
+            element={
+              <>
+                <NavbarCom />
+                <UpdateProduct />
+                <MobileFooter />
+                <Footer />
+              </>
+            }
+          ></Route>
+        )}
+        <Route
+          path="/login"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <Login />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/register"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <Register />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/recover"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <ForgetPassword />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/orders"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <Orders />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
         <Route
           path="/checkout"
           element={<CheckoutForm />}

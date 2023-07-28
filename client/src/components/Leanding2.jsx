@@ -10,13 +10,16 @@ const FourImages = () => {
       {
         ImagesForLeading2.map((element) => {
           return (
-            <a href="/collections" className="overflow-hidden className shadow-lg cursor-pointer relative overflow-y-hidden item flex-shrink-0 scroll-snap-align-start" key={element.id}>
+            <Link to={element.link} className=''>
+            <div className="overflow-hidden className shadow-lg cursor-pointer relative overflow-y-hidden item flex-shrink-0 scroll-snap-align-start" key={element.id}>
               <img className="object-cover w-full h-[15rem] sm:h-[30rem] " src={element.img} alt="Flower and sky" />
 
-              <button className="absolute bottom-2 sm:bottom-12 mx-[20%] sm:mx-[25%]  bg-white hover:bg-black text-black  hover:text-white py-2 px-4 duration-500 hover:outline-none flex justify-center">
+              <button className="mx-auto bg-white hover:bg-black text-black  hover:text-white py-2 px-4 duration-500 hover:outline-none flex justify-center">
                 {element.buttontext}
               </button>
-            </a>
+              
+            </div>
+            </Link>
 
           )
         })

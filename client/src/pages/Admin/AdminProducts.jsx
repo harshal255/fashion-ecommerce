@@ -55,7 +55,6 @@ const AdminProducts = () => {
       console.error('Failed to delete user:', error);
     }
   };
-
   return (
     <div className="Products">
       <Link to="/admin/createProduct" className="flex m-5 gap-2 text-gray-600 items-center">

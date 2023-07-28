@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { PencilIcon } from "@heroicons/react/24/solid";
 import { XMarkIcon } from "@heroicons/react/24/solid";
@@ -16,9 +16,6 @@ import {
     CardFooter,
     IconButton,
     Tooltip,
-    Tabs,
-    TabsHeader,
-    Tab,
 } from "@material-tailwind/react";
 import { AiFillDelete } from "react-icons/ai";
 const AdminUsers = () => {
@@ -56,6 +53,10 @@ const AdminUsers = () => {
             console.error("Failed to fetch user details:", error);
         }
     }
+
+    useEffect(()=>{
+       showUsers();
+    },[]);
     const handleSelectUser = (user) => {
         setSelectedUser(user);
     };
@@ -116,7 +117,7 @@ const AdminUsers = () => {
         <>
             <div className="users">
                 <Card className="h-full w-full">
-                    <CardHeader floated={false} shadow={false} className="rounded-none">
+                    {/* <CardHeader floated={false} shadow={false} className="rounded-none">
                         <div className="mb-8 flex items-center justify-between gap-8">
                             <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
                                 <Button variant="outlined" color="blue-gray" size="sm" onClick={showUsers}>
@@ -124,7 +125,7 @@ const AdminUsers = () => {
                                 </Button>
                             </div>
                         </div>
-                    </CardHeader>
+                    </CardHeader> */}
                     <CardBody className="overflow-scroll px-0">
                         <div className="overflow-x-auto">
                             <table className="mt-4 w-full min-w-max table-auto text-left">

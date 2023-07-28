@@ -25,33 +25,33 @@ import UpdateProduct from './pages/Admin/UpdateProduct'
 import { CartProvider } from './CartContext'
 
 function App() {
-  return (
-    <AuthProvider>
-      <CartProvider>
-        <AppRoutes />
-      </CartProvider>
-    </AuthProvider>
-  );
+  return (
+    <AuthProvider>
+      <CartProvider>
+        <AppRoutes />
+      </CartProvider>
+    </AuthProvider>
+  );
 }
 
 function AppRoutes() {
-  const { isLoggedIN, fetchUserProfile } = useContext(AuthContext);
-  const [userDetails, setUserDetails] = useState({});
+  const { isLoggedIN, fetchUserProfile } = useContext(AuthContext);
+  const [userDetails, setUserDetails] = useState({});
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (isLoggedIN) {
-        try {
-          const userProfile = await fetchUserProfile();
-          setUserDetails(userProfile);
-        } catch (error) {
-          console.error('Error fetching user details:', error);
-        }
-      }
-    };
+  useEffect(() => {
+    const fetchData = async () => {
+      if (isLoggedIN) {
+        try {
+          const userProfile = await fetchUserProfile();
+          setUserDetails(userProfile);
+        } catch (error) {
+          console.error('Error fetching user details:', error);
+        }
+      }
+    };
 
-    fetchData();
-  }, []);
+    fetchData();
+  }, []);
 
   const isAdmin = userDetails?.role === 'admin';
   return (
@@ -229,25 +229,25 @@ function AppRoutes() {
           }
         ></Route>
 
-        <Route
-          path="/checkout"
-          element={<CheckoutForm />}
-        ></Route>
-        <Route
-          path="*"
-          element={
-            <>
-              <NavbarCom />
-              <NavbarMenu />
-              <NoMatch />
-              <MobileFooter />
-              <Footer />
-            </>
-          }
-        ></Route>
-      </Routes >
-    </>
-  );
+        <Route
+          path="/checkout"
+          element={<CheckoutForm />}
+        ></Route>
+        <Route
+          path="*"
+          element={
+            <>
+              <NavbarCom />
+              <NavbarMenu />
+              <NoMatch />
+              <MobileFooter />
+              <Footer />
+            </>
+          }
+        ></Route>
+      </Routes >
+    </>
+  );
 }
 
 export default App;

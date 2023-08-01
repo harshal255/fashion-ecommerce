@@ -137,7 +137,7 @@ export default function NavbarCom() {
             // Set the refresh token in the cookie
             alert("Log In Successfull");
             const Token = response.data.token;
-            Cookies.set('token', Token);
+            Cookies.set('tokenjwt', Token);
 
             if (response.data.user.role === 'admin') {
                 navigate('/admin');
@@ -166,7 +166,7 @@ export default function NavbarCom() {
                 alert(response.data.message);
                 localStorage.clear();
                 navigate("/");
-                Cookies.remove('token'); // Remove the token from the cookie
+                Cookies.remove('tokenjwt'); // Remove the token from the cookie
             } else {
                 alert("Logout failed. Please try again.");
             }

@@ -31,7 +31,7 @@ export default function Login() {
             alert("Log In Successfull");
             localStorage.setItem("role",response.data.user.role);
             const Token = response.data.token;
-            Cookies.set('token', Token);
+            Cookies.set('tokenjwt', Token);
 
             if (response.data.user.role === 'admin') {
                 navigate('/admin');

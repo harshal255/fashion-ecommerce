@@ -13,6 +13,7 @@ const UpdateProduct = () => {
     const initialValues = {
         name: "",
         price: 0,
+        stock: 0,
         description: "",
         category: "",
         photos: null,
@@ -23,6 +24,7 @@ const UpdateProduct = () => {
             const formData = new FormData();
             formData.append("name", values.name);
             formData.append("price", values.price);
+            formData.append("stock", values.stock);
             formData.append("description", values.description);
             formData.append("category", values.category);
 
@@ -81,6 +83,24 @@ const UpdateProduct = () => {
                             type="number"
                             id="price"
                             name="price"
+                            style={{
+                                width: '100%',
+                                padding: '0.75rem',
+                                border: '1px solid black',
+                                borderRadius: '0.375rem',
+                                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+                                outline: 'none',
+                            }}
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="stock" className="block mb-1 font-medium">
+                            Stock:
+                        </label>
+                        <Field
+                            type="number"
+                            id="stock"
+                            name="stock"
                             style={{
                                 width: '100%',
                                 padding: '0.75rem',

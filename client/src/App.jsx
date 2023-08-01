@@ -228,7 +228,6 @@ function AppRoutes() {
             </>
           }
         ></Route>
-
         <Route
           path="/checkout"
           element={<CheckoutForm />}

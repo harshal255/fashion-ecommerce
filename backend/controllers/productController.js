@@ -70,7 +70,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     await cloudinary.uploader.destroy(product.images[i].public_id);
   }
 
-  try {
+  try { 
     result = await cloudinary.uploader.upload(file.tempFilePath,{
       folder: "products",
     });

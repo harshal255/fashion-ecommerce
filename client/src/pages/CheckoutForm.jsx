@@ -501,7 +501,11 @@ function CheckoutForm() {
                                 <Link to="/orders" className="font-medium transition-colors hover:text-pink-700 w-[50%]">
                                     &lt; Return to cart
                                 </Link>
+<<<<<<< HEAD
                                 <Button className="ml-20 mt-6 bg-pink-500" id="rzp-button1" type="submit" onClick={() => { handleOpenRazorpay(total); }}>
+=======
+                                <Button className="ml-20 mt-6 bg-pink-500" id="rzp-button1" type="submit" onClick={() => { handleFormSubmit(total); }}>
+>>>>>>> f869ceac1aed7d0349c0d9e2df8462b217d6a9b1
                                     Continue for Payment
                                 </Button>
                             </div>

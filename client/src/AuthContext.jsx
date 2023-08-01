@@ -28,6 +28,7 @@ export const AuthProvider = ({ children }) => {
       console.log(response);
       const userDetails = response.data.user;
       setUserDetails(userDetails); // Set the user profile details in the state variable
+      return userDetails;
     } catch (error) {
       console.error("Error object:", error);
       // Check for network errors

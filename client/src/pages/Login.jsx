@@ -29,11 +29,13 @@ export default function Login() {
 
             // Set the refresh token in the cookie
             alert("Log In Successfull");
+            localStorage.setItem("role",response.data.user.role);
             const Token = response.data.token;
-            Cookies.set('token', Token);
+            Cookies.set('tokenjwt', Token);
 
             if (response.data.user.role === 'admin') {
-                navigate('/admin/dash');
+                navigate('/admin');
+                window.location.href = '/admin';
             } else {
                 navigate('/');
             }

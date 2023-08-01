@@ -131,15 +131,17 @@ export default function NavbarCom() {
                     },
 
                 });
-            // console.log(response);
+            
+            localStorage.setItem("role",response.data.user.role);
 
             // Set the refresh token in the cookie
             alert("Log In Successfull");
             const Token = response.data.token;
-            Cookies.set('token', Token);
+            Cookies.set('tokenjwt', Token);
 
             if (response.data.user.role === 'admin') {
                 navigate('/admin');
+                window.location.href = '/admin';
             } else {
                 navigate('/');
             }
@@ -162,8 +164,9 @@ export default function NavbarCom() {
             if (response && response.status === 200) {
                 setIsLoggedIn(false); // Remove the logged-in state
                 alert(response.data.message);
+                localStorage.clear();
                 navigate("/");
-                Cookies.remove('token'); // Remove the token from the cookie
+                Cookies.remove('tokenjwt'); // Remove the token from the cookie
             } else {
                 alert("Logout failed. Please try again.");
             }
@@ -431,7 +434,7 @@ export default function NavbarCom() {
                 <div className="mb-2 flex items-center justify-between p-4">
 
                     <Link to={isRegister ? '/register' : '/login'} onClick={handleRglClick}>
-                        <Typography variant="h7" onClick={handleRglClick} >
+                        <Typography variant="h6" onClick={handleRglClick} >
                             {isRegister ? "REGISTER" : "LOGIN"}
 
                         </Typography>
@@ -501,7 +504,7 @@ export default function NavbarCom() {
             </Drawer>
             <Drawer placement="right" open={openSearch} onClose={closeDrawerSearch}>
                 <div className="mb-2 flex items-center justify-between p-4">
-                    <Typography variant="h7">SEARCH OUR SITE</Typography>
+                    <Typography variant="h6">SEARCH OUR SITE</Typography>
                     <IconButton variant="text" onClick={closeDrawerSearch}>
                         <XMarkIcon strokeWidth={2} className="h-5 w-5" />
                     </IconButton>
@@ -544,7 +547,7 @@ export default function NavbarCom() {
             <Drawer open={openNavbar} onClose={closeDrawerNavbar}>
                 <div className="mb-2 flex items-center justify-between p-4">
 
-                    <Typography variant="h7" color="blue-gray">
+                    <Typography variant="h6" color="blue-gray">
 
                         Side Menu
                     </Typography>
@@ -554,75 +557,40 @@ export default function NavbarCom() {
                 </div>
                 <List>
                     <ListItem>
-                        <ListItemPrefix>
-                            <PresentationChartBarIcon className="h-5 w-5" />
-                        </ListItemPrefix>
-                        Demo
-                    </ListItem>
-                    <ListItem>
-                        <ListItemPrefix>
+                    <Link to="/LehengaCholiCollections" className='menu-btn' onClick={closeDrawerNavbar}>
+                        <ListItemPrefix className="flex gap-3">
                             <ShoppingBagIcon className="h-5 w-5" />
+                           
+                            Lehenga Choli
+                      
                         </ListItemPrefix>
-                        Shop
+                        </Link>
                     </ListItem>
                     <ListItem>
-                        <ListItemPrefix>
-                            <InboxIcon className="h-5 w-5" />
+                    <Link to="/SareesCollections" onClick={closeDrawerNavbar}>
+                        <ListItemPrefix className="flex gap-3">
+                            <ShoppingBagIcon className="h-5 w-5" />
+                                Sarees
                         </ListItemPrefix>
-                        Product
-                        <ListItemSuffix>
-                            <Chip
-                                value="14"
-                                size="sm"
-                                variant="ghost"
-                                color="blue-gray"
-                                className="rounded-full"
-                            />
-                        </ListItemSuffix>
+                        </Link>
                     </ListItem>
                     <ListItem>
-                        <ListItemPrefix>
-                            <UserCircleIcon className="h-5 w-5" />
+                    <Link to="/GownCollections" onClick={closeDrawerNavbar}>
+                        <ListItemPrefix className="flex gap-3">
+                            <ShoppingBagIcon className="h-5 w-5" />
+                                Gown
                         </ListItemPrefix>
-                        Portfolio
+                        </Link>
+                        
                     </ListItem>
                     <ListItem>
-                        <ListItemPrefix>
-                            <Cog6ToothIcon className="h-5 w-5" />
+                    <Link to="/TopCollections" onClick={closeDrawerNavbar}>
+                        <ListItemPrefix className="flex gap-3">
+                            <ShoppingBagIcon className="h-5 w-5" />
+                                Top
                         </ListItemPrefix>
-                        Lookbook
-                    </ListItem>
-                    <ListItem>
-                        <ListItemPrefix>
-                            <AiFillHeart className="h-5 w-5" />
-                        </ListItemPrefix>
-                        WishList
-                    </ListItem>
-                    <ListItem>
-                        <ListItemPrefix>
-                            <IoIosSearch className="h-5 w-5" />
-                        </ListItemPrefix>
-                        Search
-                    </ListItem>
-                    <ListItem>
-                        <ListItemPrefix>
-                            <VscAccount className="h-5 w-5" />
-                        </ListItemPrefix>
-                        Login/Register
-                    </ListItem>
-                    <ListItem >
-                        <ListItemPrefix>
-                            <FiHelpCircle className="h-5 w-5" />
-                        </ListItemPrefix>
-                        Need Help?
-
-                    </ListItem>
-                    <ListItem >
-                        +01 23456789
-
-                    </ListItem>
-                    <ListItem >
-                        kalles@domain.com
+                        </Link>
+                        
                     </ListItem>
                 </List>
             </Drawer>

@@ -1,34 +1,29 @@
 const ImagesForLeading2 = [
     {
         id:"1",
-        img:"./images/PartyWearLehenga.webp",
-        buttontext:"Party Wear Lehenga",
+        img:"./images/SequinsLehengaCholi.webp",
+        buttontext:"Lehenga Choli",
+        link:"/LehengaCholiCollections"
     },
     {
         id:"2",
-        img:"./images/SequinsLehengaCholi.webp",
-        buttontext:"Sequins Lehenga Choli",
+        img:"./images/SimpleLehengaCholi.webp ",
+        buttontext:"Sarees",
+        link:"/SareesCollections"
     },
     {
         id:"3",
-        img:"./images/SimpleLehengaCholi.webp",
-        buttontext:"Simple Lehenga Choli",
+        img:"./images/gown.webp",
+        buttontext:"Gown",
+        link:"/GownCollections"
     },
     {
         id:"4",
-        img:"./images/SimpleLehengaCholi.webp",
-        buttontext:"Simple Lehenga Choli",
+        img:"./images/top.jpg",
+        buttontext:"Top",
+        link:"/TopCollections"
     },
-    {
-        id:"5",
-        img:"./images/ChaniyaCholi.webp",
-        buttontext:"Chaniya Choli",
-    },
-    {
-        id:"6",
-        img:"./images/PartyWearLehenga.webp",
-        buttontext:"Chaniya Choli",
-    }
+    
 ]
 
 export default ImagesForLeading2;

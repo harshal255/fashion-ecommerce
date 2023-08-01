@@ -12,6 +12,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
+
 const SareesCollections = () => {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
@@ -85,17 +86,20 @@ const SareesCollections = () => {
                         return (
                             <div className='ease-in-out cursor-pointer h-full min-h-[18rem] w-full md:w-[18rem] lg:w-full md:h-[30.5rem] xl:h-[43rem] overflow-hidden relative' key={element.id}>
                                 <img alt="team" className="flex-shrink-0 viol object-center mb-4  ease-in-out object-cover h-full min-h-[18rem] w-full md:w-[18rem] lg:w-full  md:h-[30.5rem] xl:h-[43rem] hover:scale-110 duration-700 " src={element.images[0].url} />
+                                <div className='absolute bottom-5 right-2 sm:right-10 lg:right-[9rem] m-auto'>
                                 <button
                                     onClick={() => navigate("/collections/details", { state: { productId: element._id } })}
-                                    className="absolute bottom-5 sm:bottom-20 left-5 sm:left-20 bg-pink-500 border-0 my-4 py-2 px-6 focus:outline-none rounded-full hover:bg-pink-800 duration-300 hover:translate-y-2"
+                                    className="text-white bg-pink-500 border-0 my-4 py-2 px-6 focus:outline-none rounded-full hover:bg-pink-800 duration-300 hover:translate-y-2"
                                 >
                                     View Details
                                 </button>
-                                <div className="absolute bottom-5 sm:bottom-36 left-5 sm:left-20 bg-white p-2 rounded-lg shadow-md">
+                                <div className="  bg-white p-2 rounded-lg shadow-md">
                                     <div>{element.buttonText}</div>
                                     <div>{element.name} </div>
                                     <div>Price : {element.price} ₹</div>
                                 </div>
+                                </div>
+                               
                             </div>
                         )
                     })}

@@ -1,3 +1,4 @@
+import { select } from "@material-tailwind/react";
 import axios from "axios";
 import { Formik, Form, Field } from "formik";
 import { useState } from "react";
@@ -108,6 +109,7 @@ const CreateProduct = () => {
               Category:
             </label>
             <Field
+              as="select"
               type="text"
               id="category"
               name="category"
@@ -119,7 +121,13 @@ const CreateProduct = () => {
                 boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
                 outline: 'none',
               }}
-            />
+            >
+              <option value="">Select a category</option>
+              <option value="LehengaCholi">LehengaCholi</option>
+              <option value="Saree">Saree</option>
+              <option value="Gown">Gown</option>
+              <option value="Top">Top</option>
+            </Field>
           </div>
           <div className="my-5">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="multiple_files">Upload file</label>

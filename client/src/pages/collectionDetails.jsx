@@ -6,6 +6,7 @@ import AddtoCart from "../components/AddtoCart";
 import CustomerReview from "../components/CustomerReview";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import { useCart } from '../CartContext';
 
 export const ProductContext = createContext();
 
@@ -13,7 +14,9 @@ const collectionDetails = () => {
 
     const location = useLocation();
     const productId = location.state?.productId;
-    console.log(productId);
+    // console.log(productId);
+
+    const { cartItems, setCartItems } = useCart();
 
     const [product, setProduct] = useState(null);
 
@@ -54,59 +57,81 @@ const collectionDetails = () => {
     const setSelected = (value) => {
         SetIsSelected(value);
     }
-    const openDrawerNavbar = () => {
-        setOpenNavbar(true);
-        document.body.style.overflow = "hidden";
-        document.body.style.height = "100vh";
+    // const openDrawerNavbar = () => {
+    //     setOpenNavbar(true);
+    //     document.body.style.overflow = "hidden";
+    //     document.body.style.height = "100vh";
 
-    }
-    const closeDrawerNavbar = () => {
-        setOpenNavbar(false);
-        document.body.style.overflow = "";
-        document.body.style.height = "";
+    // }
+    // const closeDrawerNavbar = () => {
+    //     setOpenNavbar(false);
+    //     document.body.style.overflow = "";
+    //     document.body.style.height = "";
 
-    }
-    const openDrawerSearch = () => {
-        setOpenSearch(true);
-        document.body.style.overflow = "hidden";
-        document.body.style.height = "100vh";
+    // }
+    // const openDrawerSearch = () => {
+    //     setOpenSearch(true);
+    //     document.body.style.overflow = "hidden";
+    //     document.body.style.height = "100vh";
 
-    }
-    const closeDrawerSearch = () => {
-        setOpenSearch(false);
-        document.body.style.overflow = "";
-        document.body.style.height = "";
+    // }
+    // const closeDrawerSearch = () => {
+    //     setOpenSearch(false);
+    //     document.body.style.overflow = "";
+    //     document.body.style.height = "";
 
-    }
-    const openDrawerLogin = () => {
-        setOpenLogin(true);
-        document.body.style.overflow = "hidden";
-        document.body.style.height = "100vh";
-    }
-    const closeDrawerLogin = () => {
-        setOpenLogin(false);
-        document.body.style.overflow = "";
-        document.body.style.height = "";
-    }
-    const openDrawerBag = () => {
+    // }
+    // const openDrawerLogin = () => {
+    //     setOpenLogin(true);
+    //     document.body.style.overflow = "hidden";
+    //     document.body.style.height = "100vh";
+    // }
+    // const closeDrawerLogin = () => {
+    //     setOpenLogin(false);
+    //     document.body.style.overflow = "";
+    //     document.body.style.height = "";
+    // }
+    const handleAddToCart = () => {
+        if (counter <= 0) {
+            // If the counter is 0 or negative, don't add the item to the cart
+            return;
+        }
+
+        const cartItem = {
+            product: product,
+            quantity: counter,
+        };
+
+        // Check if the product is already in the cart
+        const existingCartItem = cartItems.find((item) => item.product._id === product._id);
+
+        if (existingCartItem) {
+            // If the product is already in the cart, update its quantity
+            setCartItems((prevCartItems) =>
+                prevCartItems.map((item) =>
+                    item.product._id === product._id ? { ...item, quantity: counter } : item
+                )
+            );
+        } else {
+            // If the product is not in the cart, add it as a new item
+            setCartItems((prevCartItems) => [...prevCartItems, cartItem]);
+        }
         setOpenBag(true);
         document.body.style.overflow = "hidden";
         document.body.style.height = "100vh";
-    }
+    };
+
     const closeDrawerBag = () => {
         setOpenBag(false);
         document.body.style.overflow = "";
         document.body.style.height = "";
     }
 
-
     const handleIncrement = () => {
         setCounter(counter + 1);
-
     };
 
     const handleDecrement = () => {
-
         if (counter > 0) {
             setCounter(counter - 1);
 
@@ -121,6 +146,10 @@ const collectionDetails = () => {
         setPrice(counter * singleprice);
     }, [singleprice, counter]);
 
+    // useEffect hook to log cartItems after state update
+    useEffect(() => {
+        console.log("Cart Items:", cartItems);
+    }, [cartItems, counter]);
     return (
         <>
             {loading ? (
@@ -154,7 +183,7 @@ const collectionDetails = () => {
                                         </button>
                                         <button
                                             className="flex text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none rounded-full hover:bg-pink-800 duration-300 hover:translate-y-2"
-                                            onClick={openDrawerBag}
+                                            onClick={handleAddToCart}
                                         >
                                             Add to Cart
                                         </button>
@@ -169,7 +198,7 @@ const collectionDetails = () => {
                             )}
                             {/* AddtoCart Component */}
                             {product && (
-                                <AddtoCart open={openBag} onClose={closeDrawerBag} productCount={counter} singleproductPrice={singleprice} />
+                                <AddtoCart open={openBag} onClose={closeDrawerBag} singleproductprice={singleprice}/>
                             )}
                         </div>
                         {product._id && <CustomerReview pid={product._id} />}

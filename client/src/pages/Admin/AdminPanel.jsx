@@ -1,4 +1,3 @@
-
 import Heading from "../../components/Heading";
 import { useState } from 'react'
 import AdminDashboard from "./AdminDashboard";
@@ -49,7 +48,6 @@ const AdminPanel = () => {
         selectedButton === 'users' ?
           <AdminUsers /> : selectedButton === 'products' ? <AdminProducts /> :
             <AdminOrders />
-
       }
     </div>
   )

@@ -86,7 +86,7 @@ function UserDetails() {
             alert('Password updated successfully!');
 
             const newToken = response.data.token;
-            Cookies.set('token', newToken);
+            Cookies.set('tokenjwt', newToken);
 
             handleOpen();
         } catch (error) {

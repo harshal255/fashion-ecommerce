@@ -19,6 +19,33 @@ const UpdateProduct = () => {
         photos: null,
     };
 
+    const getProductData = async ()=>{
+        try{
+            const response = await axios.get(
+                `http://localhost:4000/api/v1/product/${productId}`,
+                {
+                    withCredentials: true,
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+            initialValues.name = response.data.product.name
+            initialValues.price = response.data.product.price
+            initialValues.stock = response.data.product.stock
+            initialValues.description = response.data.product.description
+            console.log("res.data =>"+response.data.product );
+            
+        }
+        catch (error) {
+            alert(error.response.data.message);
+            console.error(error);
+        }
+    }
+    
+    getProductData();
+    
+
     const handleSubmit = async (values) => {
         try {
             const formData = new FormData();
@@ -83,6 +110,7 @@ const UpdateProduct = () => {
                             type="number"
                             id="price"
                             name="price"
+                            
                             style={{
                                 width: '100%',
                                 padding: '0.75rem',

@@ -33,7 +33,7 @@ const CustomerReview = ({ pid }) => {
                 // Calculate the average rating from the fetched reviews
                 const totalRating = response.data.reviews.reduce((acc, review) => acc + review.rating, 0);
                 const averageRating = totalRating / response.data.reviews.length;
-                setRated(averageRating);
+                setRated(averageRating.toFixed(1));
 
 
             } catch (error) {
@@ -92,6 +92,7 @@ const CustomerReview = ({ pid }) => {
         }
     };
 
+    const final_rate = Math.round(rated)
     return (
         <>
             <div className="flex flex-col items-center gap-2 m-auto">
@@ -101,9 +102,11 @@ const CustomerReview = ({ pid }) => {
                 <div className="flex flex-col md:flex-row gap-10">
                     <div className=" w-full flex flex-col justify-center items-center">
                         <div className="flex items-center gap-2">
-                            <Rating value={reviews.rating || 0} readonly />
+                            {/* <Rating value={final_rate ||2} readonly /> */}
+                            <Rating value={0} readonly />
+
                             <Typography color="pink-gray" className="font-medium">
-                                {rated} Rated
+                                {rated}
                             </Typography>
 
                         </div>
@@ -129,10 +132,10 @@ const CustomerReview = ({ pid }) => {
                                     <div className="badge absolute -top-2 -right-2 bg-gray-600 h-6 w-6">1</div>
                                     {/* <img src={product.images[0].url} alt="img" className='h-14 w-16' /> */}
                                 </div>
-                                <div className="flex flex-col">
+                                {/* <div className="flex flex-col">
                                     <span className='text-sm'>this is sample name</span>
                                     <Rating value={5} onChange={(value) => setRated(value)} readonly />
-                                </div>
+                                </div> */}
 
                             </div>
                             <DialogBody divider>
@@ -140,7 +143,7 @@ const CustomerReview = ({ pid }) => {
                                     <Typography color="pink-gray" className="font-medium">
                                         {rated} Rated
                                     </Typography>
-                                    <Rating value={5} onChange={(value) => setRated(value)} />
+                                    <Rating value={0} onChange={(value) => setRated(value)} />
                                 </div>
                                 <div className="grid gap-6">
                                     <Textarea label="Review Content" onChange={(e) => { setComment(e.target.value) }} />
@@ -268,7 +271,8 @@ const CustomerReview = ({ pid }) => {
                                 </p>
                             </div>
                         </div>
-                        <Rating value={reviews.rating || 0 } readonly />
+                        <Rating value={Math.round(review.rating)||0} readonly />
+                        {/* <Rating value={reviews.rating || 0 } readonly /> */}
                         <p className="mb-2 text-gray-500 dark:text-gray-400">
                             {review.comment}
                         </p>

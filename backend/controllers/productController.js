@@ -43,7 +43,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
 // get all products
 exports.getAllProducts = catchAsyncErrors(async (req, res) => {
-  const resultPerPage = 2;
+  const resultPerPage = 3;
   const productCount = await Product.countDocuments();
 
   const apiFeatures = new ApiFeatures(Product.find(), req.query)
@@ -65,23 +65,34 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
   }
-  const file = req.files.photos;
-  for (let i = 0; i < product.images.length; i++) {
-    await cloudinary.uploader.destroy(product.images[i].public_id);
+
+  if(req.files){
+    const file = req.files.photos;
+    for (let i = 0; i < product.images.length; i++) {
+      await cloudinary.uploader.destroy(product.images[i].public_id);
+    }
+
+    try { 
+      result = await cloudinary.uploader.upload(file.tempFilePath,{
+        folder: "products",
+      });
+  
+      req.body.images = {
+        public_id: result.public_id,
+        url: result.url,
+      };
+  
+    } catch (err) {
+      return next(new ErrorHandler("Error uploading file to Cloudinary", 500));
+    }
   }
 
-  try { 
-    result = await cloudinary.uploader.upload(file.tempFilePath,{
-      folder: "products",
-    });
-  } catch (err) {
-    return next(new ErrorHandler("Error uploading file to Cloudinary", 500));
-  }
+  
 
-  req.body.images = {
-    public_id: result.public_id,
-    url: result.url,
-  };
+  // req.body.images = {
+  //   public_id: result.public_id,
+  //   url: result.url,
+  // };
 
   product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,

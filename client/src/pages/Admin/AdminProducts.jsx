@@ -95,6 +95,7 @@ const AdminProducts = () => {
                 <div className="cardFooter md:m-2 m-0 text-center text-black  transform transition-opacity flex flex-col items-center text-[12px] md:text-sm ">
                   <p className="hover:text-blue-900 duration-700">{product.description}</p>
                   <span>Price: {product.price}</span>
+                  <span>Stock: {product.stock}</span>
                 </div>
               </div>
             ))

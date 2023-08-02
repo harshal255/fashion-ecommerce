@@ -3,7 +3,6 @@ const Product = require("../models/productModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const Razorpay = require('razorpay');
-const crypto = require('crypto');
 
 exports.addpayment = catchAsyncErrors(async (req,res,next)=>{
     
@@ -28,7 +27,7 @@ exports.addpayment = catchAsyncErrors(async (req,res,next)=>{
 exports.verfiypayment = catchAsyncErrors(async (req,res,next)=>{
     let body = req.body.response.razorpay_order_id + "|" + req.body.response.razorpay_payment_id;
 
-    var expectedSignature = crypto.createHmac('sha256',process.env.RZ_KEY_SECRET)
+    var expectedSignature = Crypto.createHmac('sha256',process.env.RZ_KEY_SECRET)
     .update(body.toString())
     .digest('hex');
 

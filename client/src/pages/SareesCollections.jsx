@@ -45,12 +45,18 @@ const SareesCollections = () => {
     const handleChange = (e) => {
         setValue(e.target.value);
     };
-    const filterProduct = () => {
+    const filterProduct = async () => {
         setOpen(false);
-        const filteredProducts = filteredProducts.filter(
-            (product) => product.price <= value
-        );
-        setFilteredProducts(filteredProducts);
+        // const filteredProducts = filteredProducts.filter(
+        //     (product) => product.price <= value
+        // );
+        // setFilteredProducts(filteredProducts);
+        try {
+            const response = await axios.get(`http://localhost:4000/api/v1/products?price[lt]=${value}&category=Saree`);
+            setFilteredProducts(response.data.products);
+          } catch (error) {
+              console.error('Failed to fetch fillter results:', error);
+          }
     };
     return (
         <Card className="h-full w-full">

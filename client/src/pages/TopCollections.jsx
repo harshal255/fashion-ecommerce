@@ -46,13 +46,20 @@ const TopCollections = () => {
     const handleChange = (e) => {
         setValue(e.target.value);
     };
-    const filterProduct = () => {
+    const filterProduct = async () => {
         setOpen(false);
-        const filteredProducts = filteredProducts.filter(
-            (product) => product.price <= value
-        );
-        setFilteredProducts(filteredProducts);
-    };
+        // const filteredProducts = filteredProducts.filter(
+        //   (product) => product.price <= value
+        // ); 
+        // console.log(value)
+        try {
+          const response = await axios.get(`http://localhost:4000/api/v1/products?price[lt]=${value}&category=Top`);
+          setFilteredProducts(response.data.products);
+        } catch (error) {
+            console.error('Failed to fetch fillter results:', error);
+        }
+        // setFilteredProducts(filteredProducts);
+      };
     return (
         <Card className="h-full w-full">
             <div className="h-20 sm:h-28 w-full bg-gray-600 box-content"></div>

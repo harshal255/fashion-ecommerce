@@ -210,192 +210,192 @@ function CheckoutForm() {
 
     };
 
-    // const handleOpenRazorpay = async(amt)=>{
-    //     const data = await handleFormPaymentSubmit(amt);
-    //     console.log(data.order.amount);
+    const handleOpenRazorpay = async(amt)=>{
+        const data = await handleFormPaymentSubmit(amt);
+        console.log(data.order.amount);
 
         
 
-    //     // console.log("dev => "+requestBody);
+        // console.log("dev => "+requestBody);
 
-    //     var options = {
-    //         "key": "rzp_test_mUYPZJhg6FYh4U", // Enter the Key ID generated from the Dashboard
-    //         "amount": Number(data.order.amount), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    //         "currency": data.currency,
-    //         "name": "Ribadiya Brothers",
-    //         "description": "Test Transaction",
-    //         "order_id": data.order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    //         "prefill": {
-    //             name: userDetails.name,
-    //             email: userDetails.email,
-    //             contact: userDetails.phone,
-    //         },
-    //         "handler": function (response){
-    //             // alert(response.razorpay_payment_id);
-    //             // alert(response.razorpay_order_id);
-    //             // alert(response.razorpay_signature)
-    //             axios.post("http://localhost:4000/api/v1/verify",{response:response},{
-    //                 withCredentials:true,
-    //             })
-    //                 .then(vfy=>{
-    //                     console.log("response "+response);
-    //                     console.log("vfy "+vfy);
-    //                     const requestBody = {
-    //                         itemsPrice: 200,
-    //                         taxPrice: taxPrice,
-    //                         shippingPrice: shippingPrice,
-    //                         totalPrice: total,
-    //                         orderItems: cartItems.map((item) => ({
-    //                             product: item.product._id,
-    //                             name: item.product.name,
-    //                             price: item.product.price,
-    //                             image: item.product.images[0].url,
-    //                             quantity: item.quantity,
-    //                         })),
-    //                         shippingInfo: {
-    //                             address: address,
-    //                             city: city,
-    //                             state: selectedState,
-    //                             country: selectedCountry,
-    //                             pinCode: pincode,
-    //                             phoneNo: phoneNo
-    //                         },
-    //                         paymentInfo: {
-    //                             id: response.razorpay_payment_id,
-    //                             status: "succeeded"
-    //                         }
-    //                     };
+        var options = {
+            "key": "rzp_test_mUYPZJhg6FYh4U", // Enter the Key ID generated from the Dashboard
+            "amount": Number(data.order.amount), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": data.currency,
+            "name": "Ribadiya Brothers",
+            "description": "Test Transaction",
+            "order_id": data.order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "prefill": {
+                name: userDetails.name,
+                email: userDetails.email,
+                contact: userDetails.phone,
+            },
+            "handler": function (response){
+                // alert(response.razorpay_payment_id);
+                // alert(response.razorpay_order_id);
+                // alert(response.razorpay_signature)
+                axios.post("http://localhost:4000/api/v1/verify",{response:response},{
+                    withCredentials:true,
+                })
+                    .then(vfy=>{
+                        console.log("response "+response);
+                        console.log("vfy "+vfy);
+                        const requestBody = {
+                            itemsPrice: 200,
+                            taxPrice: taxPrice,
+                            shippingPrice: shippingPrice,
+                            totalPrice: total,
+                            orderItems: cartItems.map((item) => ({
+                                product: item.product._id,
+                                name: item.product.name,
+                                price: item.product.price,
+                                image: item.product.images[0].url,
+                                quantity: item.quantity,
+                            })),
+                            shippingInfo: {
+                                address: address,
+                                city: city,
+                                state: selectedState,
+                                country: selectedCountry,
+                                pinCode: pincode,
+                                phoneNo: phoneNo
+                            },
+                            paymentInfo: {
+                                id: response.razorpay_payment_id,
+                                status: "succeeded"
+                            }
+                        };
                         
 
-    //                     axios.post(
-    //                         "http://localhost:4000/api/v1/order/new",
-    //                         requestBody,
-    //                         {
-    //                             withCredentials: true, // Include cookies in the request (important for authentication)
-    //                             headers: {
-    //                                 'Content-Type': 'application/json',
-    //                             },
-    //                         }
-    //                     ).then(res=>{
+                        axios.post(
+                            "http://localhost:4000/api/v1/order/new",
+                            requestBody,
+                            {
+                                withCredentials: true, // Include cookies in the request (important for authentication)
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                            }
+                        ).then(res=>{
 
-    //                         // login for shiprocket
-    //                         var data = JSON.stringify({
-    //                             "email": "ndev2003@gmail.com",
-    //                             "password": "Dev@5172"
-    //                         });
+                            // login for shiprocket
+                            var data = JSON.stringify({
+                                "email": "ndev2003@gmail.com",
+                                "password": "Dev@5172"
+                            });
                             
-    //                         var config = {
-    //                             method: 'post',
-    //                             maxBodyLength: Infinity,
-    //                             url: 'https://apiv2.shiprocket.in/v1/external/auth/login',
-    //                             headers: { 
-    //                                 'Content-Type': 'application/json'
-    //                             },
-    //                             data : data
-    //                         };
+                            var config = {
+                                method: 'post',
+                                maxBodyLength: Infinity,
+                                url: 'https://apiv2.shiprocket.in/v1/external/auth/login',
+                                headers: { 
+                                    'Content-Type': 'application/json'
+                                },
+                                data : data
+                            };
                             
-    //                         axios(config)
-    //                             .then(function (response) {
-    //                                 const token = response.data.token;
-    //                                 // console.log("token -> "+token);
-    //                                 // console.log("after login "+JSON.stringify(response.data));
-    //                                 Cookies.set('token', token);
+                            axios(config)
+                                .then(function (response) {
+                                    const token = response.data.token;
+                                    // console.log("token -> "+token);
+                                    // console.log("after login "+JSON.stringify(response.data));
+                                    Cookies.set('token', token);
 
-    //                                 // console.log("userDeatils "+ userDetails.name)
-    //                                 // console.log("userDeatils "+ userDetails.email)
-    //                                 // console.log("userDeatils "+ userDetails.phone)
-    //                                 // console.log("res.data->"+JSON.stringify(res.data))
-    //                                 var data = JSON.stringify({
-    //                                     "order_id": res.data.order._id,
-    //                                     "order_date": res.data.order.cretedAt,
-    //                                     "channel_id": "4077847",
-    //                                     "billing_customer_name": fname,
-    //                                     "billing_last_name": lname,
-    //                                     "billing_address": res.data.order.shippingInfo.address,
-    //                                     "billing_city": res.data.order.shippingInfo.city,
-    //                                     "billing_pincode": pincode,
-    //                                     "billing_state": res.data.order.shippingInfo.state,
-    //                                     "billing_country": res.data.order.shippingInfo.country,
-    //                                     "billing_email": userDetails.email,
-    //                                     "billing_phone": phoneNo,
-    //                                     "shipping_is_billing": true,
-    //                                     "shipping_customer_name": "",
-    //                                     "shipping_last_name": "",
-    //                                     "shipping_address": "",
-    //                                     "shipping_address_2": "",
-    //                                     "shipping_city": "",
-    //                                     "shipping_pincode": "",
-    //                                     "shipping_country": "",
-    //                                     "shipping_state": "",
-    //                                     "shipping_email": "",
-    //                                     "shipping_phone": "",
-    //                                     "order_items": res.data.order.orderItems.map(it => ({
-    //                                         "name": it.name,
-    //                                         "sku": it._id,
-    //                                         "units": it.quantity,
-    //                                         "selling_price": it.price,
-    //                                     })),
-    //                                     "payment_method": "Prepaid",
-    //                                     "sub_total": res.data.order.totalPrice,
-    //                                     "length": 10,
-    //                                     "breadth": 15,
-    //                                     "height": 20,
-    //                                     "weight": 2.5
-    //                                 });
+                                    // console.log("userDeatils "+ userDetails.name)
+                                    // console.log("userDeatils "+ userDetails.email)
+                                    // console.log("userDeatils "+ userDetails.phone)
+                                    // console.log("res.data->"+JSON.stringify(res.data))
+                                    var data = JSON.stringify({
+                                        "order_id": res.data.order._id,
+                                        "order_date": res.data.order.cretedAt,
+                                        "channel_id": "4077847",
+                                        "billing_customer_name": fname,
+                                        "billing_last_name": lname,
+                                        "billing_address": res.data.order.shippingInfo.address,
+                                        "billing_city": res.data.order.shippingInfo.city,
+                                        "billing_pincode": pincode,
+                                        "billing_state": res.data.order.shippingInfo.state,
+                                        "billing_country": res.data.order.shippingInfo.country,
+                                        "billing_email": userDetails.email,
+                                        "billing_phone": phoneNo,
+                                        "shipping_is_billing": true,
+                                        "shipping_customer_name": "",
+                                        "shipping_last_name": "",
+                                        "shipping_address": "",
+                                        "shipping_address_2": "",
+                                        "shipping_city": "",
+                                        "shipping_pincode": "",
+                                        "shipping_country": "",
+                                        "shipping_state": "",
+                                        "shipping_email": "",
+                                        "shipping_phone": "",
+                                        "order_items": res.data.order.orderItems.map(it => ({
+                                            "name": it.name,
+                                            "sku": it._id,
+                                            "units": it.quantity,
+                                            "selling_price": it.price,
+                                        })),
+                                        "payment_method": "Prepaid",
+                                        "sub_total": res.data.order.totalPrice,
+                                        "length": 10,
+                                        "breadth": 15,
+                                        "height": 20,
+                                        "weight": 2.5
+                                    });
 
-    //                                 console.log("data -> "+data);
-    //                                 // console.log("token -> "+response.data.token);
-    //                                 var config = {
-    //                                     method: 'post',
-    //                                     maxBodyLength: Infinity,
-    //                                     url: 'https://apiv2.shiprocket.in/v1/external/orders/create/adhoc',
-    //                                     headers: { 
-    //                                         'Content-Type': 'application/json', 
-    //                                         'Authorization': 'Bearer '+token
-    //                                     },
-    //                                     data : data
-    //                                 };
+                                    console.log("data -> "+data);
+                                    // console.log("token -> "+response.data.token);
+                                    var config = {
+                                        method: 'post',
+                                        maxBodyLength: Infinity,
+                                        url: 'https://apiv2.shiprocket.in/v1/external/orders/create/adhoc',
+                                        headers: { 
+                                            'Content-Type': 'application/json', 
+                                            'Authorization': 'Bearer '+token
+                                        },
+                                        data : data
+                                    };
                                     
-    //                                 axios(config)
-    //                                     .then(function (response) {
-    //                                         console.log("add order -> "+JSON.stringify(response.data));
-    //                                         navigate('/orders');
-    //                                     })
-    //                                     .catch(function (error) {
-    //                                         console.log(error);
-    //                                     });
-    //                             })
-    //                             .catch(function (error) {
-    //                                 console.log(error);
-    //                             });
+                                    axios(config)
+                                        .then(function (response) {
+                                            console.log("add order -> "+JSON.stringify(response.data));
+                                            navigate('/orders');
+                                        })
+                                        .catch(function (error) {
+                                            console.log(error);
+                                        });
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
 
-    //                     }).catch(err=>{
-    //                         console.error(err);
-    //                     })
-    //                 })
-    //                 .catch(err=>{
-    //                     console.error(err);
-    //                 })
-    //         },
-    //         "theme": {
-    //             "color": "#3399cc"
-    //         }
-    //     };
-    //     var rzp1 = new Razorpay(options);
-    //     rzp1.on('payment.failed', function (response){
-    //             alert(response.error.code);
-    //             alert(response.error.description);
-    //             alert(response.error.source);
-    //             alert(response.error.step);
-    //             alert(response.error.reason);
-    //             alert(response.error.metadata.order_id);
-    //             alert(response.error.metadata.payment_id);
-    //     });
-    //     document.getElementById('rzp-button1').onclick = function(e){
-    //         rzp1.open();
-    //         e.preventDefault();
-    //     }
-    // };
+                        }).catch(err=>{
+                            console.error(err);
+                        })
+                    })
+                    .catch(err=>{
+                        console.error(err);
+                    })
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.on('payment.failed', function (response){
+                alert(response.error.code);
+                alert(response.error.description);
+                alert(response.error.source);
+                alert(response.error.step);
+                alert(response.error.reason);
+                alert(response.error.metadata.order_id);
+                alert(response.error.metadata.payment_id);
+        });
+        document.getElementById('rzp-button1').onclick = function(e){
+            rzp1.open();
+            e.preventDefault();
+        }
+    };
 
     return (
         <div className="flex flex-col-reverse lg:flex-row">
@@ -502,7 +502,7 @@ function CheckoutForm() {
                                     &lt; Return to cart
                                 </Link>
 
-                                <Button className="ml-20 mt-6 bg-pink-500" id="rzp-button1" type="submit" onClick={() => { handleFormSubmit(total); }}>
+                                <Button className="ml-20 mt-6 bg-pink-500" id="rzp-button1" type="submit" onClick={() => { handleOpenRazorpay(total); }}>
                                     Continue for Payment
                                 </Button>
                             </div>
